@@ -1,0 +1,27 @@
+
+.icon {
+
+  &-home {
+    @include app-icon('home');
+  }
+
+  &-settings {
+    @include app-icon('settings');
+  }
+
+  &-games {
+    @include app-icon('games');
+  }
+
+  &-pulse {
+    @include app-icon('pulse');
+  }
+
+  &-platforms {
+    @include app-icon('platforms');
+  }
+
+  &-discover {
+    @include app-icon('discover');
+  }
+}
