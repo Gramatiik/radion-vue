@@ -1,5 +1,35 @@
 @import "variables";
 
+@mixin responsiveMinWidth($width) {
+  @media only screen and (min-width: $width) {
+    @content;
+  }
+}
+
+@mixin responsiveCardLayout($gutter) {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+
+  .card-item {
+    width: 100%;
+  }
+
+  // 2 items in tablet mode
+  @include responsiveMinWidth($bp-tablet) {
+    .card-item {
+      width: calc(50% - #{$gutter});
+    }
+  }
+
+  // 3 items grid in desktop mode
+  @include responsiveMinWidth($bp-desktop) {
+    .card-item {
+      width: calc( ( 100% / 3 ) - #{$gutter});
+    }
+  }
+}
+
 @mixin word-wrap() {
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -11,9 +41,4 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-
-@mixin menuStyle() {
-  text-decoration: none;
-  color: $font-light;
 }
