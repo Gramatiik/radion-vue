@@ -1,9 +1,14 @@
 import Vue from 'vue'
-
-const BASE_URL = 'https://igdbcom-internet-game-database-v1.p.mashape.com'
+import IgdbQueryBuilder from './igdbBase'
 
 export default {
   getGames () {
-    return Vue.http.get(BASE_URL + '/games/?fields=id,name&limit=15')
+    let builder = new IgdbQueryBuilder()
+
+    return Vue.http.get(builder.init()
+      .setEndpoint('games')
+      .setFields(['*'])
+      .setLimit(40)
+      .finalize())
   }
 }

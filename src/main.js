@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import {} from './resource'
+import {} from './filters'
 import router from './router'
 import store from './store'
 

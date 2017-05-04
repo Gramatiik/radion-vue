@@ -19,6 +19,7 @@ const actions = {
 
     gamesAPI.getGames()
       .then(function (response) {
+        console.log(response)
         commit(RECIEVE_GAMES, response.body)
       })
       .catch(function () {
