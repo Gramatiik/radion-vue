@@ -21,6 +21,8 @@
 </script>
 
 <style scoped lang="scss">
+  @import "variables";
+
   .backdrop {
     visibility: hidden;
     opacity: 0;

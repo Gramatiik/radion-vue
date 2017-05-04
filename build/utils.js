@@ -46,9 +46,8 @@ exports.cssLoaders = function (options) {
 
   var scssOptions = {
     includePaths: [
-      path.resolve('./src/styles/sass')
-    ],
-    data: '@import "~' + path.resolve('./src/styles/sass') + '/global";'
+      path.resolve('./src/styles/sass/')
+    ]
   }
 
   // https://vue-loader.vuejs.org/en/configurations/extract-css.html

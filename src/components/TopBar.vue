@@ -25,6 +25,8 @@
 </script>
 
 <style scoped lang="scss">
+  @import "variables";
+
   div.top-menu {
     position: fixed;
     top: 0;

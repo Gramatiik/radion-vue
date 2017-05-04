@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import gamesAPI from '../../api/igdbGames'
 import {
   APP_LOADING,
   APP_LOADING_FINISHED,
@@ -14,18 +14,19 @@ const getters = {
 }
 
 const actions = {
-  getGames ({ commit, state }) {
+  getGames ({ commit }) {
     commit(APP_LOADING)
-    setTimeout(function () {
-      Vue.http.get('https://jsonplaceholder.typicode.com/users').then(function (response) {
+
+    gamesAPI.getGames()
+      .then(function (response) {
         commit(RECIEVE_GAMES, response.body)
+      })
+      .catch(function () {
+        console.log('Error fetching games from API...')
+      })
+      .then(function () {
         commit(APP_LOADING_FINISHED)
       })
-        .catch(function () {
-          console.log('Error fetching games from API...')
-          commit(APP_LOADING_FINISHED)
-        })
-    }, 500)
   }
 }
 

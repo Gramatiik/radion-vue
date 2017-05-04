@@ -23,6 +23,8 @@ export default {
 </script>
 
 <style lang="scss">
+  @import "~node.normalize.scss/normalize";
+
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
