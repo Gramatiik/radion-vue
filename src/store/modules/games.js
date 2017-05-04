@@ -14,20 +14,22 @@ const getters = {
 }
 
 const actions = {
-  getGames ({ commit }) {
-    commit(APP_LOADING)
+  getGames ({ commit, state }) {
+    console.log(state)
+    if (state.games.length <= 0) {
+      commit(APP_LOADING)
 
-    gamesAPI.getGames()
-      .then(function (response) {
-        console.log(response)
-        commit(RECIEVE_GAMES, response.body)
-      })
-      .catch(function () {
-        console.log('Error fetching games from API...')
-      })
-      .then(function () {
-        commit(APP_LOADING_FINISHED)
-      })
+      gamesAPI.getGames()
+        .then(function (response) {
+          commit(RECIEVE_GAMES, response.body)
+        })
+        .catch(function () {
+          console.log('Error fetching games from API...')
+        })
+        .then(function () {
+          commit(APP_LOADING_FINISHED)
+        })
+    }
   }
 }
 

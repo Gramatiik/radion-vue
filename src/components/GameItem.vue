@@ -1,10 +1,9 @@
 <template>
   <div>
-    <router-link class="game-item-card" :to="{ name: 'About' }">
+    <router-link class="game-item-card" :to="{ name: 'GameDetails', params: {id: gameData.id} }">
       <img class="game-thumb" :src="gameData.cover | cloudinary('thumb')" />
       <div class="summary">
         <h3>{{ gameData.name }}</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eum.</p>
       </div>
     </router-link>
   </div>
@@ -26,6 +25,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 10px;
+    min-height: 150px;
     background-color: $bg-light;
     box-shadow: 0 5px 10px $bg-dark;
 
