@@ -6,6 +6,8 @@
       <span></span>
       <span></span>
     </div>
+    <div class="brand-icon"></div>
+    <div class="brand-name">Radion</div>
   </div>
 </template>
 
@@ -35,6 +37,25 @@
     width: 100%;
     height: 50px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+
+    .brand-icon {
+      position: absolute;
+      top: 5px;
+      left: 70px;
+      width: 40px;
+      height: 40px;
+      background-image: url("../assets/images/radion-logo.png");
+      background-size: contain;
+    }
+
+    .brand-name {
+      position: absolute;
+      top: 6px;
+      left: 120px;
+      font-size: 28px;
+      font-weight: bold;
+      color: $font-light;
+    }
 
     .burger-menu {
       display: inline-block;

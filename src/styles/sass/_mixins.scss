@@ -1,10 +1,4 @@
-@mixin app-icon($name) {
-  display: inline-block;
-  width: 36px;
-  height: 36px;
-  background: url("./assets/images/icons/icon-#{$name}.png") no-repeat center;
-  background-size: contain;
-}
+@import "variables";
 
 @mixin word-wrap() {
   overflow-wrap: break-word;
@@ -17,4 +11,9 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+@mixin menuStyle() {
+  text-decoration: none;
+  color: $font-light;
 }

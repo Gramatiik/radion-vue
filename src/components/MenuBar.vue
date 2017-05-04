@@ -1,13 +1,18 @@
 <template>
   <div>
     <div class="backdrop" @click="MENU_TOGGLE" :class="{ visible: menuOpened }"></div>
-    <nav class="sidenav" :class="{ opened: menuOpened }"></nav>
+    <nav class="sidenav" :class="{ opened: menuOpened }">
+      <menu-bar-item title="Settings" icon="settings" :route="{ name: 'About' }"></menu-bar-item>
+      <menu-bar-item title="Games" icon="games" :route="{ name: 'About' }"></menu-bar-item>
+      <menu-bar-item title="About" icon="pulse" :route="{ name: 'About' }"></menu-bar-item>
+    </nav>
   </div>
 </template>
 
 <script>
   import { mapState, mapMutations } from 'vuex'
   import { MENU_TOGGLE } from '@/store/mutation-types'
+  import MenuBarItem from '@/components/MenuBarItem'
   export default {
     name: 'menu-bar',
     data () {
@@ -16,7 +21,12 @@
     methods: {
       ...mapMutations([ MENU_TOGGLE ])
     },
-    computed: mapState([ 'menuOpened' ])
+    computed: {
+      ...mapState([ 'menuOpened' ])
+    },
+    components: {
+      MenuBarItem
+    }
   }
 </script>
 

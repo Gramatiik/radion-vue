@@ -1,8 +1,10 @@
 <template>
-  <div v-show="loading" class="loading">
-    <div class="spinner"></div>
-    <div class="backdrop"></div>
-  </div>
+  <transition name="loader">
+    <div v-show="loading" class="loading">
+      <div class="spinner"></div>
+      <div class="backdrop"></div>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -24,6 +26,14 @@
     100% { transform: rotate(360deg); }
   }
 
+  .loader-enter, .loader-leave-to {
+    opacity: 0
+  }
+
+  .loader-enter-active, .loader-leave-active {
+    transition: all 0.5s;
+  }
+
   .loading {
     .spinner {
       position: absolute;
@@ -37,10 +47,11 @@
       border-top: 10px solid lightcoral;
       top: 50%;
       animation: spin 2s linear infinite;
-      z-index: 1000;
+      z-index: 5001;
     }
 
     .backdrop {
+      z-index: 5000;
       position: absolute;
       top: 0;
       left: 0;
