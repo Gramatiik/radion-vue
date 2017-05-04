@@ -27,6 +27,7 @@
 
 <style scoped lang="scss">
   @import "mixins";
+  @import "variables";
 
   .container {
     display: flex;
@@ -36,15 +37,19 @@
     margin-bottom: 5px;
     transition: all .1s ease-in-out;
 
+    &.router-link-active {
+      font-weight: bold;
+    }
+
     span {
       margin-left: 12px;
       margin-right: 10px;
     }
 
     .menu-title {
-      @include menuStyle;
       line-height: 36px;
       font-size: 1.4rem;
+      color: $font-light;
     }
 
     &:hover {
