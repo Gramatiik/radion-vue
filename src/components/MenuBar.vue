@@ -3,8 +3,8 @@
     <div class="backdrop" @click="MENU_TOGGLE" :class="{ visible: menuOpened }"></div>
     <nav class="sidenav" :class="{ opened: menuOpened }">
       <menu-bar-item title="Settings" icon="settings" :route="{ name: 'About' }"></menu-bar-item>
-      <menu-bar-item title="Games" icon="games" :route="{ name: 'About' }"></menu-bar-item>
-      <menu-bar-item title="About" icon="pulse" :route="{ name: 'About' }"></menu-bar-item>
+      <menu-bar-item title="Games" icon="games" :route="{ name: 'Games' }"></menu-bar-item>
+      <menu-bar-item title="Pulses" icon="pulse" :route="{ name: 'Pulses' }"></menu-bar-item>
     </nav>
   </div>
 </template>

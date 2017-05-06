@@ -7,11 +7,11 @@ export default {
 
     return Vue.http.get(builder
       .setEndpoint('games')
-      .setFields(['id', 'name', 'slug', 'cover', 'popularity', 'created_at'])
+      .setFields(['id', 'name', 'slug', 'cover', 'popularity', 'created_at', 'first_release_date'])
       .setLimit(40)
       .setOffset(offset || 0)
       .setOrder({field: orderingField, type: 'desc'})
-      .setFilters([{field: 'created_at', type: 'lte', value: Date.now()}])
+      .setFilters([{field: 'first_release_date', type: 'lte', value: Date.now()}])
       .finalize())
       .then(response => response.body || [])
   },

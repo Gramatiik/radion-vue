@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import About from '@/components/About'
 import Games from '@/components/Games'
 import GameDetails from '@/components/GameDetails'
+import Pulses from '@/components/Pulses'
 
 Vue.use(Router)
 
@@ -21,13 +22,13 @@ export default new Router({
     },
     {
       path: '/games/popular',
-      name: 'Games',
+      name: 'PopularGames',
       component: Games,
       props: { ordering: 'popular' }
     },
     {
       path: '/games/recent',
-      name: 'Games',
+      name: 'RecentGames',
       component: Games,
       props: { ordering: 'recent' }
     },
@@ -36,6 +37,11 @@ export default new Router({
       name: 'GameDetails',
       component: GameDetails,
       props: true
+    },
+    {
+      path: '/pulses',
+      name: 'Pulses',
+      component: Pulses
     }
   ]
 })

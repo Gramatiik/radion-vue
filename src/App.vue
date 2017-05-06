@@ -4,7 +4,7 @@
     <rd-loading></rd-loading>
     <top-bar></top-bar>
     <menu-bar></menu-bar>
-    <div class="wrapper" v-show="!loading">
+    <div class="wrapper">
       <transition name="slide-fade" mode="out-in">
         <router-view></router-view>
       </transition>
@@ -16,12 +16,8 @@
 import TopBar from './components/TopBar'
 import MenuBar from './components/MenuBar'
 import RdLoading from './components/Loading'
-import { mapState } from 'vuex'
 export default {
   name: 'app',
-  computed: {
-    ...mapState(['loading', 'menuOpened'])
-  },
   components: {
     RdLoading,
     TopBar,

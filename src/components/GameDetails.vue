@@ -1,6 +1,5 @@
 <template>
   <div>
-    <router-link :to="{ name: 'Games'}">Return to list</router-link>
     <pre>{{ gameDetails }}</pre>
   </div>
 </template>
