@@ -3,12 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import VueMoment from 'vue-moment'
+import VueInfiniteScroll from 'vue-infinite-scroll'
 import {} from './resource'
 import {} from './filters'
 import router from './router'
 import store from './store'
 
 Vue.use(VueMoment)
+Vue.use(VueInfiniteScroll)
 
 Vue.config.productionTip = false
 
