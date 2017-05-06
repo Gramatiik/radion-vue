@@ -2,13 +2,13 @@
   <div>
     <h1>Games</h1>
     <div class="games-container">
-      <game-item class="card-item" v-for="game in recentGames" :key="game.id" :game-data="game"></game-item>
+      <game-item class="card-item" v-for="item in games" :key="item.id" :game-data="item"></game-item>
     </div>
   </div>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapState } from 'vuex'
   import GameItem from '@/components/GameItem'
   export default {
     name: 'games',
@@ -16,10 +16,13 @@
       return {}
     },
     computed: {
-      ...mapGetters(['recentGames'])
+      ...mapState({
+        games: state => state.gamesModule.games
+      })
     },
     created () {
-      this.$store.dispatch('getGames')
+      console.log(this.games)
+      this.$store.dispatch('getLatestGames', 50)
     },
     components: {
       GameItem

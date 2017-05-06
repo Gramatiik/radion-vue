@@ -19,7 +19,7 @@ export default new Router({
       component: Games
     },
     {
-      path: '/games/:id',
+      path: '/games/:slug',
       name: 'GameDetails',
       component: GameDetails
     }

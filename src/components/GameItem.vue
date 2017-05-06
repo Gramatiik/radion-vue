@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link class="game-item-card" :to="{ name: 'GameDetails', params: {id: gameData.id} }">
+    <router-link class="game-item-card" :to="{ name: 'GameDetails', params: {slug: gameData.slug} }">
       <img class="game-thumb" :src="gameData.cover | cloudinary('thumb')" />
       <div class="summary">
         <h3>{{ gameData.name }}</h3>
