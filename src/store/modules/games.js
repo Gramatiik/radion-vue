@@ -7,14 +7,21 @@ import {
 } from '../mutation-types'
 
 const state = {
-  games: []
+  games: [],
+  gameDetails: {}
+}
+
+const getters = {
+  gamesCount: function ({state}) {
+    return state.games.length
+  }
 }
 
 const actions = {
-  getLatestGames ({ commit }, offset) {
+  getGamesList ({ commit }, offset) {
     commit(APP_LOADING)
 
-    gamesAPI.getLatestGames(offset)
+    gamesAPI.getGamesList(offset)
       .then(function (data) {
         commit(RECIEVE_GAMES, data)
       })
@@ -25,6 +32,7 @@ const actions = {
         commit(APP_LOADING_FINISHED)
       })
   },
+
   getGameBySlug ({ commit }, slug) {
     commit(APP_LOADING)
 
@@ -52,6 +60,7 @@ const mutations = {
 
 export default {
   state,
+  getters,
   actions,
   mutations
 }

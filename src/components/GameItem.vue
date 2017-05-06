@@ -25,7 +25,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 10px;
-    min-height: 150px;
+    min-height: 120px;
     background-color: $bg-light;
     box-shadow: 0 5px 10px $bg-dark;
 

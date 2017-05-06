@@ -16,12 +16,26 @@ export default new Router({
     {
       path: '/games',
       name: 'Games',
-      component: Games
+      component: Games,
+      props: { ordering: 'popular' }
+    },
+    {
+      path: '/games/popular',
+      name: 'Games',
+      component: Games,
+      props: { ordering: 'popular' }
+    },
+    {
+      path: '/games/recent',
+      name: 'Games',
+      component: Games,
+      props: { ordering: 'recent' }
     },
     {
       path: '/games/:slug',
       name: 'GameDetails',
-      component: GameDetails
+      component: GameDetails,
+      props: true
     }
   ]
 })

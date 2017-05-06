@@ -1,13 +1,24 @@
 <template>
   <div>
-    <button @click="$router.go(-1)">Return to list</button>
+    <router-link :to="{ name: 'Games'}">Return to list</router-link>
+    <pre>{{ gameDetails }}</pre>
   </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   export default {
     name: 'game-details',
-    methods: {}
+    props: [ 'slug' ],
+    methods: {},
+    computed: {
+      ...mapState({
+        gameDetails: state => state.gamesModule.gameDetails
+      })
+    },
+    created () {
+      this.$store.dispatch('getGameBySlug', this.slug)
+    }
   }
 </script>
 

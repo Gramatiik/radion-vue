@@ -32,7 +32,7 @@
   div.top-menu {
     position: fixed;
     top: 0;
-    z-index: 100;
+    z-index: 10000;
     background-color: $primary;
     width: 100%;
     height: 50px;

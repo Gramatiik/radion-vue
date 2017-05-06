@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Games</h1>
+    <h1 class="page-title">{{ title }}</h1>
     <div class="games-container">
       <game-item class="card-item" v-for="item in games" :key="item.id" :game-data="item"></game-item>
     </div>
@@ -12,17 +12,30 @@
   import GameItem from '@/components/GameItem'
   export default {
     name: 'games',
+    props: [ 'ordering' ],
     data () {
-      return {}
+      return {
+        title: 'Games'
+      }
     },
     computed: {
       ...mapState({
         games: state => state.gamesModule.games
       })
     },
+    methods: {
+      loadGames () {
+        this.title = this.ordering === 'recent' ? 'Recent Games' : 'Popular Games'
+        this.$store.dispatch('getGamesList', this.ordering === 'recent' ? 'created_at' : 'popularity')
+      }
+    },
+    watch: {
+      '$route' (to, from) {
+        this.loadGames()
+      }
+    },
     created () {
-      console.log(this.games)
-      this.$store.dispatch('getLatestGames', 50)
+      this.loadGames()
     },
     components: {
       GameItem
@@ -30,7 +43,6 @@
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
   @import "variables";
   @import "mixins";

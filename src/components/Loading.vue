@@ -36,7 +36,7 @@
 
   .loading {
     .spinner {
-      position: absolute;
+      position: fixed;
       left: 0;
       right: 0;
       margin: 0 auto;
@@ -52,7 +52,7 @@
 
     .backdrop {
       z-index: 5000;
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       right: 0;
