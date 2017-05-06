@@ -5,7 +5,7 @@ import {
   APP_LOADING,
   APP_LOADING_FINISHED
 } from './mutation-types'
-import games from './modules/games'
+import gamesModule from './modules/games'
 
 Vue.use(Vuex)
 
@@ -26,7 +26,7 @@ const store = new Vuex.Store({
     }
   },
   modules: {
-    games: games
+    gamesModule: gamesModule
   }
 })
 

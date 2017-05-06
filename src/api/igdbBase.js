@@ -4,7 +4,7 @@ export default class IgdbQueryBuilder {
   query = ''
   options = []
 
-  init () {
+  constructor () {
     this.query = BASE_URL
     return this
   }

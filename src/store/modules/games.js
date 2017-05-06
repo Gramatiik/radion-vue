@@ -2,46 +2,56 @@ import gamesAPI from '../../api/igdbGames'
 import {
   APP_LOADING,
   APP_LOADING_FINISHED,
-  RECIEVE_GAMES
+  RECIEVE_GAMES,
+  RECIEVE_GAME_DETAILS
 } from '../mutation-types'
 
 const state = {
   games: []
 }
 
-const getters = {
-  recentGames: state => state.games
-}
-
 const actions = {
-  getGames ({ commit, state }) {
-    console.log(state)
-    if (state.games.length <= 0) {
-      commit(APP_LOADING)
+  getLatestGames ({ commit }, offset) {
+    commit(APP_LOADING)
 
-      gamesAPI.getGames()
-        .then(function (response) {
-          commit(RECIEVE_GAMES, response.body)
-        })
-        .catch(function () {
-          console.log('Error fetching games from API...')
-        })
-        .then(function () {
-          commit(APP_LOADING_FINISHED)
-        })
-    }
+    gamesAPI.getLatestGames(offset)
+      .then(function (data) {
+        commit(RECIEVE_GAMES, data)
+      })
+      .catch(function () {
+        console.log('Error fetching games from API...')
+      })
+      .then(function () {
+        commit(APP_LOADING_FINISHED)
+      })
+  },
+  getGameBySlug ({ commit }, slug) {
+    commit(APP_LOADING)
+
+    gamesAPI.getGameBySlug(slug)
+      .then(function (data) {
+        commit(RECIEVE_GAME_DETAILS, data)
+      })
+      .catch(function () {
+        console.log('Unable to retrieve game details...')
+      })
+      .then(function () {
+        commit(APP_LOADING_FINISHED)
+      })
   }
 }
 
 const mutations = {
   [RECIEVE_GAMES] (state, games) {
     state.games = games
+  },
+  [RECIEVE_GAME_DETAILS] (state, gameDetails) {
+    state.gameDetails = gameDetails
   }
 }
 
 export default {
   state,
-  getters,
   actions,
   mutations
 }
