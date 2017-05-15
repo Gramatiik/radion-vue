@@ -4,7 +4,7 @@
 
     <div class="pulses-container"
          v-infinite-scroll="loadMore"
-         infinite-scroll-disabled="false"
+         infinite-scroll-disabled="canLoad"
          infinite-scroll-distance="3">
       <pulse-item class="card-item" v-for="item in pulses" :key="item.id" :pulse-data="item"></pulse-item>
     </div>
@@ -31,7 +31,7 @@
         pulses: state => state.pulsesModule.pulses,
         listLoading: state => state.listLoading
       }),
-      ...mapGetters(['pulsesCount'])
+      ...mapGetters(['pulsesCount', 'canLoad'])
     },
     methods: {
       loadPulses () {

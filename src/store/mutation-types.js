@@ -1,9 +1,8 @@
 // General App Mutations
 export const MENU_TOGGLE = 'MENU_TOGGLE'
 export const LIST_LOADING = 'LIST_LOADING'
-export const LIST_LOADING_FINISHED = 'LIST_LOADING_FINISHED'
 export const APP_LOADING = 'APP_LOADING'
-export const APP_LOADING_FINISHED = 'APP_LOADING_FINISHED'
+export const API_FAILURE = 'API_FAILURE'
 
 // Games App Mutations
 export const RECIEVE_GAMES = 'RECIEVE_GAMES'

@@ -1,7 +1,7 @@
 import pulsesAPI from '../../api/igdbPulses'
 import {
   LIST_LOADING,
-  LIST_LOADING_FINISHED,
+  API_FAILURE,
   RECIEVE_PULSES,
   CLEAR_PULSES
 } from '../mutation-types'
@@ -19,7 +19,7 @@ const getters = {
 const actions = {
 
   getLatestPulses ({ commit }, offset) {
-    commit(LIST_LOADING)
+    commit(LIST_LOADING, true)
 
     pulsesAPI.getLatestPulses(offset)
       .then(function (data) {
@@ -27,9 +27,10 @@ const actions = {
       })
       .catch(function () {
         console.log('Error fetching pulses from API...')
+        commit(API_FAILURE, true)
       })
       .then(function () {
-        commit(LIST_LOADING_FINISHED)
+        commit(LIST_LOADING, false)
       })
   }
 }
@@ -40,8 +41,9 @@ const mutations = {
    * @param state
    * @param games
    */
-  [RECIEVE_PULSES] (state, games) {
-    state.games = state.games.concat(games)
+  [RECIEVE_PULSES] (state, data) {
+    state.apiFailure = false
+    state.pulses = state.pulses.concat(data)
   },
 
   /**

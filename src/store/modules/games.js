@@ -1,9 +1,8 @@
 import gamesAPI from '../../api/igdbGames'
 import {
   LIST_LOADING,
-  LIST_LOADING_FINISHED,
   APP_LOADING,
-  APP_LOADING_FINISHED,
+  API_FAILURE,
   CLEAR_GAMES,
   RECIEVE_GAMES,
   RECIEVE_GAME_DETAILS
@@ -32,7 +31,7 @@ const actions = {
   getGamesList ({ commit }, data) {
     let orderingField = data.orderingField === 'recent' ? 'first_release_date' : 'popularity'
 
-    commit(LIST_LOADING)
+    commit(LIST_LOADING, true)
 
     gamesAPI.getGamesList(orderingField, data.offset)
       .then(function (data) {
@@ -40,9 +39,10 @@ const actions = {
       })
       .catch(function () {
         console.log('Error fetching games from API...')
+        commit(API_FAILURE, true)
       })
       .then(function () {
-        commit(LIST_LOADING_FINISHED)
+        commit(LIST_LOADING, false)
       })
   },
 
@@ -52,7 +52,7 @@ const actions = {
    * @param slug
    */
   getGameBySlug ({ commit }, slug) {
-    commit(APP_LOADING)
+    commit(APP_LOADING, true)
 
     gamesAPI.getGameBySlug(slug)
       .then(function (data) {
@@ -60,9 +60,10 @@ const actions = {
       })
       .catch(function () {
         console.log('Unable to retrieve game details...')
+        commit(API_FAILURE, true)
       })
       .then(function () {
-        commit(APP_LOADING_FINISHED)
+        commit(APP_LOADING, false)
       })
   }
 }
@@ -74,6 +75,7 @@ const mutations = {
    * @param games
    */
   [RECIEVE_GAMES] (state, games) {
+    state.apiFailure = false
     state.games = state.games.concat(games)
   },
 
@@ -91,6 +93,7 @@ const mutations = {
    * @param gameDetails
    */
   [RECIEVE_GAME_DETAILS] (state, gameDetails) {
+    state.apiFailure = false
     state.gameDetails = gameDetails
   }
 }

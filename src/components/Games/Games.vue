@@ -4,7 +4,7 @@
 
     <div class="games-container"
          v-infinite-scroll="loadMore"
-         infinite-scroll-disabled="listLoading"
+         infinite-scroll-disabled="canLoad"
          infinite-scroll-distance="3">
       <game-item class="card-item" v-for="item in games" :key="item.id" :game-data="item"></game-item>
     </div>
@@ -33,7 +33,7 @@
         games: state => state.gamesModule.games,
         listLoading: state => state.listLoading
       }),
-      ...mapGetters(['gamesCount'])
+      ...mapGetters(['gamesCount', 'canLoad'])
     },
     methods: {
       loadGames () {

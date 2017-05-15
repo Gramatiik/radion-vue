@@ -2,10 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import {
   MENU_TOGGLE,
+  API_FAILURE,
   LIST_LOADING,
-  LIST_LOADING_FINISHED,
-  APP_LOADING,
-  APP_LOADING_FINISHED
+  APP_LOADING
 } from './mutation-types'
 import gamesModule from './modules/games'
 import pulsesModule from './modules/pulses'
@@ -16,23 +15,21 @@ const store = new Vuex.Store({
   state: {
     menuOpened: false,
     loading: false,
-    listLoading: false
+    listLoading: false,
+    apiFailure: false
   },
   mutations: {
     [MENU_TOGGLE] (state) {
       state.menuOpened = !state.menuOpened
     },
-    [LIST_LOADING] (state) {
-      state.listLoading = true
+    [API_FAILURE] (state, value) {
+      state.apiFailure = !!value
     },
-    [LIST_LOADING_FINISHED] (state) {
-      state.listLoading = false
+    [LIST_LOADING] (state, value) {
+      state.listLoading = !!value
     },
-    [APP_LOADING] (state) {
-      state.loading = true
-    },
-    [APP_LOADING_FINISHED] (state) {
-      state.loading = false
+    [APP_LOADING] (state, value) {
+      state.loading = !!value
     }
   },
   modules: {
