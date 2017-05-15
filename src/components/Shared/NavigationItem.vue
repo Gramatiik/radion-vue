@@ -10,16 +10,16 @@
 
 <script>
   export default {
-    name: 'menu-bar-item',
+    name: 'navigation-item',
     props: [ 'title', 'icon', 'route' ],
-    data () {
-      return {
-        iconClass: 'icon-' + this.icon
-      }
-    },
     methods: {
       goto () {
         // slip
+      }
+    },
+    computed: {
+      iconClass () {
+        return 'icon-' + this.icon
       }
     }
   }

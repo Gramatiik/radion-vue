@@ -13,15 +13,13 @@
 </template>
 
 <script>
-import TopBar from './components/TopBar'
-import MenuBar from './components/MenuBar'
-import RdLoading from './components/Loading'
+import TopBar from './components/Shared/TopBar'
+import RdLoading from './componen/Shared/Loading'
 export default {
   name: 'app',
   components: {
     RdLoading,
-    TopBar,
-    MenuBar
+    TopBar
   }
 }
 </script>
@@ -40,7 +38,7 @@ export default {
     transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
   }
   .slide-fade-enter, .slide-fade-leave-active {
-    transform: translateX(-30px);
+    // transform: translateX(-30px);
     opacity: 0;
   }
 </style>
