@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import About from '@/components/About'
-import Games from '@/components/Games'
-import GameDetails from '@/components/GameDetails'
-import Pulses from '@/components/Pulses'
+import Games from '@/components/Games/Games'
+import GameDetails from '@/components/Games/GameDetails'
+import Pulses from '@/components/Pulses/Pulses'
 
 Vue.use(Router)
 
@@ -11,6 +11,12 @@ export default new Router({
   routes: [
     {
       path: '/',
+      redirect: {
+        name: 'Games'
+      }
+    },
+    {
+      path: '/about',
       name: 'About',
       component: About
     },
