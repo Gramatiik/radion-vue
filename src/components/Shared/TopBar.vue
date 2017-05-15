@@ -1,19 +1,31 @@
 <template>
-  <div class="top-menu">
-    <div class="burger-menu" @click="MENU_TOGGLE" :class="{ opened: menuOpened }">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
+  <div>
+
+    <div class="top-menu">
+      <div class="burger-menu" @click="MENU_TOGGLE" :class="{ opened: menuOpened }">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="brand-icon"></div>
+      <div class="brand-name">Radion</div>
     </div>
-    <div class="brand-icon"></div>
-    <div class="brand-name">Radion</div>
+
+    <div class="backdrop" @click="MENU_TOGGLE" :class="{ visible: menuOpened }"></div>
+    <nav class="sidenav" :class="{ opened: menuOpened }">
+      <navigation-item title="Settings" icon="settings" :route="{ name: 'About' }"></navigation-item>
+      <navigation-item title="Games" icon="games" :route="{ name: 'Games' }"></navigation-item>
+      <navigation-item title="Pulses" icon="pulse" :route="{ name: 'Pulses' }"></navigation-item>
+    </nav>
+
   </div>
 </template>
 
 <script>
   import { mapMutations, mapState } from 'vuex'
   import { MENU_TOGGLE } from '@/store/mutation-types'
+  import NavigationItem from '@/components/Shared/NavigationItem'
   export default {
     name: 'top-bar',
     data () {
@@ -22,7 +34,10 @@
     methods: {
       ...mapMutations([ MENU_TOGGLE ])
     },
-    computed: mapState([ 'menuOpened' ])
+    computed: mapState([ 'menuOpened' ]),
+    components: {
+      NavigationItem
+    }
   }
 </script>
 
@@ -44,7 +59,7 @@
       left: 70px;
       width: 40px;
       height: 40px;
-      background-image: url("../assets/images/radion-logo.png");
+      background-image: url("../../assets/images/radion-logo.png");
       background-size: contain;
     }
 
@@ -112,6 +127,51 @@
             left: 50%;
           }
         }
+      }
+    }
+  }
+
+  .backdrop {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: visibility 0s, opacity 0.2s linear;
+
+    &.visible {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  .sidenav {
+    height: 100%;
+    width: 0;
+    opacity: 0;
+    position: fixed;
+    z-index: 10;
+    top: 50px;
+    left: 0;
+    background-color: $primary;
+    box-shadow: 2px 0 4px 0 rgba(0, 0, 0, 0.5);
+    overflow-x: hidden;
+    transition: opacity 0.1s, width 0.2s;
+    padding-top: 10px;
+
+    &.opened {
+      opacity: 1;
+      width: 100%;
+
+      @media screen and (min-width: $bp-mobile){
+        width: 280px;
+      }
+      @media screen and (min-width: $bp-tablet){
+        width: 560px;
       }
     }
   }
