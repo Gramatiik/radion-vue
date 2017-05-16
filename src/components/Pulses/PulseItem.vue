@@ -46,7 +46,11 @@
 
     .pulse-content {
       position: relative;
-      padding: 5px;
+      padding: 10px;
+
+      h3 {
+        font-size: 1.3rem;
+      }
 
       .released {
         position: absolute;
