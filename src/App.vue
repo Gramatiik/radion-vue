@@ -3,7 +3,6 @@
     <div class="window"></div>
     <rd-loading></rd-loading>
     <top-bar></top-bar>
-    <menu-bar></menu-bar>
     <div class="wrapper">
       <transition name="slide-fade" mode="out-in">
         <router-view></router-view>
@@ -14,7 +13,7 @@
 
 <script>
 import TopBar from './components/Shared/TopBar'
-import RdLoading from './componen/Shared/Loading'
+import RdLoading from './components/Shared/Loading'
 export default {
   name: 'app',
   components: {
