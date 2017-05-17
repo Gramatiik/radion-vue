@@ -27,5 +27,7 @@ initState(store)
       template: '<App/>',
       components: { App }
     })
+
+    document.getElementById('curtain').classList.add('closed')
   })
 

@@ -1,32 +1,14 @@
 @import "elements";
 
-@keyframes slideInFromRight {
-  0% {
-    width: 100%;
-  }
-  100% {
-    width: 0%;
-  }
-}
-
-div.window {
-  z-index: 15000;
-  animation: slideInFromRight 0.5s linear;
-  animation-fill-mode: forwards;
-  position: fixed;
-  top:0;
-  left:0;
-  width: 100%;
-  height: 100%;
-  background-color: $accent;
-}
-
 body {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  background: linear-gradient(to right, #e2e2e2 1%, #ffffff 50%, #e2e2e2 100%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   color: #2c3e50;
-  background: linear-gradient(to right, #e2e2e2 1%, #ffffff 50%, #e2e2e2 100%);
 }
 
 .wrapper {

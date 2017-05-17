@@ -6,8 +6,63 @@
     <meta name="description" content="Radion Web client">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <title>radion-vue</title>
+
+    <style>
+
+      html {
+        font-size: 100%;
+      }
+
+      @media only screen and (min-width: 768px) {
+        html {
+          font-size: 90%;
+        }
+      }
+
+      @media only screen and (min-width: 1024px){
+        html {
+          font-size: 85%;
+        }
+      }
+
+      #curtain {
+        text-align: center;
+        line-height: 100%;
+        z-index: 15000;
+        transition: all .5s ease-out;
+        animation-fill-mode: forwards;
+        position: fixed;
+        top:0;
+        left:0;
+        width: 100%;
+        height: 100%;
+        background-color: #38e869;
+      }
+
+      #curtain span {
+        color: #7af37a;
+        position: absolute;
+        font-size: 5rem;
+        font-family: Arial, sans-serif;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-orientation: upright;
+        writing-mode: vertical-rl;
+        transition: opacity .4s ease-out;
+      }
+
+      #curtain.closed {
+        visibility: hidden;
+        width: 0;
+      }
+      #curtain.closed span {
+        opacity: 0;
+      }
+    </style>
   </head>
   <body>
+    <div id="curtain"><span>LOADING</span></div>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>

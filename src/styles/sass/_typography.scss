@@ -1,18 +1,6 @@
 @import "variables";
 @import "mixins";
 
-html {
-  font-size: 100%;
-
-  @include responsiveMinWidth($bp-mobile) {
-    font-size: 85%;
-  }
-
-  @include responsiveMinWidth($bp-desktop) {
-    font-size: 90%;
-  }
-}
-
 h1,
 h2,
 h3,
