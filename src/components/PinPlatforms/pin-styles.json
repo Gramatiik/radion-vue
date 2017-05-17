@@ -1,0 +1,162 @@
+{
+  "PlayStation": {
+    "name": "PS1",
+    "primary": "#E60722",
+    "border": "#AA071C"
+  },
+  "PlayStation 2": {
+    "name": "PS2",
+    "primary": "#143EEC",
+    "border": "#1F1E84"
+  },
+  "PlayStation 3": {
+    "name": "PS3",
+    "primary": "#006EB9",
+    "border": "PlayStation 3"
+  },
+  "PlayStation Portable": {
+    "name": "PSP",
+    "primary": "#333333",
+    "border": "#000000"
+  },
+  "PlayStation Vita": {
+    "name": "Vita",
+    "primary": "#053585",
+    "border": "#031F6B"
+  },
+  "PlayStation 4": {
+    "name": "PS4",
+    "primary": "#003F96",
+    "border": "#00285F"
+  },
+  "Xbox 360": {
+    "name": "360",
+    "primary": "#3ABF12",
+    "border": "#25820A"
+  },
+  "Xbox One": {
+    "name": "One",
+    "primary": "#127E11",
+    "border": "#0B570A"
+  },
+  "Nintendo Entertainment System (NES)": {
+    "name": "NES",
+    "primary": "#E82D35",
+    "border": "#B6050D"
+  },
+  "Super Nintendo Entertainment System (SNES)": {
+    "name": "SNES",
+    "primary": "#B6050D",
+    "border": "#79050B"
+  },
+  "Virtual Console (Nintendo)": {
+    "name": "VC",
+    "primary": "#000",
+    "border": "#E82D35"
+  },
+  "Nintendo GameCube": {
+    "name": "NGC",
+    "primary": "#8278B8",
+    "border": "#5B5483"
+  },
+  "Nintendo 64": {
+    "name": "N64",
+    "primary": "#119638",
+    "border": "#011DA9"
+  },
+  "Wii": {
+    "name": "Wii",
+    "primary": "#030504",
+    "border": "#5B5B5B"
+  },
+  "Wii U": {
+    "name": "Wii U",
+    "primary": "#009AC7",
+    "border": "#006F91"
+  },
+  "Nintendo Switch": {
+    "name": "Switch",
+    "primary": "#E60012",
+    "border": "7C0009"
+  },
+  "Game Boy Color": {
+    "name": "GBC",
+    "primary": "#332BDB",
+    "border": "#2000CD"
+  },
+  "Game Boy Advance": {
+    "name": "GBA",
+    "primary": "#000",
+    "border": "#2000CD)"
+  },
+  "Nintendo DS": {
+    "name": "DS",
+    "primary": "#030504",
+    "border": "#030504"
+  },
+  "Nintendo 3DS": {
+    "name": "3DS",
+    "primary": "#CF181F",
+    "border": "#8F1015"
+  },
+  "SteamOS": {
+    "name": "SteamOS",
+    "primary": "#333333",
+    "border": "#5E3B8D"
+  },
+  "PC (Microsoft Windows)": {
+    "name": "PC",
+    "primary": "#434343",
+    "border": "#242424"
+  },
+  "Windows Phone": {
+    "name": "WP",
+    "primary": "#434343",
+    "border": "#242424"
+  },
+  "Web browser": {
+    "name": "Web",
+    "primary": "#e28d1e",
+    "border": "#632f05"
+  },
+  "Sega Mega Drive\/Genesis": {
+    "name": "Mega Drive",
+    "primary": "#6177A5",
+    "border": "#13579E"
+  },
+  "Sega Master System": {
+    "name": "Master System",
+    "primary": "#0061A8",
+    "border": "#FF0000"
+  },
+  "N-Gage": {
+    "name": "N-Gage",
+    "primary": "#000000",
+    "border": "#FF0000"
+  },
+  "Neo Geo MVS": {
+    "name": "NeoGeo",
+    "primary": "#D9A738",
+    "border": "#00A1E1"
+  },
+  "Neo Geo AES": {
+    "name": "NeoGeo",
+    "primary": "#D9A738",
+    "border": "#00A1E1"
+  },
+  "Atari 2600": {
+    "name": "Atari 2600",
+    "primary": "#000000",
+    "border": "#FF0000"
+  },
+  "Android": {
+    "name": "Android",
+    "primary": "#A4C639",
+    "border": "#7E9B30"
+  },
+  "iOS": {
+    "name": "iOS",
+    "primary": "#2A2A2A",
+    "border": "#474747"
+  }
+}

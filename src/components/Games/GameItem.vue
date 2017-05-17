@@ -6,11 +6,13 @@
         <h3>{{ gameData.name }}</h3>
         <span class="release-date">Released {{ new Date(gameData.first_release_date) | moment("from", "now") }}</span>
       </div>
+      <pin-platforms class="game-platforms" :platform-ids="platformIds"></pin-platforms>
     </router-link>
   </div>
 </template>
 
 <script>
+  import PinPlatforms from '../PinPlatforms/PinPlatforms.vue'
   export default {
     name: 'game-item',
     props: [ 'gameData' ],
@@ -18,7 +20,17 @@
     computed: {
       cardThumb: function () {
         return `url("${this.$options.filters.cloudinary(this.gameData.cover, 'thumb_2x')}")`
+      },
+      platformIds: function () {
+        let platformIds = []
+        for (let release of this.gameData['release_dates'] || {}) {
+          platformIds.push(release.platform)
+        }
+        return platformIds
       }
+    },
+    components: {
+      PinPlatforms
     }
   }
 </script>
@@ -46,6 +58,16 @@
       height: 90px;
       background-size: cover;
       margin-right: 5px;
+      box-shadow: 1px 1px 5px $bg-dark;
+    }
+
+    .game-infos h3 {
+      font-size: 1.4rem;
+    }
+
+    .game-platforms {
+      padding-top: 5px;
+      clear: both;
     }
   }
 </style>
