@@ -34,6 +34,11 @@
     min-height: 90px;
     background-color: $bg-light;
     box-shadow: 0 5px 10px $bg-dark;
+    transition: transform .2s ease-out;
+
+    &:hover {
+      transform: scale(1.02);
+    }
 
     .game-thumb {
       float: left;

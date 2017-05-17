@@ -43,7 +43,7 @@
     background-color: $bg-light;
     box-shadow: 0 5px 10px $bg-dark;
     overflow: hidden;
-    transition: transform .2s ease-in-out;
+    transition: transform .2s ease-out;
 
     .pulse-image {
       height: 200px;
