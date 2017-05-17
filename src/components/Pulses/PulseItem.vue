@@ -49,6 +49,7 @@
       height: 200px;
       width: 100%;
       background-size: cover;
+      transition: background-image 0.4s ease-in-out;
     }
 
     .pulse-content {

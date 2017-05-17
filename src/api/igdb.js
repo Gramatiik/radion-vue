@@ -53,5 +53,47 @@ export default {
       .setOffset(offset || 0)
       .finalize())
       .then(response => response.body || [])
+  },
+
+  /**
+   * Returns the list of all platforms names
+   */
+  getPlatformsList () {
+    let builder = new IgdbQueryBuilder()
+    let requests = []
+
+    return new Promise((resolve, reject) => {
+    // get the count of platforms
+      Vue.http.get(new IgdbQueryBuilder().setEndpoint('platforms/count').finalize())
+        .then(response => response.body.count || 0)
+        .then(count => {
+          // calculate how many calls to get all platforms
+          let calls = Math.ceil(count / 50)
+
+          // perform all calls to the API
+          for (let i = 0; i < calls; i++) {
+            requests.push(Vue.http.get(builder
+              .setEndpoint('platforms')
+              .setFields(['id', 'name'])
+              .setLimit(50)
+              .setOffset(i * 50)
+              .finalize()))
+          }
+
+          Promise.all(requests)
+            .then((responses) => {
+              let platforms = []
+
+              for (let result of responses) {
+                for (let item of result.body) {
+                  platforms[item.id] = item.name
+                }
+              }
+
+              resolve(platforms)
+            })
+            .catch(error => reject(error))
+        })
+    })
   }
 }

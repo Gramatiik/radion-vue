@@ -4,7 +4,6 @@
     <rd-loading></rd-loading>
     <top-bar></top-bar>
     <div class="wrapper">
-      <pin-platforms></pin-platforms>
       <transition name="slide-fade" mode="out-in">
         <router-view></router-view>
       </transition>
@@ -13,17 +12,22 @@
 </template>
 
 <script>
-import TopBar from './components/Shared/TopBar'
-import RdLoading from './components/Shared/Loading'
-import PinPlatforms from './components/PinPlatforms/PinPlatforms'
-export default {
-  name: 'app',
-  components: {
-    RdLoading,
-    TopBar,
-    PinPlatforms
+  import initState from './store/init'
+  import TopBar from './components/Shared/TopBar'
+  import RdLoading from './components/Shared/Loading'
+  import PinPlatforms from './components/PinPlatforms/PinPlatforms'
+  export default {
+    name: 'app',
+    components: {
+      RdLoading,
+      TopBar,
+      PinPlatforms
+    },
+    created () {
+      // here we will initialize our state with values from localStorage or API
+      initState(this.$store)
+    }
   }
-}
 </script>
 
 <style lang="scss">
