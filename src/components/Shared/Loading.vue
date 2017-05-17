@@ -2,7 +2,6 @@
   <transition name="loader">
     <div v-show="loading" class="loading">
       <div class="spinner"></div>
-      <div class="backdrop"></div>
     </div>
   </transition>
 </template>
@@ -21,6 +20,8 @@
 </script>
 
 <style scoped lang="scss">
+  @import "variables";
+
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -35,29 +36,27 @@
   }
 
   .loading {
+    box-sizing: border-box;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: $bg-dark;
+
     .spinner {
-      position: fixed;
-      left: 0;
-      right: 0;
-      margin: 0 auto;
-      width: 50px;
-      height: 50px;
+      box-sizing: border-box;
+      height: 100%;
+      width: 100%;
       border-radius: 50%;
       border: 10px solid white;
       border-top: 10px solid lightcoral;
-      top: 50%;
       animation: spin 2s linear infinite;
       z-index: 5001;
-    }
-
-    .backdrop {
-      z-index: 5000;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.8);
     }
   }
 </style>
