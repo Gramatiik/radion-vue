@@ -44,31 +44,29 @@
       ...mapGetters(['gamesCount'])
     },
     methods: {
-      loadGames () {
-        this.title = this.ordering === 'recent' ? 'Recent Games' : 'Popular Games'
-
-        // clear saved games at component startup
-        this.$store.commit(CLEAR_GAMES)
-
-        // load initial data
+      dispatchGamesAction () {
         this.$store.dispatch('getGamesList', { orderingField: this.ordering, offset: this.gamesCount })
       },
+      initGames () {
+        this.title = this.ordering === 'recent' ? 'Recent Games' : 'Popular Games'
+        this.$store.commit(CLEAR_GAMES)
+        this.dispatchGamesAction()
+      },
       loadMore () {
-        // load more data
-        this.$store.dispatch('getGamesList', { orderingField: this.ordering, offset: this.gamesCount })
+        this.dispatchGamesAction()
       },
       retry () {
         this.$store.commit(API_FAILURE, false)
-        this.$store.dispatch('getGamesList', { orderingField: this.ordering, offset: this.gamesCount })
+        this.dispatchGamesAction()
       }
     },
     watch: {
       '$route' () {
-        this.loadGames()
+        this.initGames()
       }
     },
     created () {
-      this.loadGames()
+      this.initGames()
     },
     components: {
       GameItem

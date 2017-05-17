@@ -81,12 +81,12 @@ export default {
                   .finalize())
                   .then(response => resolve(response))
                   .catch(err => reject(err))
-              }, i * 500)
+              }, i * 120)
             })
             requests.push(prom)
           }
 
-          return Promise.all(requests)
+          Promise.all(requests)
             .then((responses) => {
               let pulseSources = []
 
@@ -98,6 +98,7 @@ export default {
 
               resolve(pulseSources)
             })
+            .catch(err => reject(err))
         })
     })
   },
@@ -129,12 +130,12 @@ export default {
                   .finalize())
                   .then(response => resolve(response))
                   .catch(err => reject(err))
-              }, i * 500)
+              }, i * 120)
             })
             requests.push(prom)
           }
 
-          return Promise.all(requests)
+          Promise.all(requests)
             .then((responses) => {
               let platforms = []
 
@@ -146,6 +147,7 @@ export default {
 
               resolve(platforms)
             })
+            .catch(err => reject(err))
         })
     })
   }
