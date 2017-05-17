@@ -9,6 +9,7 @@ import {} from './resource'
 import {} from './filters'
 import router from './router'
 import store from './store'
+import initState from './store/init'
 
 Vue.use(VueMoment)
 Vue.use(VueInfiniteScroll)
@@ -16,11 +17,15 @@ Vue.component('lazy-background', VueLazyBackgroundImage)
 
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  store,
-  template: '<App/>',
-  components: { App }
-})
+initState(store)
+  .then(() => {
+    /* eslint-disable no-new */
+    new Vue({
+      el: '#app',
+      router,
+      store,
+      template: '<App/>',
+      components: { App }
+    })
+  })
+

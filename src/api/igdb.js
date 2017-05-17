@@ -56,6 +56,53 @@ export default {
   },
 
   /**
+   * Returns the list of all pulse websites sources
+   */
+  getPulsesSourceList () {
+    let builder = new IgdbQueryBuilder()
+    let requests = []
+
+    return new Promise((resolve, reject) => {
+      Vue.http.get(new IgdbQueryBuilder().setEndpoint('pulse_sources/count').finalize())
+        .then(response => response.body.count || 0)
+        .then(count => {
+          let calls = Math.ceil(count / 50)
+          console.log(count)
+
+          // perform all calls to the API
+          for (let i = 0; i < calls; i++) {
+            let prom = new Promise((resolve, reject) => {
+              setTimeout(() => {
+                Vue.http.get(builder
+                  .setEndpoint('pulse_sources')
+                  .setFields(['id', 'name'])
+                  .setLimit(50)
+                  .setOffset(i * 50)
+                  .finalize())
+                  .then(response => resolve(response))
+                  .catch(err => reject(err))
+              }, i * 500)
+            })
+            requests.push(prom)
+          }
+
+          return Promise.all(requests)
+            .then((responses) => {
+              let pulseSources = []
+
+              for (let result of responses) {
+                for (let item of result.body) {
+                  pulseSources[item.id] = item.name
+                }
+              }
+
+              resolve(pulseSources)
+            })
+        })
+    })
+  },
+
+  /**
    * Returns the list of all platforms names
    */
   getPlatformsList () {
@@ -72,15 +119,22 @@ export default {
 
           // perform all calls to the API
           for (let i = 0; i < calls; i++) {
-            requests.push(Vue.http.get(builder
-              .setEndpoint('platforms')
-              .setFields(['id', 'name'])
-              .setLimit(50)
-              .setOffset(i * 50)
-              .finalize()))
+            let prom = new Promise((resolve, reject) => {
+              setTimeout(() => {
+                Vue.http.get(builder
+                  .setEndpoint('platforms')
+                  .setFields(['id', 'name'])
+                  .setLimit(50)
+                  .setOffset(i * 50)
+                  .finalize())
+                  .then(response => resolve(response))
+                  .catch(err => reject(err))
+              }, i * 500)
+            })
+            requests.push(prom)
           }
 
-          Promise.all(requests)
+          return Promise.all(requests)
             .then((responses) => {
               let platforms = []
 
@@ -92,7 +146,6 @@ export default {
 
               resolve(platforms)
             })
-            .catch(error => reject(error))
         })
     })
   }

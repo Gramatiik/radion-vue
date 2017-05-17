@@ -7,6 +7,7 @@ import {
   RECIEVE_GAMES,
   RECIEVE_GAME_DETAILS,
 
+  RECIEVE_PULSE_SOURCES_LIST,
   RECIEVE_PULSES,
   CLEAR_PULSES,
 
@@ -18,6 +19,7 @@ const state = {
   gameDetails: {},
 
   pulses: [],
+  pulseSourcesList: [],
 
   platformsList: []
 }
@@ -148,8 +150,22 @@ const mutations = {
     state.pulses = []
   },
 
+  /**
+   * Save recieved platforms list to current state
+   * @param state
+   * @param list
+   */
   [RECIEVE_PLATFORMS_LIST] (state, list) {
     state.platformsList = list
+  },
+
+  /**
+   * Save recieved pulses sources list to current state
+   * @param state
+   * @param list
+   */
+  [RECIEVE_PULSE_SOURCES_LIST] (state, list) {
+    state.pulseSourcesList = list
   }
 }
 

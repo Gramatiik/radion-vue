@@ -12,7 +12,6 @@
 </template>
 
 <script>
-  import initState from './store/init'
   import TopBar from './components/Shared/TopBar'
   import RdLoading from './components/Shared/Loading'
   import PinPlatforms from './components/PinPlatforms/PinPlatforms'
@@ -22,10 +21,6 @@
       RdLoading,
       TopBar,
       PinPlatforms
-    },
-    created () {
-      // here we will initialize our state with values from localStorage or API
-      initState(this.$store)
     }
   }
 </script>
