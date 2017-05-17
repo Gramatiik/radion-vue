@@ -13,3 +13,6 @@ export const RECIEVE_GAME_CATEGORIES = 'RECIEVE_GAME_CATEGORIES'
 // Pulses App Mutations
 export const RECIEVE_PULSES = 'RECIEVE_PULSES'
 export const CLEAR_PULSES = 'CLEAR_PULSES'
+
+// Platforms Mutations
+export const RECIEVE_PLATFORMS_LIST = 'RECIEVE_PLATFORMS_LIST'

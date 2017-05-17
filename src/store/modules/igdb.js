@@ -8,14 +8,18 @@ import {
   RECIEVE_GAME_DETAILS,
 
   RECIEVE_PULSES,
-  CLEAR_PULSES
+  CLEAR_PULSES,
+
+  RECIEVE_PLATFORMS_LIST
 } from '../mutation-types'
 
 const state = {
   games: [],
   gameDetails: {},
 
-  pulses: []
+  pulses: [],
+
+  platformsList: []
 }
 
 const getters = {
@@ -34,15 +38,14 @@ const actions = {
    * Loads a list of games ordered by release dates or popularity
    * and appends results it to the current loaded games
    * @param commit
-   * @param orderingField type of ordering wanted
-   * @param offset offset from first item
+   * @param data orderingField and offset
    */
   getGamesList ({ commit }, data) {
     let orderingField = data.orderingField === 'recent' ? 'first_release_date' : 'popularity'
 
     commit(LIST_LOADING, true)
 
-    igdbApi.getGamesList(orderingField, data.offset)
+    return igdbApi.getGamesList(orderingField, data.offset)
       .then(function (data) {
         commit(RECIEVE_GAMES, data)
       })
@@ -63,7 +66,7 @@ const actions = {
   getGameBySlug ({ commit }, slug) {
     commit(APP_LOADING, true)
 
-    igdbApi.getGameBySlug(slug)
+    return igdbApi.getGameBySlug(slug)
       .then(function (data) {
         commit(RECIEVE_GAME_DETAILS, data)
       })
@@ -84,7 +87,7 @@ const actions = {
   getLatestPulses ({ commit }, offset) {
     commit(LIST_LOADING, true)
 
-    igdbApi.getLatestPulses(offset)
+    return igdbApi.getLatestPulses(offset)
       .then(function (data) {
         commit(RECIEVE_PULSES, data)
       })
@@ -143,6 +146,10 @@ const mutations = {
    */
   [CLEAR_PULSES] (state) {
     state.pulses = []
+  },
+
+  [RECIEVE_PLATFORMS_LIST] (state, list) {
+    state.platformsList = list
   }
 }
 
