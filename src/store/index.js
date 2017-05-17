@@ -6,8 +6,7 @@ import {
   LIST_LOADING,
   APP_LOADING
 } from './mutation-types'
-import gamesModule from './modules/games'
-import pulsesModule from './modules/pulses'
+import igdbModule from './modules/igdb'
 
 Vue.use(Vuex)
 
@@ -33,8 +32,7 @@ const store = new Vuex.Store({
     }
   },
   modules: {
-    gamesModule: gamesModule,
-    pulsesModule: pulsesModule
+    igdb: igdbModule
   }
 })
 

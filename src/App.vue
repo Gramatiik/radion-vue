@@ -4,6 +4,7 @@
     <rd-loading></rd-loading>
     <top-bar></top-bar>
     <div class="wrapper">
+      <pin-platforms></pin-platforms>
       <transition name="slide-fade" mode="out-in">
         <router-view></router-view>
       </transition>
@@ -14,11 +15,13 @@
 <script>
 import TopBar from './components/Shared/TopBar'
 import RdLoading from './components/Shared/Loading'
+import PinPlatforms from './components/PinPlatforms/PinPlatforms'
 export default {
   name: 'app',
   components: {
     RdLoading,
-    TopBar
+    TopBar,
+    PinPlatforms
   }
 }
 </script>

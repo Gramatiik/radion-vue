@@ -1,21 +1,30 @@
-import gamesAPI from '../../api/igdbGames'
+import igdbApi from '../../api/igdb'
 import {
   LIST_LOADING,
   APP_LOADING,
   API_FAILURE,
   CLEAR_GAMES,
   RECIEVE_GAMES,
-  RECIEVE_GAME_DETAILS
+  RECIEVE_GAME_DETAILS,
+
+  RECIEVE_PULSES,
+  CLEAR_PULSES
 } from '../mutation-types'
 
 const state = {
   games: [],
-  gameDetails: {}
+  gameDetails: {},
+
+  pulses: []
 }
 
 const getters = {
   gamesCount: function (state) {
     return state.games.length
+  },
+
+  pulsesCount: function (state) {
+    return state.pulses.length
   }
 }
 
@@ -33,7 +42,7 @@ const actions = {
 
     commit(LIST_LOADING, true)
 
-    gamesAPI.getGamesList(orderingField, data.offset)
+    igdbApi.getGamesList(orderingField, data.offset)
       .then(function (data) {
         commit(RECIEVE_GAMES, data)
       })
@@ -54,7 +63,7 @@ const actions = {
   getGameBySlug ({ commit }, slug) {
     commit(APP_LOADING, true)
 
-    gamesAPI.getGameBySlug(slug)
+    igdbApi.getGameBySlug(slug)
       .then(function (data) {
         commit(RECIEVE_GAME_DETAILS, data)
       })
@@ -64,6 +73,27 @@ const actions = {
       })
       .then(function () {
         commit(APP_LOADING, false)
+      })
+  },
+
+  /**
+   * Get the latest pulses news
+   * @param commit
+   * @param offset
+   */
+  getLatestPulses ({ commit }, offset) {
+    commit(LIST_LOADING, true)
+
+    igdbApi.getLatestPulses(offset)
+      .then(function (data) {
+        commit(RECIEVE_PULSES, data)
+      })
+      .catch(function () {
+        console.log('Error fetching pulses from API...')
+        commit(API_FAILURE, true)
+      })
+      .then(function () {
+        commit(LIST_LOADING, false)
       })
   }
 }
@@ -95,6 +125,24 @@ const mutations = {
   [RECIEVE_GAME_DETAILS] (state, gameDetails) {
     state.apiFailure = false
     state.gameDetails = gameDetails
+  },
+
+  /**
+   * Save recieved pulses
+   * @param state
+   * @param games
+   */
+  [RECIEVE_PULSES] (state, data) {
+    state.apiFailure = false
+    state.pulses = state.pulses.concat(data)
+  },
+
+  /**
+   * Clears currently loaded pulses
+   * @param state
+   */
+  [CLEAR_PULSES] (state) {
+    state.pulses = []
   }
 }
 

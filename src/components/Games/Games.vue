@@ -37,7 +37,7 @@
     },
     computed: {
       ...mapState({
-        games: state => state.gamesModule.games,
+        games: state => state.igdb.games,
         listLoading: state => state.listLoading,
         apiFailure: state => state.apiFailure
       }),

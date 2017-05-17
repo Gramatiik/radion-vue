@@ -24,7 +24,7 @@
     methods: {},
     computed: {
       pulseImage () {
-        return this.pulseData.image
+        return this.pulseData.image || ''
       },
       released () {
         return this.$options.filters.moment(this.pulseData.published_at, 'from')

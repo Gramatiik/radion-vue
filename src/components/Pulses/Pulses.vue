@@ -34,7 +34,7 @@
     },
     computed: {
       ...mapState({
-        pulses: state => state.pulsesModule.pulses,
+        pulses: state => state.igdb.pulses,
         listLoading: state => state.listLoading,
         apiFailure: state => state.apiFailure
       }),
