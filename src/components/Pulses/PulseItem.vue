@@ -1,7 +1,14 @@
 <template>
   <a class="pulse-card" :href="pulseData.url" target="_blank">
     <div class="pulse-infos">
-      <div class="pulse-image" :style="{ backgroundImage: pulseImage }"></div>
+
+      <lazy-background
+        class="pulse-image"
+        :image-source="pulseImage"
+        :loading-image="require('@/assets/images/pulse-no-image.png')"
+        :error-image="require('@/assets/images/pulse-no-image.png')">
+      </lazy-background>
+
       <div class="pulse-content">
         <h3>{{ pulseData.title }}</h3>
         <span class="released">{{ released }}</span>
@@ -17,7 +24,7 @@
     methods: {},
     computed: {
       pulseImage () {
-        return `url("${this.pulseData.image || require('@/assets/images/pulse-no-image.png')}")`
+        return this.pulseData.image
       },
       released () {
         return this.$options.filters.moment(this.pulseData.published_at, 'from')

@@ -1,13 +1,13 @@
 <template>
 
   <div>
-    <h1 class="page-title">Pulses</h1>
+    <h1 class="page-title">Latest Pulses</h1>
 
     <div v-if="!apiFailure">
       <div class="pulses-container">
         <pulse-item class="card-item" v-for="item in pulses" :key="item.id" :pulse-data="item"></pulse-item>
-        <button @click="loadMore">Load More</button>
       </div>
+      <button @click="loadMore">Load More</button>
     </div>
     <div v-else style="text-align: center">
       Unable to retrieve pulses from API...
