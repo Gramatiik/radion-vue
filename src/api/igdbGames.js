@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import IgdbQueryBuilder from './igdbBase'
+import IgdbQueryBuilder from './IgdbQueryBuilder'
 
 export default {
   getGamesList (orderingField, offset) {
