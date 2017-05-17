@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="MENU_TOGGLE">
     <router-link class="container" :to="route">
       <span :class="[ iconClass ]"></span>
       <div class="menu-title">{{ title }}</div>
@@ -9,13 +9,13 @@
 </template>
 
 <script>
+  import { mapMutations } from 'vuex'
+  import { MENU_TOGGLE } from '@/store/mutation-types'
   export default {
     name: 'navigation-item',
     props: [ 'title', 'icon', 'route' ],
     methods: {
-      goto () {
-        // slip
-      }
+      ...mapMutations([MENU_TOGGLE])
     },
     computed: {
       iconClass () {
