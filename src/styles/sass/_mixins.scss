@@ -16,14 +16,14 @@
   }
 
   // 2 items in tablet mode
-  @include responsiveMinWidth($bp-tablet) {
+  @include responsiveMinWidth($bp-tablet - 1) {
     .card-item {
       width: calc(50% - #{$gutter / 2});
     }
   }
 
   // 3 items grid in desktop mode
-  @include responsiveMinWidth($bp-desktop) {
+  @include responsiveMinWidth($bp-desktop - 1) {
     .card-item {
       width: calc( ( 100% / 3 ) - #{(2 / 3 ) * $gutter});
     }
