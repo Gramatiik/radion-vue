@@ -12,13 +12,11 @@
 <script>
   import TopBar from './components/Shared/TopBar'
   import RdLoading from './components/Shared/Loading'
-  import PinPlatforms from './components/PinPlatforms/PinPlatforms'
   export default {
     name: 'app',
     components: {
       RdLoading,
-      TopBar,
-      PinPlatforms
+      TopBar
     }
   }
 </script>
