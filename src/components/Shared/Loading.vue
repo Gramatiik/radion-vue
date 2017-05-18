@@ -46,15 +46,16 @@
     margin: 0 auto;
     padding: 10px;
     border-radius: 5px;
-    background-color: $bg-dark;
+    background-color: rgba($bg-dark, .7);
+    z-index: 5000;
 
     .spinner {
       box-sizing: border-box;
       height: 100%;
       width: 100%;
       border-radius: 50%;
-      border: 10px solid white;
-      border-top: 10px solid lightcoral;
+      border: 10px solid $font-light;
+      border-top-color: $primary;
       animation: spin 2s linear infinite;
       z-index: 5001;
     }
