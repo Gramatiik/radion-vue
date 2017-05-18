@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <pre>{{ gameDetails }}</pre>
-  </div>
+  <transition mode="out-in" name="bottom-push">
+    <div>
+      <pre>{{ gameDetails }}</pre>
+    </div>
+  </transition>
 </template>
 
 <script>

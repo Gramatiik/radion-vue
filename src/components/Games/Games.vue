@@ -1,36 +1,36 @@
 <template>
-  <div>
-    <h1 class="page-title">Games</h1>
+  <transition mode="out-in" name="slide-fade">
+    <div>
+      <h1 class="page-title">Games</h1>
 
-    <div class="segment">
-      <router-link :to="{ name: 'Games', params: { ordering: 'popular' } }">Popular</router-link>
-      <router-link :to="{ name: 'Games', params: { ordering: 'recent' } }">Recent</router-link>
-      <router-link :to="{ name: 'Games', params: { ordering: 'top-rated' } }">Rating</router-link>
-    </div>
-
-    <div v-if="!apiFailure">
-      <div class="games-container">
-        <game-item class="card-item" v-for="item in games" :key="item.id" :game-data="item"></game-item>
+      <div class="segment">
+        <router-link :to="{ name: 'Games', params: { ordering: 'popular' } }">Popular</router-link>
+        <router-link :to="{ name: 'Games', params: { ordering: 'recent' } }">Recent</router-link>
+        <router-link :to="{ name: 'Games', params: { ordering: 'top-rated' } }">Rating</router-link>
       </div>
-      <button @click="loadMore">Load More</button>
-    </div>
-    <div v-else style="text-align: center">
-      Unable to load games...
-      <button @click="retry">Try again ?</button>
-    </div>
 
-    <div class="spinner" v-if="listLoading && !apiFailure">
-      <div class="double-bounce double-bounce-1"></div>
-      <div class="double-bounce double-bounce-2"></div>
-    </div>
+      <div v-if="!apiFailure">
+        <div class="games-container">
+          <game-item class="card-item" v-for="item in games" :key="item.id" :game-data="item"></game-item>
+        </div>
+        <button @click="loadMore">Load More</button>
+      </div>
+      <div v-else style="text-align: center">
+        Unable to load games...
+        <button @click="retry">Try again ?</button>
+      </div>
 
-  </div>
+      <list-loader :loading="listLoading"></list-loader>
+
+    </div>
+  </transition>
 </template>
 
 <script>
   import { mapState, mapGetters } from 'vuex'
   import { API_FAILURE, CLEAR_GAMES } from '@/store/mutation-types'
   import GameItem from '@/components/Games/GameItem'
+  import ListLoader from '@/components/Shared/ListLoader'
   import store from '@/store/'
   export default {
     name: 'games',
@@ -62,7 +62,8 @@
       getGames(to, next)
     },
     components: {
-      GameItem
+      GameItem,
+      ListLoader
     }
   }
 
