@@ -19,7 +19,10 @@ export default new Router({
     {
       path: '/',
       redirect: {
-        name: 'PopularGames'
+        name: 'Games',
+        params: {
+          ordering: 'popular'
+        }
       }
     },
     {
