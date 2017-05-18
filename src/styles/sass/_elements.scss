@@ -38,3 +38,35 @@
       transform: scale(1.0);
     }
 }
+
+
+.segment {
+  width: 100%;
+  display: flex;
+
+  a {
+    text-align: center;
+    font-size: 1.4rem;
+    display: inline-block;
+    width: 50%;
+    border: 1px solid $primary;
+    border-right: none;
+    color: $primary;
+
+    &.router-link-active {
+      background-color: $primary;
+      color: $font-light;
+    }
+
+    &:first-child {
+      border-bottom-left-radius: 5px;
+      border-top-left-radius: 5px;
+    }
+
+    &:last-child {
+      border-bottom-right-radius: 5px;
+      border-top-right-radius: 5px;
+      border-right: 1px solid $primary;
+    }
+  }
+}

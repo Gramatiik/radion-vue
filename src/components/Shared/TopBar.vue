@@ -15,7 +15,7 @@
     <div class="backdrop" @click="MENU_TOGGLE" :class="{ visible: menuOpened }"></div>
     <nav class="sidenav" :class="{ opened: menuOpened }">
       <navigation-item title="Settings" icon="settings" :route="{ name: 'About' }"></navigation-item>
-      <navigation-item title="Games" icon="games" :route="{ name: 'Games' }"></navigation-item>
+      <navigation-item title="Games" icon="games" :route="{ name: 'PopularGames' }"></navigation-item>
       <navigation-item title="Pulses" icon="pulse" :route="{ name: 'Pulses' }"></navigation-item>
     </nav>
 

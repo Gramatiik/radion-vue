@@ -22,9 +22,9 @@ export default new Router({
     },
     {
       path: '/games',
-      name: 'Games',
-      component: Games,
-      props: { ordering: 'popular' }
+      redirect: {
+        name: 'PopularGames'
+      }
     },
     {
       path: '/games/popular',
@@ -37,6 +37,12 @@ export default new Router({
       name: 'RecentGames',
       component: Games,
       props: { ordering: 'recent' }
+    },
+    {
+      path: '/games/best-rated',
+      name: 'BestRatedGames',
+      component: Games,
+      props: { ordering: 'rating' }
     },
     {
       path: '/games/:slug',

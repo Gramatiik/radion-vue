@@ -1,11 +1,17 @@
 <template>
   <div>
-    <h1 class="page-title">{{ title }}</h1>
+    <h1 class="page-title">Games</h1>
+
+    <div class="segment">
+      <router-link :to="{ name: 'PopularGames' }">Popular</router-link>
+      <router-link :to="{ name: 'RecentGames' }">Recent</router-link>
+      <router-link :to="{ name: 'BestRatedGames' }">Rating</router-link>
+    </div>
 
     <div v-if="!apiFailure">
       <div class="games-container"
            v-infinite-scroll="loadMore"
-           infinite-scroll-disabled="listLoading"
+           :infinite-scroll-disabled="listLoading || apiFailure"
            infinite-scroll-distance="3">
         <game-item class="card-item" v-for="item in games" :key="item.id" :game-data="item"></game-item>
       </div>
@@ -30,11 +36,6 @@
   export default {
     name: 'games',
     props: [ 'ordering' ],
-    data () {
-      return {
-        title: 'Games'
-      }
-    },
     computed: {
       ...mapState({
         games: state => state.igdb.games,
@@ -48,7 +49,6 @@
         this.$store.dispatch('getGamesList', { orderingField: this.ordering, offset: this.gamesCount })
       },
       initGames () {
-        this.title = this.ordering === 'recent' ? 'Recent Games' : 'Popular Games'
         this.$store.commit(CLEAR_GAMES)
         this.dispatchGamesAction()
       },
