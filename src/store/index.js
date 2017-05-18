@@ -22,6 +22,7 @@ const store = new Vuex.Store({
       state.menuOpened = !state.menuOpened
     },
     [API_FAILURE] (state, value) {
+      state.listLoading = !value
       state.apiFailure = !!value
     },
     [LIST_LOADING] (state, value) {
