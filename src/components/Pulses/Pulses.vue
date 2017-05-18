@@ -7,16 +7,11 @@
         <div class="pulses-container">
           <pulse-item class="card-item" v-for="item in pulses" :key="item.id" :pulse-data="item"></pulse-item>
         </div>
-        <button @click="loadMore">Load More</button>
+        <list-loader :loading="listLoading" :load-more="loadMore"></list-loader>
       </div>
       <div v-else style="text-align: center">
         Unable to retrieve pulses from API...
         <button @click="retry">Retry ?</button>
-      </div>
-
-      <div class="spinner" v-if="listLoading && !apiFailure">
-        <div class="double-bounce double-bounce-1"></div>
-        <div class="double-bounce double-bounce-2"></div>
       </div>
     </div>
   </transition>
@@ -26,6 +21,7 @@
   import { mapState, mapGetters } from 'vuex'
   import { API_FAILURE, CLEAR_PULSES } from '@/store/mutation-types'
   import PulseItem from '@/components/Pulses/PulseItem'
+  import ListLoader from '@/components/Shared/ListLoader'
   import store from '@/store/'
   export default {
     name: 'pulses',
@@ -54,7 +50,8 @@
       loadPulses(next)
     },
     components: {
-      PulseItem
+      PulseItem,
+      ListLoader
     }
   }
 

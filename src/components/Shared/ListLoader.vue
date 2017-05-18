@@ -1,19 +1,39 @@
 <template>
-  <div class="spinner" v-if="loading">
-    <div class="double-bounce double-bounce-1"></div>
-    <div class="double-bounce double-bounce-2"></div>
+  <div>
+    <div class="spinner" v-if="loading">
+      <div class="double-bounce double-bounce-1"></div>
+      <div class="double-bounce double-bounce-2"></div>
+    </div>
+    <div class="load-more" v-else @click="loadMore">Load More</div>
   </div>
 </template>
 
 <script>
   export default {
     name: 'list-loader',
-    props: ['loading']
+    props: {
+      loading: { type: Boolean },
+      loadMore: { type: Function }
+    }
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import "variables";
+
+  .load-more {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: $accent;
+
+    &:hover {
+      background-color: lighten($accent, 10%);
+    }
+  }
 
   .spinner {
     width: 50px;

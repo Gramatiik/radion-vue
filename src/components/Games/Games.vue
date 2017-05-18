@@ -13,14 +13,12 @@
         <div class="games-container">
           <game-item class="card-item" v-for="item in games" :key="item.id" :game-data="item"></game-item>
         </div>
-        <button @click="loadMore">Load More</button>
+        <list-loader :loading="listLoading" :load-more="loadMore"></list-loader>
       </div>
       <div v-else style="text-align: center">
         Unable to load games...
         <button @click="retry">Try again ?</button>
       </div>
-
-      <list-loader :loading="listLoading"></list-loader>
 
     </div>
   </transition>
