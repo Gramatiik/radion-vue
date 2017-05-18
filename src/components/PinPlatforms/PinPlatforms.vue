@@ -56,11 +56,12 @@
   .pins-container {
     color: $font-light;
     margin-bottom: -5px;
+    text-align: right;
 
     .pin {
       min-width: 22px;
       padding: 1px 3px;
-      margin-right: 5px;
+      margin-left: 5px;
       margin-bottom: 5px;
       border-radius: 5px;
       border: 1px solid;
