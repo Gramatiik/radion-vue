@@ -66,7 +66,6 @@
   }
 
   function getGames (to, next) {
-    // workaround waiting for a clean fix :)
     store.commit(CLEAR_GAMES)
     store.dispatch('getGamesList', { orderingField: to.params.ordering, offset: store.getters.gamesCount })
       .then(() => next())

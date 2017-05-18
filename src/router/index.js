@@ -32,8 +32,10 @@ export default new Router({
     },
     {
       path: '/games',
+      name: 'GamesDefault',
       redirect: {
-        name: 'Games'
+        name: 'Games',
+        params: { ordering: 'popular' }
       }
     },
     {
