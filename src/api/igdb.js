@@ -12,7 +12,7 @@ export default {
 
     return Vue.http.get(builder
       .setEndpoint('games')
-      .setFields(['id', 'name', 'slug', 'cover', 'popularity', 'created_at', 'first_release_date', 'release_dates'])
+      .setFields(['id', 'name', 'slug', 'cover', 'popularity', 'created_at', 'first_release_date', 'release_dates', 'rating'])
       .setLimit(40)
       .setOffset(offset || 0)
       .setOrder({field: orderingField, type: 'desc'})

@@ -6,7 +6,7 @@
 
 <script>
   import { mapState } from 'vuex'
-  import store from '../../store/index'
+  import store from '@/store/'
   export default {
     name: 'game-details',
     props: [ 'slug' ],
@@ -23,8 +23,6 @@
     beforeRouteUpdate (to, from, next) {
       store.dispatch('getGameBySlug', to.params.slug)
         .then(() => next())
-    },
-    created () {
     }
   }
 </script>

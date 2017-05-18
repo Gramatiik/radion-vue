@@ -8,6 +8,13 @@ import Pulses from '@/components/Pulses/Pulses'
 Vue.use(Router)
 
 export default new Router({
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  },
   routes: [
     {
       path: '/',
@@ -23,26 +30,14 @@ export default new Router({
     {
       path: '/games',
       redirect: {
-        name: 'PopularGames'
+        name: 'Games'
       }
     },
     {
-      path: '/games/popular',
-      name: 'PopularGames',
+      path: '/games/:ordering',
+      name: 'Games',
       component: Games,
-      props: { ordering: 'popular' }
-    },
-    {
-      path: '/games/recent',
-      name: 'RecentGames',
-      component: Games,
-      props: { ordering: 'recent' }
-    },
-    {
-      path: '/games/best-rated',
-      name: 'BestRatedGames',
-      component: Games,
-      props: { ordering: 'rating' }
+      props: true
     },
     {
       path: '/games/:slug',

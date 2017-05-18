@@ -40,10 +40,26 @@ const actions = {
    * Loads a list of games ordered by release dates or popularity
    * and appends results it to the current loaded games
    * @param commit
-   * @param data orderingField and offset
+   * @param data orderingField (can be 'recent', 'popular' or 'best-rated' and offset
    */
   getGamesList ({ commit }, data) {
-    let orderingField = data.orderingField === 'recent' ? 'first_release_date' : 'popularity'
+    let orderingField
+    switch (data.orderingField) {
+      case 'recent':
+        orderingField = 'first_release_date'
+        break
+
+      case 'top-rated':
+        orderingField = 'rating'
+        break
+
+      case 'popular':
+        orderingField = 'popularity'
+        break
+
+      default:
+        throw new Error('Ordering field is invalid')
+    }
 
     commit(LIST_LOADING, true)
 

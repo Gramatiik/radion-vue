@@ -3,18 +3,16 @@
     <h1 class="page-title">Games</h1>
 
     <div class="segment">
-      <router-link :to="{ name: 'PopularGames' }">Popular</router-link>
-      <router-link :to="{ name: 'RecentGames' }">Recent</router-link>
-      <router-link :to="{ name: 'BestRatedGames' }">Rating</router-link>
+      <router-link :to="{ name: 'Games', params: { ordering: 'popular' } }">Popular</router-link>
+      <router-link :to="{ name: 'Games', params: { ordering: 'recent' } }">Recent</router-link>
+      <router-link :to="{ name: 'Games', params: { ordering: 'top-rated' } }">Rating</router-link>
     </div>
 
     <div v-if="!apiFailure">
-      <div class="games-container"
-           v-infinite-scroll="loadMore"
-           :infinite-scroll-disabled="listLoading || apiFailure"
-           infinite-scroll-distance="3">
+      <div class="games-container">
         <game-item class="card-item" v-for="item in games" :key="item.id" :game-data="item"></game-item>
       </div>
+      <button @click="loadMore">Load More</button>
     </div>
     <div v-else style="text-align: center">
       Unable to load games...
@@ -33,6 +31,7 @@
   import { mapState, mapGetters } from 'vuex'
   import { API_FAILURE, CLEAR_GAMES } from '@/store/mutation-types'
   import GameItem from '@/components/Games/GameItem'
+  import store from '@/store/'
   export default {
     name: 'games',
     props: [ 'ordering' ],
@@ -48,10 +47,6 @@
       dispatchGamesAction () {
         this.$store.dispatch('getGamesList', { orderingField: this.ordering, offset: this.gamesCount })
       },
-      initGames () {
-        this.$store.commit(CLEAR_GAMES)
-        this.dispatchGamesAction()
-      },
       loadMore () {
         this.dispatchGamesAction()
       },
@@ -60,17 +55,22 @@
         this.dispatchGamesAction()
       }
     },
-    watch: {
-      '$route' () {
-        this.initGames()
-      }
+    beforeRouteEnter (to, from, next) {
+      getGames(to, next)
     },
-    created () {
-      this.initGames()
+    beforeRouteUpdate (to, from, next) {
+      getGames(to, next)
     },
     components: {
       GameItem
     }
+  }
+
+  function getGames (to, next) {
+    // workaround waiting for a clean fix :)
+    store.commit(CLEAR_GAMES)
+    store.dispatch('getGamesList', { orderingField: to.params.ordering, offset: store.getters.gamesCount })
+      .then(() => next())
   }
 </script>
 
