@@ -46,7 +46,7 @@ export default {
 
     return Vue.http.get(builder
       .setEndpoint('pulses')
-      .setFields(['id', 'title', 'image', 'url', 'published_at'])
+      .setFields(['id', 'title', 'image', 'url', 'published_at', 'pulse_source'])
       .setLimit(25)
       .setOrder({field: 'published_at', type: 'desc'})
       .setFilters([{field: 'published_at', type: 'lte', value: Date.now()}])

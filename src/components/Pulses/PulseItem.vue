@@ -11,7 +11,7 @@
 
       <div class="pulse-content">
         <h3>{{ pulseData.title }}</h3>
-        <span class="released">{{ released }}</span>
+        <span class="released">{{ released }} on {{ pulseSource }}</span>
       </div>
     </div>
   </a>
@@ -28,6 +28,9 @@
       },
       released () {
         return this.$options.filters.moment(this.pulseData.published_at, 'from')
+      },
+      pulseSource () {
+        return this.$store.state.igdb.pulseSourcesList[this.pulseData.pulse_source] || null
       }
     }
   }
