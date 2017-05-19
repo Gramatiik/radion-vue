@@ -1,6 +1,6 @@
 <template>
-  <div class="pins-container">
-    <span v-for="pin in pins" class="pin" :style="{ backgroundColor: pin.primary, borderColor: pin.border}">{{ pin.name }}</span>
+  <div class="pins-container" :style="{ textAlign: alignment }">
+    <span v-for="pin in pins" class="pin" :style="{ backgroundColor: pin.primary, borderColor: pin.border, fontSize: pinSize + 'rem'}">{{ pin.name }}</span>
   </div>
 </template>
 
@@ -9,7 +9,22 @@
   import { mapState } from 'vuex'
   export default {
     name: 'pin-platforms',
-    props: [ 'platformIds' ],
+    props: {
+      platformIds: {
+        type: Array,
+        required: true
+      },
+      pinSize: {
+        type: Number,
+        required: false,
+        default: 0.8
+      },
+      alignment: {
+        type: String,
+        required: false,
+        default: 'right'
+      }
+    },
     data () {
       return {
         pins: [],
@@ -56,7 +71,6 @@
   .pins-container {
     color: $font-light;
     margin-bottom: -5px;
-    text-align: right;
 
     .pin {
       min-width: 22px;
