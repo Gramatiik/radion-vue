@@ -6,7 +6,7 @@
       <div class="segment">
         <router-link class="segment-item" :to="{ name: 'Games', params: { ordering: 'popular' } }">Popular</router-link>
         <router-link class="segment-item" :to="{ name: 'Games', params: { ordering: 'recent' } }">Recent</router-link>
-        <router-link class="segment-item" :to="{ name: 'Games', params: { ordering: 'top-rated' } }">Top Rated</router-link>
+        <router-link class="segment-item" :to="{ name: 'Games', params: { ordering: 'top-rated' } }">Ratings</router-link>
       </div>
 
       <div v-if="!apiFailure">

@@ -3,24 +3,33 @@
     <div>
       <div class="game-header">
 
-        <lazy-background
-          class="game-cover"
-          :image-source="gameCoverImage"
-          :loading-image="require('@/assets/images/pulse-no-image.png')"
-          :error-image="require('@/assets/images/pulse-no-image.png')">
-        </lazy-background>
+        <img class="game-cover" :src="gameCoverImage" alt="Cover">
 
         <h1 class="game-name">{{ gameDetails.name }}</h1>
 
+        <span class="game-release-date">Released on {{ new Date(gameDetails.first_release_date) | moment("MMMM D, YYYY") }}</span>
+
         <lazy-background
           class="game-header-background"
-          :image-source="gameCoverImage"
+          :image-source="gameCoverBackgroundImage"
           :loading-image="require('@/assets/images/pulse-no-image.png')"
           :error-image="require('@/assets/images/pulse-no-image.png')">
         </lazy-background>
 
       </div>
-      <pin-platforms class="game-platforms" :platform-ids="platformIds"></pin-platforms>
+
+      <pin-platforms class="game-platforms" :platform-ids="platformIds" :pin-size="1.2"></pin-platforms>
+
+      <div class="game-info-section" v-if="gameDetails.summary">
+        <h2>Summary</h2>
+        <p v-html="gameDetails.summary"></p>
+      </div>
+
+      <div class="game-info-section" v-if="gameDetails.storyline">
+        <h2>Storyline</h2>
+        <p v-html="gameDetails.storyline"></p>
+      </div>
+
       <pre>{{ gameDetails }}</pre>
     </div>
   </transition>
@@ -45,8 +54,11 @@
         }
         return platformIds
       },
-      gameCoverImage: function () {
+      gameCoverBackgroundImage: function () {
         return this.gameDetails.cover ? this.gameDetails.cover.url : require('@/assets/images/pulse-no-image.png')
+      },
+      gameCoverImage: function () {
+        return this.$options.filters.cloudinary(this.gameDetails.cover, 'cover_small_2x')
       }
     },
     components: {
@@ -77,11 +89,11 @@
     display: flex;
     flex-flow: column;
     justify-content: center;
-
     min-height: 350px;
     background-size: cover;
     overflow: hidden;
-    padding: 10px 5px;
+    margin-bottom: 5px;
+    padding: 10px 5px 1.8rem;
 
     .game-cover, .game-header-background {
       background: $font-light center;
@@ -89,8 +101,11 @@
 
     .game-cover {
       box-shadow: 2px 2px 12px rgba(#000, .9);
-      width: 90px;
-      height: 128px;
+      object-fit: contain;
+      min-width: 90px;
+      min-height: 90px;
+      max-width: 200px;
+      max-height: 200px;
       margin: 0 auto;
     }
 
@@ -113,6 +128,16 @@
       color: $font-light;
       text-shadow: 2px 2px 5px #000;
       margin: 25px 20px 40px;
+    }
+
+    .game-release-date {
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      padding: 5px;
+      background-color: rgba(#000, .4);
+      font-size: 1.4rem;
+      color: $accent;
     }
   }
 </style>
