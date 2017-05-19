@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import PinPlatforms from '../PinPlatforms/PinPlatforms.vue'
+  import PinPlatforms from '@/components/PinPlatforms/PinPlatforms'
   export default {
     name: 'game-item',
     props: [ 'gameData' ],
