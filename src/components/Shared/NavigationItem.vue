@@ -61,7 +61,7 @@
     margin: 5px 12px;
     border: none;
     height: 1px;
-    background: linear-gradient(to right, rgba(30,87,153,0) 0%,rgba(255,255,255,1) 50%,rgba(125,185,232,0) 100%);
+    background: linear-gradient(to right, rgba(30,87,153,0) 0%,rgba(255,255,255,1) 1%,rgba(125,185,232,0) 100%);
   }
 
 
