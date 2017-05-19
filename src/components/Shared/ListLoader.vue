@@ -29,6 +29,7 @@
     padding: 10px;
     margin-top: 5px;
     background-color: $accent;
+    cursor: pointer;
 
     &:hover {
       background-color: lighten($accent, 10%);
