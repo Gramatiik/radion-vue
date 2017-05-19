@@ -45,7 +45,7 @@ export default new Router({
       props: true
     },
     {
-      path: '/games/:slug',
+      path: '/games/details/:slug',
       name: 'GameDetails',
       component: GameDetails,
       props: true
