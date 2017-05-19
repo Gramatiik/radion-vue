@@ -19,7 +19,7 @@
     methods: {},
     computed: {
       cardThumb: function () {
-        return `url("${this.$options.filters.cloudinary(this.gameData.cover, 'thumb_2x')}")`
+        return `url("${this.$options.filters.cloudinary(this.gameData.cover, 'thumb')}")`
       },
       platformIds: function () {
         let platformIds = []
