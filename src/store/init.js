@@ -1,13 +1,15 @@
 import igdbApi from '../api/igdb'
 import {
   RECIEVE_PLATFORMS_LIST,
-  RECIEVE_PULSE_SOURCES_LIST
+  RECIEVE_PULSE_SOURCES_LIST,
+  RECIEVE_GENRES_LIST
 } from '../store/mutation-types'
 
 export default function (store) {
   return Promise.all([
     initPlatformList(store),
-    initPulseSourcesList(store)
+    initPulseSourcesList(store),
+    initGenresList(store)
   ])
     .then(() => console.log('state inited'))
 }
@@ -66,6 +68,35 @@ function initPulseSourcesList (store) {
         .catch(err => reject(err))
     } else {
       store.commit(RECIEVE_PULSE_SOURCES_LIST, sources)
+      resolve()
+    }
+  })
+}
+
+function initGenresList (store) {
+  return new Promise((resolve, reject) => {
+    let genres = localStorage.getItem('genres')
+
+    if (genres) genres = JSON.parse(genres)
+
+    if (!Array.isArray(genres)) {
+      igdbApi.getGenresList()
+        .then(fetchedSources => {
+          genres = fetchedSources
+
+          // attempt to save sources to local storage
+          try {
+            localStorage.setItem('genres', JSON.stringify(fetchedSources))
+          } catch (e) {
+            console.error(e)
+          }
+
+          store.commit(RECIEVE_GENRES_LIST, genres)
+          resolve()
+        })
+        .catch(err => reject(err))
+    } else {
+      store.commit(RECIEVE_GENRES_LIST, genres)
       resolve()
     }
   })

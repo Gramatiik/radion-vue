@@ -11,7 +11,8 @@ import {
   RECIEVE_PULSES,
   CLEAR_PULSES,
 
-  RECIEVE_PLATFORMS_LIST
+  RECIEVE_PLATFORMS_LIST,
+  RECIEVE_GENRES_LIST
 } from '../mutation-types'
 
 const state = {
@@ -21,7 +22,8 @@ const state = {
   pulses: [],
   pulseSourcesList: [],
 
-  platformsList: []
+  platformsList: [],
+  pulseGenresList: []
 }
 
 const getters = {
@@ -182,6 +184,15 @@ const mutations = {
    */
   [RECIEVE_PULSE_SOURCES_LIST] (state, list) {
     state.pulseSourcesList = list
+  },
+
+  /**
+   * Save recieved genres list to current state
+   * @param state
+   * @param list
+   */
+  [RECIEVE_GENRES_LIST] (state, list) {
+    state.pulseGenresList = list
   }
 }
 

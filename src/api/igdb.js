@@ -150,5 +150,54 @@ export default {
             .catch(err => reject(err))
         })
     })
+  },
+
+  /**
+   * Returns the list of all genres names
+   */
+  getGenresList () {
+    let builder = new IgdbQueryBuilder()
+    let requests = []
+
+    return new Promise((resolve, reject) => {
+      // get the count of platforms
+      Vue.http.get(new IgdbQueryBuilder().setEndpoint('genres/count').finalize())
+        .then(response => response.body.count || 0)
+        .then(count => {
+          // calculate how many calls to get all platforms
+          let calls = Math.ceil(count / 50)
+
+          // perform all calls to the API
+          for (let i = 0; i < calls; i++) {
+            let prom = new Promise((resolve, reject) => {
+              setTimeout(() => {
+                Vue.http.get(builder
+                  .setEndpoint('genres')
+                  .setFields(['id', 'name'])
+                  .setLimit(50)
+                  .setOffset(i * 50)
+                  .finalize())
+                  .then(response => resolve(response))
+                  .catch(err => reject(err))
+              }, i * 120)
+            })
+            requests.push(prom)
+          }
+
+          Promise.all(requests)
+            .then((responses) => {
+              let genres = []
+
+              for (let result of responses) {
+                for (let item of result.body) {
+                  genres[item.id] = item.name
+                }
+              }
+
+              resolve(genres)
+            })
+            .catch(err => reject(err))
+        })
+    })
   }
 }
