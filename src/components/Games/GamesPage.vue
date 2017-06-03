@@ -1,27 +1,25 @@
 <template>
-  <transition mode="out-in" name="slide-fade">
-    <div>
-      <h1 class="page-title">Games</h1>
+  <div>
+    <h1 class="page-title">Games</h1>
 
-      <div class="segment">
-        <router-link class="segment-item" :to="{ name: 'Games', params: { ordering: 'popular' } }">Popular</router-link>
-        <router-link class="segment-item" :to="{ name: 'Games', params: { ordering: 'recent' } }">Recent</router-link>
-        <router-link class="segment-item" :to="{ name: 'Games', params: { ordering: 'top-rated' } }">Ratings</router-link>
-      </div>
-
-      <div v-if="!apiFailure">
-        <div class="games-container">
-          <game-item-component class="card-item" v-for="item in games" :key="item.id" :game-data="item"></game-item-component>
-        </div>
-        <list-loader-component :loading="listLoading" :load-more="loadMore"></list-loader-component>
-      </div>
-      <div v-else style="text-align: center">
-        Unable to load games...
-        <button @click="retry">Try again ?</button>
-      </div>
-
+    <div class="segment">
+      <router-link class="segment-item" :to="{ name: 'Games', params: { ordering: 'popular' } }">Popular</router-link>
+      <router-link class="segment-item" :to="{ name: 'Games', params: { ordering: 'recent' } }">Recent</router-link>
+      <router-link class="segment-item" :to="{ name: 'Games', params: { ordering: 'top-rated' } }">Ratings</router-link>
     </div>
-  </transition>
+
+    <div v-if="!apiFailure">
+      <div class="games-container">
+        <game-item-component class="card-item" v-for="item in games" :key="item.id" :game-data="item"></game-item-component>
+      </div>
+      <list-loader-component :loading="listLoading" :load-more="loadMore"></list-loader-component>
+    </div>
+    <div v-else style="text-align: center">
+      Unable to load games...
+      <button @click="retry">Try again ?</button>
+    </div>
+
+  </div>
 </template>
 
 <script>

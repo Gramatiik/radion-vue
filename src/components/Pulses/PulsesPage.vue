@@ -1,20 +1,18 @@
 <template>
-  <transition mode="out-in" name="slide-fade">
-    <div>
-      <h1 class="page-title">Latest Pulses</h1>
+  <div>
+    <h1 class="page-title">Latest Pulses</h1>
 
-      <div v-if="!apiFailure">
-        <div class="pulses-container">
-          <pulse-item-component class="card-item" v-for="item in pulses" :key="item.id" :pulse-data="item"></pulse-item-component>
-        </div>
-        <list-loader-component :loading="listLoading" :load-more="loadMore"></list-loader-component>
+    <div v-if="!apiFailure">
+      <div class="pulses-container">
+        <pulse-item-component class="card-item" v-for="item in pulses" :key="item.id" :pulse-data="item"></pulse-item-component>
       </div>
-      <div v-else style="text-align: center">
-        Unable to retrieve pulses from API...
-        <button @click="retry">Retry ?</button>
-      </div>
+      <list-loader-component :loading="listLoading" :load-more="loadMore"></list-loader-component>
     </div>
-  </transition>
+    <div v-else style="text-align: center">
+      Unable to retrieve pulses from API...
+      <button @click="retry">Retry ?</button>
+    </div>
+  </div>
 </template>
 
 <script>

@@ -1,40 +1,38 @@
 <template>
-  <transition mode="out-in" name="slide-fade">
-    <div>
-      <div class="game-header">
+  <div>
+    <div class="game-header">
 
-        <img class="game-cover" :src="gameCoverImage" alt="Cover">
+      <img class="game-cover" :src="gameCoverImage" alt="Cover">
 
-        <h1 class="game-name">{{ gameDetails.name }}</h1>
+      <h1 class="game-name">{{ gameDetails.name }}</h1>
 
-        <span class="game-release-date">Released on {{ new Date(gameDetails.first_release_date) | moment("MMMM D, YYYY") }}</span>
+      <span class="game-release-date">Released on {{ new Date(gameDetails.first_release_date) | moment("MMMM D, YYYY") }}</span>
 
-        <lazy-background
-          class="game-header-background"
-          :image-source="gameCoverBackgroundImage"
-          :loading-image="require('@/assets/images/pulse-no-image.png')"
-          :error-image="require('@/assets/images/pulse-no-image.png')">
-        </lazy-background>
-      </div>
-      <rating-meter-component v-if="gameDetails.aggregated_rating" :value="gameDetails.aggregated_rating"></rating-meter-component>
-
-      <pin-platforms-component class="game-platforms" :platform-ids="platformIds" :pin-size="1.2"></pin-platforms-component>
-
-      <div class="game-info-section" v-if="gameDetails.summary">
-        <h2>Summary</h2>
-        <p v-html="gameDetails.summary"></p>
-      </div>
-
-      <div class="game-info-section" v-if="gameDetails.storyline">
-        <h2>Storyline</h2>
-        <p v-html="gameDetails.storyline"></p>
-      </div>
-
-      <simple-gallery-component :images="['https://placehold.it/350x300']"></simple-gallery-component>
-
-      <pre @click="">{{ gameDetails }}</pre>
+      <lazy-background
+        class="game-header-background"
+        :image-source="gameCoverBackgroundImage"
+        :loading-image="require('@/assets/images/pulse-no-image.png')"
+        :error-image="require('@/assets/images/pulse-no-image.png')">
+      </lazy-background>
     </div>
-  </transition>
+    <rating-meter-component v-if="gameDetails.aggregated_rating" :value="gameDetails.aggregated_rating"></rating-meter-component>
+
+    <pin-platforms-component class="game-platforms" :platform-ids="platformIds" :pin-size="1.2"></pin-platforms-component>
+
+    <div class="game-info-section" v-if="gameDetails.summary">
+      <h2>Summary</h2>
+      <p v-html="gameDetails.summary"></p>
+    </div>
+
+    <div class="game-info-section" v-if="gameDetails.storyline">
+      <h2>Storyline</h2>
+      <p v-html="gameDetails.storyline"></p>
+    </div>
+
+    <simple-gallery-component :images="screenshotImages"></simple-gallery-component>
+
+    <pre @click="">{{ gameDetails }}</pre>
+  </div>
 </template>
 
 <script>
@@ -67,6 +65,17 @@
       },
       gameCoverImage: function () {
         return this.$options.filters.cloudinary(this.gameDetails.cover, 'cover_small')
+      },
+      screenshotImages: function () {
+        let images = []
+        for (let screenshot of this.gameDetails.screenshots || []) {
+          images.push({
+            thumb: this.$options.filters.cloudinary(screenshot, 'cover_small'),
+            big: this.$options.filters.cloudinary(screenshot, 'screenshot_big')
+          })
+        }
+
+        return images
       }
     },
     beforeRouteEnter (to, from, next) {
