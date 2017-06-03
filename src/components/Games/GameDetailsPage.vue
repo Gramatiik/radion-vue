@@ -15,10 +15,10 @@
           :loading-image="require('@/assets/images/pulse-no-image.png')"
           :error-image="require('@/assets/images/pulse-no-image.png')">
         </lazy-background>
-
       </div>
+      <rating-meter-component v-if="gameDetails.aggregated_rating" :value="gameDetails.aggregated_rating"></rating-meter-component>
 
-      <pin-platforms class="game-platforms" :platform-ids="platformIds" :pin-size="1.2"></pin-platforms>
+      <pin-platforms-component class="game-platforms" :platform-ids="platformIds" :pin-size="1.2"></pin-platforms-component>
 
       <div class="game-info-section" v-if="gameDetails.summary">
         <h2>Summary</h2>
@@ -30,7 +30,9 @@
         <p v-html="gameDetails.storyline"></p>
       </div>
 
-      <pre>{{ gameDetails }}</pre>
+      <simple-gallery-component :images="['https://placehold.it/350x300']"></simple-gallery-component>
+
+      <pre @click="">{{ gameDetails }}</pre>
     </div>
   </transition>
 </template>
@@ -38,11 +40,17 @@
 <script>
   import { mapState } from 'vuex'
   import store from '@/store/'
-  import PinPlatforms from '@/components/PinPlatforms/PinPlatforms'
+  import PinPlatformsComponent from '@/components/PinPlatforms/PinPlatformsComponent'
+  import RatingMeterComponent from '@/components/Shared/RatingMeterComponent'
+  import SimpleGalleryComponent from '@/components/SHared/SimpleGalleryComponent'
   export default {
-    name: 'game-details',
+    name: 'game-details-page',
     props: [ 'slug' ],
-    methods: {},
+    components: {
+      PinPlatformsComponent,
+      RatingMeterComponent,
+      SimpleGalleryComponent
+    },
     computed: {
       ...mapState({
         gameDetails: state => state.igdb.gameDetails
@@ -58,11 +66,8 @@
         return this.gameDetails.cover ? this.gameDetails.cover.url : require('@/assets/images/pulse-no-image.png')
       },
       gameCoverImage: function () {
-        return this.$options.filters.cloudinary(this.gameDetails.cover, 'cover_small_2x')
+        return this.$options.filters.cloudinary(this.gameDetails.cover, 'cover_small')
       }
-    },
-    components: {
-      PinPlatforms
     },
     beforeRouteEnter (to, from, next) {
       getGameDetails(to, next)
@@ -70,7 +75,7 @@
     beforeRouteUpdate (to, from, next) {
       getGameDetails(to, next)
     },
-    created () {
+    mounted () {
       scrollTo(0, 0)
     }
   }
@@ -92,7 +97,6 @@
     min-height: 350px;
     background-size: cover;
     overflow: hidden;
-    margin-bottom: 5px;
     padding: 10px 5px 1.8rem;
 
     .game-cover, .game-header-background {
@@ -139,5 +143,9 @@
       font-size: 1.4rem;
       color: $accent;
     }
+  }
+
+  .game-platforms {
+    margin-top: 5px;
   }
 </style>

@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import About from '@/components/About'
-import Games from '@/components/Games/Games'
-import GameDetails from '@/components/Games/GameDetails'
-import Pulses from '@/components/Pulses/Pulses'
+import AboutPage from '@/components/AboutPage'
+import GamesPage from '@/components/Games/GamesPage'
+import GameDetailsPage from '@/components/Games/GameDetailsPage'
+import PulsesPage from '@/components/Pulses/PulsesPage'
 
 Vue.use(Router)
 
@@ -28,7 +28,7 @@ export default new Router({
     {
       path: '/about',
       name: 'About',
-      component: About
+      component: AboutPage
     },
     {
       path: '/games',
@@ -41,19 +41,19 @@ export default new Router({
     {
       path: '/games/:ordering',
       name: 'Games',
-      component: Games,
+      component: GamesPage,
       props: true
     },
     {
       path: '/games/details/:slug',
       name: 'GameDetails',
-      component: GameDetails,
+      component: GameDetailsPage,
       props: true
     },
     {
       path: '/pulses',
       name: 'Pulses',
-      component: Pulses
+      component: PulsesPage
     }
   ]
 })

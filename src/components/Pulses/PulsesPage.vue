@@ -5,9 +5,9 @@
 
       <div v-if="!apiFailure">
         <div class="pulses-container">
-          <pulse-item class="card-item" v-for="item in pulses" :key="item.id" :pulse-data="item"></pulse-item>
+          <pulse-item-component class="card-item" v-for="item in pulses" :key="item.id" :pulse-data="item"></pulse-item-component>
         </div>
-        <list-loader :loading="listLoading" :load-more="loadMore"></list-loader>
+        <list-loader-component :loading="listLoading" :load-more="loadMore"></list-loader-component>
       </div>
       <div v-else style="text-align: center">
         Unable to retrieve pulses from API...
@@ -20,8 +20,8 @@
 <script>
   import { mapState, mapGetters } from 'vuex'
   import { API_FAILURE, CLEAR_PULSES } from '@/store/mutation-types'
-  import PulseItem from '@/components/Pulses/PulseItem'
-  import ListLoader from '@/components/Shared/ListLoader'
+  import PulseItemComponent from '@/components/Pulses/PulseItemComponent'
+  import ListLoaderComponent from '@/components/Shared/ListLoaderComponent'
   import store from '@/store/'
   export default {
     name: 'pulses',
@@ -50,8 +50,8 @@
       loadPulses(next)
     },
     components: {
-      PulseItem,
-      ListLoader
+      PulseItemComponent,
+      ListLoaderComponent
     }
   }
 

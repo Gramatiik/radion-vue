@@ -12,9 +12,9 @@
 </template>
 
 <script>
-  import PinPlatforms from '@/components/PinPlatforms/PinPlatforms'
+  import PinPlatforms from '@/components/PinPlatforms/PinPlatformsComponent'
   export default {
-    name: 'game-item',
+    name: 'game-item-component',
     props: [ 'gameData' ],
     methods: {},
     computed: {

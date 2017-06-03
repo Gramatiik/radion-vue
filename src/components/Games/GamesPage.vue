@@ -11,9 +11,9 @@
 
       <div v-if="!apiFailure">
         <div class="games-container">
-          <game-item class="card-item" v-for="item in games" :key="item.id" :game-data="item"></game-item>
+          <game-item-component class="card-item" v-for="item in games" :key="item.id" :game-data="item"></game-item-component>
         </div>
-        <list-loader :loading="listLoading" :load-more="loadMore"></list-loader>
+        <list-loader-component :loading="listLoading" :load-more="loadMore"></list-loader-component>
       </div>
       <div v-else style="text-align: center">
         Unable to load games...
@@ -27,12 +27,16 @@
 <script>
   import { mapState, mapGetters } from 'vuex'
   import { API_FAILURE, CLEAR_GAMES } from '@/store/mutation-types'
-  import GameItem from '@/components/Games/GameItem'
-  import ListLoader from '@/components/Shared/ListLoader'
+  import GameItemComponent from '@/components/Games/GameItemComponent'
+  import ListLoaderComponent from '@/components/Shared/ListLoaderComponent'
   import store from '@/store/'
   export default {
-    name: 'games',
+    name: 'games-page',
     props: [ 'ordering' ],
+    components: {
+      GameItemComponent,
+      ListLoaderComponent
+    },
     computed: {
       ...mapState({
         games: state => state.igdb.games,
@@ -58,10 +62,6 @@
     },
     beforeRouteUpdate (to, from, next) {
       getGames(to, next)
-    },
-    components: {
-      GameItem,
-      ListLoader
     }
   }
 

@@ -14,9 +14,7 @@
 
     <div class="backdrop" @click="MENU_TOGGLE" :class="{ visible: menuOpened }"></div>
     <nav class="sidenav" :class="{ opened: menuOpened }">
-      <navigation-item title="Settings" icon="settings" :route="{ name: 'About' }"></navigation-item>
-      <navigation-item title="Games" icon="games" :route="{ name: 'GamesDefault' }"></navigation-item>
-      <navigation-item title="Pulses" icon="pulse" :route="{ name: 'Pulses' }"></navigation-item>
+      <navigation-item-component v-for="menuEntry in menuItems" :key="menuEntry.title" :title="menuEntry.title" :icon="menuEntry.icon" :route="menuEntry.route"></navigation-item-component>
     </nav>
 
   </div>
@@ -25,18 +23,42 @@
 <script>
   import { mapMutations, mapState } from 'vuex'
   import { MENU_TOGGLE } from '@/store/mutation-types'
-  import NavigationItem from '@/components/Shared/NavigationItem'
+  import NavigationItemComponent from '@/components/Shared/NavigationItemComponent'
   export default {
-    name: 'top-bar',
+    name: 'top-bar-component',
     data () {
-      return {}
+      return {
+        menuItems: [
+          {
+            title: 'Settings',
+            icon: 'settings',
+            route: {
+              name: 'About'
+            }
+          },
+          {
+            title: 'Games',
+            icon: 'games',
+            route: {
+              name: 'GamesDefault'
+            }
+          },
+          {
+            title: 'Pulses',
+            icon: 'pulse',
+            route: {
+              name: 'Pulses'
+            }
+          }
+        ]
+      }
     },
     methods: {
       ...mapMutations([ MENU_TOGGLE ])
     },
     computed: mapState([ 'menuOpened' ]),
     components: {
-      NavigationItem
+      NavigationItemComponent
     }
   }
 </script>

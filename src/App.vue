@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div class="window"></div>
-    <rd-loading></rd-loading>
-    <top-bar></top-bar>
+    <loading-component></loading-component>
+    <top-bar-component></top-bar-component>
     <div class="wrapper">
       <router-view></router-view>
     </div>
@@ -10,13 +10,13 @@
 </template>
 
 <script>
-  import TopBar from './components/Shared/TopBar'
-  import RdLoading from './components/Shared/Loading'
+  import TopBarComponent from './components/Shared/TopBarComponent'
+  import LoadingComponent from './components/Shared/LoadingComponent'
   export default {
     name: 'app',
     components: {
-      RdLoading,
-      TopBar
+      LoadingComponent,
+      TopBarComponent
     }
   }
 </script>

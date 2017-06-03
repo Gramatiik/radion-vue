@@ -10,7 +10,7 @@
 
 <script>
   export default {
-    name: 'list-loader',
+    name: 'list-loader-component',
     props: {
       loading: { type: Boolean },
       loadMore: { type: Function }

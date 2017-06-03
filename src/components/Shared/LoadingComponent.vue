@@ -9,7 +9,7 @@
 <script>
   import { mapState } from 'vuex'
   export default {
-    name: 'rd-loading',
+    name: 'loading-component',
     data () {
       return {}
     },

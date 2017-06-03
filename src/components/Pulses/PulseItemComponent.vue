@@ -19,7 +19,7 @@
 
 <script>
   export default {
-    name: 'pulse-item',
+    name: 'pulse-item-component',
     props: [ 'pulseData' ],
     methods: {},
     computed: {
