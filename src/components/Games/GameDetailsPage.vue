@@ -29,9 +29,17 @@
       <p v-html="gameDetails.storyline"></p>
     </div>
 
-    <simple-gallery-component :images="screenshotImages"></simple-gallery-component>
+    <div class="game-info-section" v-if="gameDetails.screenshots">
+      <h2>Screenshots ({{ gameDetails.screenshots.length }})</h2>
+      <simple-gallery-component :images="screenshotImages"></simple-gallery-component>
+    </div>
 
-    <pre @click="">{{ gameDetails }}</pre>
+    <div class="game-info-section" v-if="gameDetails.videos">
+      <h2>Videos ({{ gameDetails.videos.length }})</h2>
+      <div class="youtube-video-container">
+        <youtube class="youtube-video" v-for="video in gameDetails.videos" :key="video.video_id" :video-id="video.video_id"></youtube>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -156,5 +164,14 @@
 
   .game-platforms {
     margin-top: 5px;
+  }
+
+  .youtube-video-container {
+    overflow-x: auto;
+    white-space: nowrap;
+
+    .youtube-video {
+      display: inline-block;
+    }
   }
 </style>

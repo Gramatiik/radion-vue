@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import VueMoment from 'vue-moment'
-import VueInfiniteScroll from 'vue-infinite-scroll'
+import VueYoutubeEmbed from 'vue-youtube-embed'
 import VueLazyBackgroundImage from 'vue-lazy-background-images/VueLazyBackgroundImage.vue'
 import {} from './resource'
 import {} from './filters'
@@ -12,7 +12,7 @@ import store from './store'
 import initState from './store/init'
 
 Vue.use(VueMoment)
-Vue.use(VueInfiniteScroll)
+Vue.use(VueYoutubeEmbed)
 Vue.component('lazy-background', VueLazyBackgroundImage)
 
 Vue.config.productionTip = false
