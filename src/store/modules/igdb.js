@@ -79,6 +79,27 @@ const actions = {
   },
 
   /**
+   * Loads a list of games matching the given query
+   * @param commit
+   * @param query
+   */
+  searchForGames ({ commit }, query) {
+    commit(LIST_LOADING, true)
+
+    return igdbApi.searchForGames(query)
+      .then(function (data) {
+        commit(RECIEVE_GAMES, data)
+      })
+      .catch(function () {
+        console.log('Error fetching games from API...')
+        commit(API_FAILURE, true)
+      })
+      .then(function () {
+        commit(LIST_LOADING, false)
+      })
+  },
+
+  /**
    * Grabs games details based on the slug of the game
    * @param commit
    * @param slug

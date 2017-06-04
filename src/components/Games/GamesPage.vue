@@ -1,18 +1,16 @@
 <template>
   <div>
-    <h1 class="page-title">Games</h1>
+    <h1 class="page-title">{{ query ? 'Search result' : 'Games' }}</h1>
 
-    <div class="segment">
-      <router-link class="segment-item" :to="{ name: 'Games', params: { ordering: 'popular' } }">Popular</router-link>
-      <router-link class="segment-item" :to="{ name: 'Games', params: { ordering: 'recent' } }">Recent</router-link>
-      <router-link class="segment-item" :to="{ name: 'Games', params: { ordering: 'top-rated' } }">Ratings</router-link>
+    <div class="segment" v-if="!query">
+      <router-link v-for="value in orderings" :key="value.param" class="segment-item" :to="{ name: 'Games', params: { ordering: value.param } }">{{ value.name }}</router-link>
     </div>
 
     <div v-if="!apiFailure">
       <div class="games-container">
         <game-item-component class="card-item" v-for="item in games" :key="item.id" :game-data="item"></game-item-component>
       </div>
-      <list-loader-component :loading="listLoading" :load-more="loadMore"></list-loader-component>
+      <list-loader-component v-if="!query" :loading="listLoading" :load-more="loadMore"></list-loader-component>
     </div>
     <div v-else style="text-align: center">
       Unable to load games...
@@ -30,7 +28,39 @@
   import store from '@/store/'
   export default {
     name: 'games-page',
-    props: [ 'ordering' ],
+    props: {
+      ordering: {
+        type: String,
+        required: false,
+        default: 'popular',
+        validator: function (value) {
+          return !(['popular', 'recent', 'top-rated'].indexOf(value) === -1)
+        }
+      },
+      query: {
+        type: String,
+        required: false,
+        default: null
+      }
+    },
+    data () {
+      return {
+        orderings: [
+          {
+            name: 'Popular',
+            param: 'popular'
+          },
+          {
+            name: 'Recent',
+            param: 'recent'
+          },
+          {
+            name: 'Ratings',
+            param: 'top-rated'
+          }
+        ]
+      }
+    },
     components: {
       GameItemComponent,
       ListLoaderComponent
@@ -65,8 +95,15 @@
 
   function getGames (to, next) {
     store.commit(CLEAR_GAMES)
-    store.dispatch('getGamesList', { orderingField: to.params.ordering, offset: store.getters.gamesCount })
-      .then(() => next())
+
+    // if query param is set, perform a search query
+    if (to.params.query) {
+      store.dispatch('searchForGames', to.params.query)
+        .then(() => next())
+    } else { // else just fetch some games
+      store.dispatch('getGamesList', { orderingField: to.params.ordering, offset: store.getters.gamesCount })
+        .then(() => next())
+    }
   }
 </script>
 

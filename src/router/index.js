@@ -45,6 +45,12 @@ export default new Router({
       props: true
     },
     {
+      path: '/games/search/:query',
+      name: 'GamesSearch',
+      component: GamesPage,
+      props: true
+    },
+    {
       path: '/games/details/:slug',
       name: 'GameDetails',
       component: GameDetailsPage,

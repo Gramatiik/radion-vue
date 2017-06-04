@@ -38,6 +38,22 @@ export default {
   },
 
   /**
+   * Search for games matching query
+   * @param query string
+   */
+  searchForGames (query) {
+    let builder = new IgdbQueryBuilder()
+
+    return Vue.http.get(builder
+      .setEndpoint('games')
+      .setFields(['id', 'name', 'slug', 'cover', 'popularity', 'created_at', 'first_release_date', 'release_dates', 'rating'])
+      .setSearch(query)
+      .setFilters([{field: 'first_release_date', type: 'lte', value: Date.now()}])
+      .finalize())
+      .then(response => response.body || {})
+  },
+
+  /**
    * Get the latest pulse news
    * @param offset
    */
