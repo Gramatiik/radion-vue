@@ -4,6 +4,7 @@ import AboutPage from '@/components/AboutPage'
 import GamesPage from '@/components/Games/GamesPage'
 import GameDetailsPage from '@/components/Games/GameDetailsPage'
 import PulsesPage from '@/components/Pulses/PulsesPage'
+import Error404Page from '@/components/errors/Error404Page'
 
 Vue.use(Router)
 
@@ -60,6 +61,11 @@ export default new Router({
       path: '/pulses',
       name: 'Pulses',
       component: PulsesPage
+    },
+    {
+      path: '*',
+      name: 'NotFound',
+      component: Error404Page
     }
   ]
 })
