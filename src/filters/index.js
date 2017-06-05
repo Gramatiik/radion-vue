@@ -7,9 +7,9 @@ Vue.filter('cloudinary', function (value, type) {
     return require('@/assets/images/no-image.png')
   } else {
     if (type === 'original') {
-      return `${CLOUDINARY_URL}/${value.cloudinary_id}.png`
+      return `${CLOUDINARY_URL}/${value.cloudinary_id}.jpg`
     }
 
-    return `${CLOUDINARY_URL}/t_${type}/${value.cloudinary_id}.png`
+    return `${CLOUDINARY_URL}/t_${type}/${value.cloudinary_id}.jpg`
   }
 })
