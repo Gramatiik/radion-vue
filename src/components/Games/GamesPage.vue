@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="page-title">{{ query ? 'Search result' : 'Games' }}</h1>
+    <h1 class="page-title">{{ query ? 'Search results' : 'Games' }}</h1>
 
     <div class="segment" v-if="!query">
       <router-link v-for="value in orderings" :key="value.param" class="segment-item" :to="{ name: 'Games', params: { ordering: value.param } }">{{ value.name }}</router-link>
