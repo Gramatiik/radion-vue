@@ -14,6 +14,7 @@
 
     <div class="backdrop" @click="MENU_TOGGLE" :class="{ visible: menuOpened }"></div>
     <nav class="sidenav" :class="{ opened: menuOpened }">
+      <games-search-component></games-search-component>
       <navigation-item-component v-for="menuEntry in menuItems" :key="menuEntry.title" :title="menuEntry.title" :icon="menuEntry.icon" :route="menuEntry.route"></navigation-item-component>
     </nav>
 
@@ -24,8 +25,13 @@
   import { mapMutations, mapState } from 'vuex'
   import { MENU_TOGGLE } from '@/store/mutation-types'
   import NavigationItemComponent from '@/components/Shared/NavigationItemComponent'
+  import GamesSearchComponent from '@/components/Games/GamesSearchComponent'
   export default {
     name: 'top-bar-component',
+    components: {
+      NavigationItemComponent,
+      GamesSearchComponent
+    },
     data () {
       return {
         menuItems: [
@@ -56,10 +62,7 @@
     methods: {
       ...mapMutations([ MENU_TOGGLE ])
     },
-    computed: mapState([ 'menuOpened' ]),
-    components: {
-      NavigationItemComponent
-    }
+    computed: mapState([ 'menuOpened' ])
   }
 </script>
 

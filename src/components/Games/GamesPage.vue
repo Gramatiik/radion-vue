@@ -14,7 +14,7 @@
     </div>
     <div v-else style="text-align: center">
       Unable to load games...
-      <button @click="retry">Try again ?</button>
+      <button v-if="!query" @click="retry">Try again ?</button>
     </div>
 
   </div>
