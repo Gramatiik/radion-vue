@@ -37,7 +37,7 @@
     <div class="game-info-section" v-if="gameDetails.videos">
       <h2>Videos ({{ gameDetails.videos.length }})</h2>
       <div class="youtube-video-container">
-        <youtube class="youtube-video" v-for="video in gameDetails.videos" :key="video.video_id" :video-id="video.video_id"></youtube>
+        <youtube class="card-item youtube-video" player-width="100%" player-height="100%" v-for="video in gameDetails.videos" :key="video.video_id" :video-id="video.video_id"></youtube>
       </div>
     </div>
   </div>
@@ -105,6 +105,7 @@
 
 <style scoped lang="scss">
   @import "variables";
+  @import "mixins";
 
   .game-header {
     position: relative;
@@ -167,11 +168,11 @@
   }
 
   .youtube-video-container {
-    overflow-x: auto;
-    white-space: nowrap;
+    @include responsiveCardLayout(12px);
 
     .youtube-video {
-      display: inline-block;
+      height: 200px;
+      padding: 5px 0;
     }
   }
 </style>
