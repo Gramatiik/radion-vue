@@ -1,3 +1,10 @@
+/*
+ * Segment Styles
+ */
+$segmentBackgroundColor: $primary;
+$segmentBorderColor: $primary;
+$segmentTextColor: $primary;
+$segmentTextColor_active: $font-light;
 .segment {
   width: 100%;
   display: flex;
@@ -7,13 +14,13 @@
     font-size: 1.4rem;
     display: inline-block;
     width: 50%;
-    border: 1px solid $primary;
+    border: 1px solid $segmentBorderColor;
     border-right: none;
-    color: $primary;
+    color: $segmentTextColor;
 
     &.router-link-active {
-      background-color: $primary;
-      color: $font-light;
+      background-color: $segmentBackgroundColor;
+      color: $segmentTextColor_active;
     }
 
     &:first-child {
@@ -24,7 +31,43 @@
     &:last-child {
       border-bottom-right-radius: 5px;
       border-top-right-radius: 5px;
-      border-right: 1px solid $primary;
+      border-right: 1px solid $segmentBorderColor;
     }
+  }
+}
+
+/*
+ * Buttons Styles
+ */
+$buttonTextColor: $font-light;
+$buttonBackgroundColor: $accent;
+.button {
+  background-color: $buttonBackgroundColor;
+  color: $buttonTextColor;
+  border: none;
+  margin: 2px;
+  font-size: 1.4rem;
+  transition: background-color .15s ease;
+
+  &.small {
+    font-size: 1rem;
+  }
+
+  &.big {
+    font-size: 1.8rem;
+  }
+
+  &.rounded {
+    border-radius: 3px;
+  }
+
+  &:hover {
+    background-color: lighten($buttonBackgroundColor, 15%);
+  }
+
+  &[disabled] {
+    background-color: darken($buttonBackgroundColor, 15%);
+    color: darken($buttonTextColor, 15%);
+    pointer-events: none;
   }
 }

@@ -1,3 +1,14 @@
+// fade transition
+.fade-enter-active {
+  transition: all .3s ease;
+}
+.fade-leave-active {
+  transition: all .3s ease;
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0;
+}
+
 // slide-fade transition
 .slide-fade-enter-active {
   transition: all .3s ease;

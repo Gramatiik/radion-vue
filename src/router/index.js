@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import AboutPage from '@/components/AboutPage'
+import SettingsPage from '@/components/SettingsPage'
 import GamesPage from '@/components/Games/GamesPage'
 import GameDetailsPage from '@/components/Games/GameDetailsPage'
 import PulsesPage from '@/components/Pulses/PulsesPage'
@@ -30,6 +31,11 @@ export default new Router({
       path: '/about',
       name: 'About',
       component: AboutPage
+    },
+    {
+      path: '/settings',
+      name: 'Settings',
+      component: SettingsPage
     },
     {
       path: '/games',

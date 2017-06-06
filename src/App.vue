@@ -4,7 +4,7 @@
     <loading-component></loading-component>
     <top-bar-component></top-bar-component>
     <div class="wrapper">
-      <transition name="slide-fade" mode="out-in">
+      <transition name="fade" mode="out-in">
         <router-view></router-view>
       </transition>
     </div>

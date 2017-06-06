@@ -39,7 +39,7 @@
             title: 'Settings',
             icon: 'settings',
             route: {
-              name: 'About'
+              name: 'Settings'
             }
           },
           {
