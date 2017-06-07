@@ -67,6 +67,7 @@ app.use(hotMiddleware)
 // serve pure static assets
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
+app.use('/', express.static('./OneSignal'))
 
 if(typeof process.argv[2] !== 'undefined' && process.argv[2] === '--open') {
   var uri = 'http://0.0.0.0:' + port

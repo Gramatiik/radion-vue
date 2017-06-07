@@ -36,9 +36,8 @@
 
     <div class="game-info-section" v-if="gameDetails.videos">
       <h2>Videos ({{ gameDetails.videos.length }})</h2>
-      <div class="youtube-video-container">
-        <youtube class="card-item youtube-video" player-width="100%" player-height="100%" v-for="video in gameDetails.videos" :key="video.video_id" :video-id="video.video_id"></youtube>
-      </div>
+      <pre>{{ gameDetails.videos }}</pre>
+      <youtube-player-component :video_ids="videoIds"></youtube-player-component>
     </div>
   </div>
 </template>
@@ -48,33 +47,35 @@
   import store from '@/store/'
   import PinPlatformsComponent from '@/components/PinPlatforms/PinPlatformsComponent'
   import RatingMeterComponent from '@/components/Shared/RatingMeterComponent'
-  import SimpleGalleryComponent from '@/components/SHared/SimpleGalleryComponent'
+  import SimpleGalleryComponent from '@/components/Shared/SimpleGalleryComponent'
+  import YoutubePlayerComponent from '@/components/Shared/YoutubePlayerComponent'
   export default {
     name: 'game-details-page',
     props: [ 'slug' ],
     components: {
       PinPlatformsComponent,
       RatingMeterComponent,
-      SimpleGalleryComponent
+      SimpleGalleryComponent,
+      YoutubePlayerComponent
     },
     computed: {
       ...mapState({
         gameDetails: state => state.igdb.gameDetails
       }),
-      platformIds: function () {
+      platformIds () {
         let platformIds = []
         for (let release of this.gameDetails['release_dates'] || {}) {
           platformIds.push(release.platform)
         }
         return platformIds
       },
-      gameCoverBackgroundImage: function () {
+      gameCoverBackgroundImage () {
         return this.gameDetails.cover ? this.gameDetails.cover.url : require('@/assets/images/pulse-no-image.png')
       },
-      gameCoverImage: function () {
+      gameCoverImage () {
         return this.$options.filters.cloudinary(this.gameDetails.cover, 'cover_small')
       },
-      screenshotImages: function () {
+      screenshotImages () {
         let images = []
         for (let screenshot of this.gameDetails.screenshots || []) {
           images.push({
@@ -82,8 +83,14 @@
             big: this.$options.filters.cloudinary(screenshot, 'screenshot_big')
           })
         }
-
         return images
+      },
+      videoIds: function () {
+        let ids = []
+        for (let video of this.gameDetails.videos || []) {
+          ids.push(video.video_id)
+        }
+        return ids
       }
     },
     beforeRouteEnter (to, from, next) {

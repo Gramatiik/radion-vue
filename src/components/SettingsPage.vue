@@ -3,10 +3,25 @@
       <h1>Settings</h1>
 
       <div class="SettingsPage_SettingCategory">
-        <h3>Cache</h3>
-        <div>
+
+        <h3 class="SettingsPage_SettingCategory_Title">Notifications</h3>
+
+        <div class="SettingsPage_SettingCategory_Content">
           <div class="SettingsPage_SettingItem">
-            <button class="button small" @click="clearCache('all')">Clear all cache</button>
+            <label for="notifications">Enable notifications</label>
+            <input type="checkbox" id="notifications" v-model="enableNotifications">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="SettingsPage_SettingCategory">
+
+        <h3 class="SettingsPage_SettingCategory_Title">Cache</h3>
+
+        <div class="SettingsPage_SettingCategory_Content-row">
+          <div class="SettingsPage_SettingItem">
+            <button class="button" @click="clearCache()">Clear all cache</button>
           </div>
 
           <div class="SettingsPage_SettingItem">
@@ -14,26 +29,17 @@
           </div>
 
           <div class="SettingsPage_SettingItem">
-            <button class="button big" @click="clearCache('pulseSources')">Clear pulse sources cache</button>
+            <button class="button" @click="clearCache('pulseSources')">Clear pulse sources cache</button>
           </div>
 
           <div class="SettingsPage_SettingItem">
-            <button class="button rounded" disabled="true" @click="clearCache('genres')">Clear genres cache</button>
+            <button class="button" @click="clearCache('genres')">Clear genres cache</button>
           </div>
         </div>
+
       </div>
 
-      <div class="SettingsPage_SettingCategory">
-        <h3>Notifications</h3>
-        <div>
-          <div class="SettingsPage_SettingItem">
-            <label for="notifications">Enable notifications</label>
-            <input type="checkbox" id="notifications" v-model="enableNotifications">
-          </div>
-        </div>
-      </div>
-
-
+      <button class="button big rounded" @click="saveSettings">Save</button>
     </div>
 </template>
 
@@ -50,9 +56,6 @@
       clearCache (type) {
         // clear localstorage based on given key
         switch (type) {
-          case 'all':
-            localStorage.clear()
-            break
           case 'platforms':
             localStorage.removeItem('platforms')
             break
@@ -62,9 +65,14 @@
           case 'genres':
             localStorage.removeItem('genres')
             break
+          default:
+            localStorage.clear()
         }
         // then reload the page to re-init state
         location.reload()
+      },
+      saveSettings () {
+        // settings should reflect user selected values
       }
     }
   }
@@ -72,20 +80,24 @@
 
 <style scoped lang="scss">
   @import "variables";
+  @import "mixins";
 
   .SettingsPage {
 
     &_SettingCategory {
-      border-bottom: 1px solid $accent;
       margin-bottom: 12px;
-      padding-left: 12px;
 
-      & > h3 {
+      &_Title {
         color: $primary;
       }
 
-      & > div {
+      &_Content {
+        margin-left: 12px;
 
+        &-row {
+          display: flex;
+          flex-flow: row wrap;
+        }
       }
     }
 
