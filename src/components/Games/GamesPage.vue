@@ -7,7 +7,7 @@
     </div>
 
     <div v-if="!apiFailure">
-      <div class="GamesPage_GamesContainer CardLayout">
+      <div class="CardLayout">
         <game-item-component class="CardLayout_Item" v-for="item in games" :key="item.id" :game-data="item"></game-item-component>
       </div>
       <list-loader-component v-if="!query" :loading="listLoading" :load-more="loadMore"></list-loader-component>

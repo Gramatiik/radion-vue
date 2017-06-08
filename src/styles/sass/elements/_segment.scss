@@ -6,11 +6,11 @@ $segmentBackgroundColor: $primary;
 $segmentBorderColor: $primary;
 $segmentTextColor: $primary;
 $segmentTextColor_active: $font-light;
-.segment {
+.Segment {
   width: 100%;
   display: flex;
 
-  &-item {
+  &_Item {
     text-align: center;
     font-size: 1.4rem;
     display: inline-block;

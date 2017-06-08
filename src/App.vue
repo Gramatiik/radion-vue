@@ -25,4 +25,5 @@
 
 <style lang="scss">
   @import "main";
+  @import "variables";
 </style>

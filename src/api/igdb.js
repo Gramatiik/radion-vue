@@ -170,6 +170,23 @@ export default {
   },
 
   /**
+   * Get a list of platforms starting at offset and ordered by name
+   * @param offset
+   */
+  getPlatforms (offset) {
+    let builder = new IgdbQueryBuilder()
+
+    return Vue.http.get(builder
+      .setEndpoint('platforms')
+      .setFields(['id', 'name', 'games', 'logo', 'versions'])
+      .setLimit(50)
+      .setOffset(offset || 0)
+      .setOrder({field: 'name', type: 'asc'})
+      .finalize())
+      .then(response => response.body || [])
+  },
+
+  /**
    * Returns the list of all genres names
    */
   getGenresList () {
