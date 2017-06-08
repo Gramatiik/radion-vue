@@ -1,12 +1,12 @@
 <template>
-    <div class="DiscoverPage">
-      <h1>Discover</h1>
+    <div class="PlatformItemComponent">
+
     </div>
 </template>
 
 <script>
   export default {
-    name: 'discover-page',
+    name: 'platform-item-component',
     data () {
       return {}
     }
@@ -14,7 +14,7 @@
 </script>
 
 <style scoped lang="scss">
-    .DiscoverPage {
+    .PlatformItemComponent {
 
     }
 </style>

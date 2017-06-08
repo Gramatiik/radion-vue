@@ -1,12 +1,12 @@
 <template>
-    <div class="DiscoverPage">
-      <h1>Discover</h1>
+    <div class="PlatformsPage">
+      <h1>Platforms</h1>
     </div>
 </template>
 
 <script>
   export default {
-    name: 'discover-page',
+    name: 'platforms-page',
     data () {
       return {}
     }
@@ -14,7 +14,7 @@
 </script>
 
 <style scoped lang="scss">
-    .DiscoverPage {
+    .PlatformsPage {
 
     }
 </style>

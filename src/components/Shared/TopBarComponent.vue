@@ -46,7 +46,7 @@
             title: 'Home',
             icon: 'home',
             route: {
-              name: 'GamesDefault'
+              name: 'Home'
             }
           },
           {
@@ -67,7 +67,7 @@
             title: 'Platforms',
             icon: 'platforms',
             route: {
-              name: 'GamesDefault'
+              name: 'Platforms'
             }
           },
           {
