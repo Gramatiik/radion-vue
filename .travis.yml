@@ -18,6 +18,7 @@ after_success:
   - tar -czf dist.tgz dist
   - export SSHPASS=$DEPLOY_PASSWD
   - sshpass -e scp -o StrictHostKeyChecking=no dist.tgz $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+  - sshpass -e ssh -o StrictHostKeyChecking=no $DEPLOY_USER@$DEPLOY_HOST $DEPLOY_PATH/deploy.sh
 
 addons:
   apt:
