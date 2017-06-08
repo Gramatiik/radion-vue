@@ -1,9 +1,10 @@
 <template>
     <div class="YoutubePlayerComponent">
-      <youtube class="YoutubePlayerComponent_Player" player-width="100%" player-height="100%" :video-id="currentVideo"></youtube>
+      <youtube class="YoutubePlayerComponent_Player" player-width="100%" player-height="350" :video-id="currentVideo"></youtube>
       <div class="YoutubePlayerComponent_Controls">
-        <button @click="previousVideo" :disabled="!hasPrevious" class="YoutubePlayerComponent_Controls_Previous">Previous</button>
-        <button @click="nextVideo" :disabled="!hasNext" class="YoutubePlayerComponent_Controls_Next">Next</button>
+        <button @click="previousVideo" :disabled="!hasPrevious" class="YoutubePlayerComponent_Controls_Control button">Previous</button>
+        <span>{{ currentVideoIndex + 1 }}/{{ videoCount }}</span>
+        <button @click="nextVideo" :disabled="!hasNext" class="YoutubePlayerComponent_Controls_Control button">Next</button>
       </div>
     </div>
 </template>
@@ -53,6 +54,20 @@
 
 <style scoped lang="scss">
     .YoutubePlayerComponent {
+
+      &_Player {
+
+      }
+
+      &_Controls {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+
+        &_Control {
+          width: 100px;
+        }
+      }
 
     }
 </style>

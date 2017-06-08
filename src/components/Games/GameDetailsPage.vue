@@ -36,7 +36,6 @@
 
     <div class="game-info-section" v-if="gameDetails.videos">
       <h2>Videos ({{ gameDetails.videos.length }})</h2>
-      <pre>{{ gameDetails.videos }}</pre>
       <youtube-player-component :video_ids="videoIds"></youtube-player-component>
     </div>
   </div>
@@ -172,14 +171,5 @@
 
   .game-platforms {
     margin-top: 5px;
-  }
-
-  .youtube-video-container {
-    @include responsiveCardLayout(12px);
-
-    .youtube-video {
-      height: 200px;
-      padding: 5px 0;
-    }
   }
 </style>

@@ -1,5 +1,7 @@
 # radion-vue
 
+[![Build Status](https://travis-ci.org/Gramatiik/radion-vue.svg?branch=master)](https://travis-ci.org/Gramatiik/radion-vue)
+
 > Radion Web in Vue.js
 
 ## Build Setup
