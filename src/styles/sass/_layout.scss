@@ -1,3 +1,7 @@
+@import "mixins";
+@import "variables";
+
+// App general layout
 body {
   background: linear-gradient(to right, #e2e2e2 1%, #ffffff 50%, #e2e2e2 100%);
   -webkit-font-smoothing: antialiased;
@@ -17,5 +21,30 @@ body {
 
   @include responsiveMinWidth($bp-desktop) {
     width: $bp-desktop;
+  }
+}
+
+// Card layout - 3 items
+.CardLayout {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+
+  &_Item {
+    width: 100%;
+  }
+
+  // 2 items in tablet mode
+  @include responsiveMinWidth($bp-tablet - 1) {
+    &_Item {
+      width: calc(50% - #{$card-layout-gutter / 2});
+    }
+  }
+
+  // 3 items grid in desktop mode
+  @include responsiveMinWidth($bp-desktop - 1) {
+    &_Item {
+      width: calc( ( 100% / 3 ) - #{(2 / 3 ) * $card-layout-gutter});
+    }
   }
 }

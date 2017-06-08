@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <div class="spinner" v-if="loading">
+  <div class="ListLoaderComponent">
+    <div class="ListLoaderComponent_Spinner" v-if="loading">
       <div class="double-bounce double-bounce-1"></div>
       <div class="double-bounce double-bounce-2"></div>
     </div>
-    <div class="load-more" v-else @click="loadMore">Load More</div>
+    <div class="ListLoaderComponent_LoadMore" v-else @click="loadMore">Load More</div>
   </div>
 </template>
 
@@ -21,45 +21,48 @@
 <style lang="scss" scoped>
   @import "variables";
 
-  .load-more {
-    box-sizing: border-box;
-    display: block;
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    margin-top: 5px;
-    background-color: $accent;
-    cursor: pointer;
+  .ListLoaderComponent {
 
-    &:hover {
-      background-color: lighten($accent, 10%);
-    }
-  }
+    &_Spinner {
+      width: 50px;
+      height: 50px;
+      position: relative;
+      margin: 10px auto;
 
-  .spinner {
-    width: 50px;
-    height: 50px;
-    position: relative;
-    margin: 10px auto;
+      .double-bounce {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        opacity: 0.6;
+        position: absolute;
+        top: 0;
+        left: 0;
 
-    .double-bounce {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      opacity: 0.6;
-      position: absolute;
-      top: 0;
-      left: 0;
+        animation: sk-bounce 2.0s infinite ease-in-out;
 
-      animation: sk-bounce 2.0s infinite ease-in-out;
+        &-1 {
+          background-color: $primary;
+        }
 
-      &-1 {
-        background-color: $primary;
+        &-2 {
+          background-color: $accent;
+          animation-delay: -1.0s;
+        }
       }
+    }
 
-      &-2 {
-        background-color: $accent;
-        animation-delay: -1.0s;
+    &_LoadMore {
+      box-sizing: border-box;
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 10px;
+      margin-top: 5px;
+      background-color: $accent;
+      cursor: pointer;
+
+      &:hover {
+        background-color: lighten($accent, 10%);
       }
     }
   }

@@ -1,6 +1,8 @@
 <template>
-  <div class="pins-container" :style="{ textAlign: alignment }">
-    <span v-for="pin in pins" class="pin" :style="{ backgroundColor: pin.primary, borderColor: pin.border, fontSize: pinSize + 'rem'}">{{ pin.name }}</span>
+  <div class="PinsPlatformsComponent" :style="{ textAlign: alignment }">
+    <span v-for="pin in pins"
+          class="PinsPlatformsComponent_Item"
+          :style="{ backgroundColor: pin.primary, borderColor: pin.border, fontSize: pinSize + 'rem'}">{{ pin.name }}</span>
   </div>
 </template>
 
@@ -68,11 +70,11 @@
 <style lang="scss" scoped>
   @import "variables";
 
-  .pins-container {
+  .PinsPlatformsComponent {
     color: $font-light;
     margin-bottom: -5px;
 
-    .pin {
+    &_Item {
       min-width: 22px;
       padding: 1px 3px;
       margin-left: 5px;

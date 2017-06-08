@@ -51,12 +51,17 @@
 
       &_Input {
         flex: 1;
+        margin: 0;
+        padding: 2px;
+        border: none;
+        outline: none;
       }
 
       &_Submit {
         background-color: $accent;
         border: none;
         color: $font-light;
+        outline: none;
         transition: background-color .1s ease;
 
         &:hover {

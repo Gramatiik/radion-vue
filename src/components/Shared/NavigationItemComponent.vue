@@ -1,10 +1,10 @@
 <template>
-  <div @click="MENU_TOGGLE">
-    <router-link class="container" :to="route">
-      <span :class="[ iconClass ]"></span>
-      <div class="menu-title">{{ title }}</div>
+  <div @click="MENU_TOGGLE" class="NavigationItemComponent">
+    <router-link class="NavigationItemComponent_Link" :to="route">
+      <span class="NavigationItemComponent_Link_Icon" :class="[ iconClass ]"></span>
+      <div class="NavigationItemComponent_Link_Title">{{ title }}</div>
     </router-link>
-    <hr>
+    <hr class="NavigationItemComponent_Separator">
   </div>
 </template>
 
@@ -19,7 +19,7 @@
     },
     computed: {
       iconClass () {
-        return 'icon-' + this.icon
+        return 'Icon Icon-' + this.icon
       }
     }
   }
@@ -29,39 +29,42 @@
   @import "mixins";
   @import "variables";
 
-  .container {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 5px;
-    transition: all .1s ease-in-out;
+  .NavigationItemComponent {
 
-    &.router-link-active {
-      font-weight: bold;
+    &_Link {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 5px;
+      transition: all .15s ease-out;
+
+      &:hover, &.router-link-active {
+        transform: translateX(10px);
+      }
+
+      &.router-link-active {
+        font-weight: bold;
+      }
+
+      &_Icon {
+        margin-left: 12px;
+        margin-right: 10px;
+      }
+
+      &_Title {
+        line-height: 36px;
+        font-size: 1.4rem;
+        color: $font-light;
+      }
     }
 
-    span {
-      margin-left: 12px;
-      margin-right: 10px;
+    &_Separator {
+      margin: 5px 12px;
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, rgba(30,87,153,0) 0%,rgba(255,255,255,1) 1%,rgba(125,185,232,0) 100%);
     }
-
-    .menu-title {
-      line-height: 36px;
-      font-size: 1.4rem;
-      color: $font-light;
-    }
-
-    &:hover {
-      transform: translateX(5px);
-    }
-  }
-
-  hr {
-    margin: 5px 12px;
-    border: none;
-    height: 1px;
-    background: linear-gradient(to right, rgba(30,87,153,0) 0%,rgba(255,255,255,1) 1%,rgba(125,185,232,0) 100%);
   }
 
 

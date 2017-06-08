@@ -44,42 +44,42 @@
         menuItems: [
           {
             title: 'Home',
-            icon: 'home',
+            icon: 'Home',
             route: {
               name: 'Home'
             }
           },
           {
             title: 'Games',
-            icon: 'games',
+            icon: 'Games',
             route: {
               name: 'GamesDefault'
             }
           },
           {
             title: 'Discover',
-            icon: 'discover',
+            icon: 'Discover',
             route: {
               name: 'Discover'
             }
           },
           {
             title: 'Platforms',
-            icon: 'platforms',
+            icon: 'Platforms',
             route: {
               name: 'Platforms'
             }
           },
           {
             title: 'Pulses',
-            icon: 'pulse',
+            icon: 'Pulse',
             route: {
               name: 'Pulses'
             }
           },
           {
             title: 'Settings',
-            icon: 'settings',
+            icon: 'Settings',
             route: {
               name: 'Settings'
             }
