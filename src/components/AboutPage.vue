@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <router-link :to="{ name: 'Games' }">Go to Games</router-link>
+  <div class="AboutPage">
+    <h1>About</h1>
   </div>
 </template>
 
@@ -11,5 +11,7 @@
 </script>
 
 <style scoped lang="scss">
+    .AboutPage {
 
+    }
 </style>

@@ -32,10 +32,6 @@
     width: 100%;
     background-color: lighten($primary, 20%);
 
-    &:hover {
-      height: 20px;
-    }
-
     &_Value {
       background-color: $primary;
       height: 100%;

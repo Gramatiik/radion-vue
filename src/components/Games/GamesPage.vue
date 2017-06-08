@@ -1,14 +1,14 @@
 <template>
-  <div>
-    <h1 class="page-title">{{ query ? 'Search results' : 'Games' }}</h1>
+  <div class="GamesPage">
+    <h1 class="GamesPage_Title">{{ query ? 'Search results' : 'Games' }}</h1>
 
-    <div class="segment" v-if="!query">
-      <router-link v-for="value in orderings" :key="value.param" class="segment-item" :to="{ name: 'Games', params: { ordering: value.param } }">{{ value.name }}</router-link>
+    <div class="Segment" v-if="!query">
+      <router-link v-for="value in orderings" :key="value.param" class="Segment_Item" :to="{ name: 'Games', params: { ordering: value.param } }">{{ value.name }}</router-link>
     </div>
 
     <div v-if="!apiFailure">
-      <div class="games-container">
-        <game-item-component class="card-item" v-for="item in games" :key="item.id" :game-data="item"></game-item-component>
+      <div class="CardLayout">
+        <game-item-component class="CardLayout_Item" v-for="item in games" :key="item.id" :game-data="item"></game-item-component>
       </div>
       <list-loader-component v-if="!query" :loading="listLoading" :load-more="loadMore"></list-loader-component>
     </div>
@@ -106,12 +106,3 @@
     }
   }
 </script>
-
-<style scoped lang="scss">
-  @import "variables";
-  @import "mixins";
-
-  .games-container {
-    @include responsiveCardLayout($card-layout-gutter);
-  }
-</style>

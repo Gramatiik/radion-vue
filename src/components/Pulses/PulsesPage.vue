@@ -3,8 +3,8 @@
     <h1 class="page-title">Latest Pulses</h1>
 
     <div v-if="!apiFailure">
-      <div class="pulses-container">
-        <pulse-item-component class="card-item" v-for="item in pulses" :key="item.id" :pulse-data="item"></pulse-item-component>
+      <div class="pulses-container CardLayout">
+        <pulse-item-component class="CardLayout_Item" v-for="item in pulses" :key="item.id" :pulse-data="item"></pulse-item-component>
       </div>
       <list-loader-component :loading="listLoading" :load-more="loadMore"></list-loader-component>
     </div>
@@ -59,12 +59,3 @@
       .then(() => next())
   }
 </script>
-
-<style scoped lang="scss">
-  @import "variables";
-  @import "mixins";
-
-  .pulses-container {
-    @include responsiveCardLayout($card-layout-gutter);
-  }
-</style>

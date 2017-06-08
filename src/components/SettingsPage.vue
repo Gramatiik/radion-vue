@@ -21,25 +21,25 @@
 
         <div class="SettingsPage_SettingCategory_Content-row">
           <div class="SettingsPage_SettingItem">
-            <button class="button" @click="clearCache()">Clear all cache</button>
+            <button class="Button" @click="clearCache()">Clear all cache</button>
           </div>
 
           <div class="SettingsPage_SettingItem">
-            <button class="button" @click="clearCache('platforms')">Clear platforms cache</button>
+            <button class="Button" @click="clearCache('platforms')">Clear platforms cache</button>
           </div>
 
           <div class="SettingsPage_SettingItem">
-            <button class="button" @click="clearCache('pulseSources')">Clear pulse sources cache</button>
+            <button class="Button" @click="clearCache('pulseSources')">Clear pulse sources cache</button>
           </div>
 
           <div class="SettingsPage_SettingItem">
-            <button class="button" @click="clearCache('genres')">Clear genres cache</button>
+            <button class="Button" @click="clearCache('genres')">Clear genres cache</button>
           </div>
         </div>
 
       </div>
 
-      <button class="button big rounded" @click="saveSettings">Save</button>
+      <button class="Button" @click="saveSettings">Save</button>
     </div>
 </template>
 

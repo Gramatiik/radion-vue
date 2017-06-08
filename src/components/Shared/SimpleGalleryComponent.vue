@@ -3,7 +3,7 @@
     <img class="SimpleGalleryComponent_CurrentImage" :src="currentImage.big">
     <div class="SimpleGalleryComponent_Thumbs">
       <img v-for="(image, index) in images"
-           class="SimpleGalleryComponent_Thumbs_Thumb"
+           class="SimpleGalleryComponent_Thumbs_Item"
            :class="{ current : isCurrent(index) }"
            :src="image.thumb"
            @click="setCurrent(index)">
@@ -68,7 +68,7 @@
       white-space: nowrap;
       overflow-x: auto;
 
-      &_Thumb {
+      &_Item {
         display: inline-block;
         object-fit: contain;
         width: 160px;

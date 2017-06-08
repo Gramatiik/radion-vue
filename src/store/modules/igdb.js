@@ -3,13 +3,17 @@ import {
   LIST_LOADING,
   APP_LOADING,
   API_FAILURE,
-  CLEAR_GAMES,
+
   RECIEVE_GAMES,
   RECIEVE_GAME_DETAILS,
+  CLEAR_GAMES,
 
   RECIEVE_PULSE_SOURCES_LIST,
   RECIEVE_PULSES,
   CLEAR_PULSES,
+
+  RECIEVE_PLATFORMS,
+  CLEAR_PLATFORMS,
 
   RECIEVE_PLATFORMS_LIST,
   RECIEVE_GENRES_LIST
@@ -22,7 +26,9 @@ const state = {
   pulses: [],
   pulseSourcesList: [],
 
+  platforms: [],
   platformsList: [],
+
   pulseGenresList: []
 }
 
@@ -33,6 +39,14 @@ const getters = {
 
   pulsesCount: function (state) {
     return state.pulses.length
+  },
+
+  platformsCount: function (state) {
+    return state.platforms.length
+  },
+
+  platformsTotalCount: function (state) {
+    return state.platformsList.filter(val => { if (val) return val }).length
   }
 }
 
@@ -121,6 +135,27 @@ const actions = {
   },
 
   /**
+   * Get platforms in alphabetical order
+   * @param commit
+   * @param offset
+   */
+  getPlatforms ({ commit }, offset) {
+    commit(LIST_LOADING, true)
+
+    return igdbApi.getPlatforms(offset)
+      .then(function (data) {
+        commit(RECIEVE_PLATFORMS, data)
+      })
+      .catch(function () {
+        console.log('Error fetching plaforms from API...')
+        commit(API_FAILURE, true)
+      })
+      .then(function () {
+        commit(LIST_LOADING, false)
+      })
+  },
+
+  /**
    * Get the latest pulses news
    * @param commit
    * @param offset
@@ -196,6 +231,24 @@ const mutations = {
    */
   [RECIEVE_PLATFORMS_LIST] (state, list) {
     state.platformsList = list
+  },
+
+  /**
+   * Save recieved platforms list to current state
+   * @param state
+   * @param list
+   */
+  [RECIEVE_PLATFORMS] (state, platforms) {
+    state.apiFailure = false
+    state.platforms = state.platforms.concat(platforms)
+  },
+
+  /**
+   * Clears currently loaded pulses
+   * @param state
+   */
+  [CLEAR_PLATFORMS] (state) {
+    state.platforms = []
   },
 
   /**

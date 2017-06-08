@@ -1,15 +1,16 @@
 /*
- * Segment Styles
+ * Segment Element
  */
+
 $segmentBackgroundColor: $primary;
 $segmentBorderColor: $primary;
 $segmentTextColor: $primary;
 $segmentTextColor_active: $font-light;
-.segment {
+.Segment {
   width: 100%;
   display: flex;
 
-  &-item {
+  &_Item {
     text-align: center;
     font-size: 1.4rem;
     display: inline-block;
@@ -33,40 +34,5 @@ $segmentTextColor_active: $font-light;
       border-top-right-radius: 5px;
       border-right: 1px solid $segmentBorderColor;
     }
-  }
-}
-
-/*
- * Buttons Styles
- */
-$buttonTextColor: $font-light;
-$buttonBackgroundColor: $accent;
-.button {
-  background-color: $buttonBackgroundColor;
-  color: $buttonTextColor;
-  border: none;
-  font-size: 1.4rem;
-  transition: background-color .15s ease;
-
-  &.small {
-    font-size: 1rem;
-  }
-
-  &.big {
-    font-size: 1.8rem;
-  }
-
-  &.rounded {
-    border-radius: 4px;
-  }
-
-  &:hover {
-    background-color: lighten($buttonBackgroundColor, 15%);
-  }
-
-  &[disabled] {
-    background-color: darken($buttonBackgroundColor, 15%);
-    color: darken($buttonTextColor, 15%);
-    pointer-events: none;
   }
 }
