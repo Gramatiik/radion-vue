@@ -1,7 +1,7 @@
 <template>
     <div class="YoutubePlayerComponent">
       <youtube class="YoutubePlayerComponent_Player" player-width="100%" player-height="350" :video-id="currentVideo"></youtube>
-      <div class="YoutubePlayerComponent_Controls">
+      <div class="YoutubePlayerComponent_Controls" v-if="videoCount > 1">
         <button @click="previousVideo" :disabled="!hasPrevious" class="YoutubePlayerComponent_Controls_Control button">Previous</button>
         <span>{{ currentVideoIndex + 1 }}/{{ videoCount }}</span>
         <button @click="nextVideo" :disabled="!hasNext" class="YoutubePlayerComponent_Controls_Control button">Next</button>
