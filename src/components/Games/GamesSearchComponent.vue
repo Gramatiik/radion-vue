@@ -1,8 +1,8 @@
 <template>
     <div class="GamesSearchComponent">
-      <form @submit.prevent="performSearch">
-        <input type="text" title="Search" placeholder="Search for games..." v-model="searchQuery" @submit="performSearch">
-        <button :disabled="!searchQuery">Go</button>
+      <form class="GamesSearchComponent_Form" @submit.prevent="performSearch">
+        <input class="GamesSearchComponent_Form_Input" type="text" title="Search" placeholder="Search for games..." v-model="searchQuery" @submit="performSearch">
+        <button class="GamesSearchComponent_Form_Submit" :disabled="!searchQuery">Go</button>
       </form>
     </div>
 </template>
@@ -41,22 +41,20 @@
   @import "variables";
 
   .GamesSearchComponent {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     font-size: 1.2rem;
 
-    form {
+    &_Form {
       display: flex;
       width: 100%;
+      padding: 0 12px;
 
-      input {
-        margin-left: 12px;
-        margin-right: 5px;
+      &_Input {
         flex: 1;
       }
 
-      button {
+      &_Submit {
         background-color: $accent;
-        margin-right: 12px;
         border: none;
         color: $font-light;
         transition: background-color .1s ease;
