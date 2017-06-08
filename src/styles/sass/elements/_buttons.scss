@@ -1,0 +1,35 @@
+/*
+ * Buttons Styles
+ */
+
+$buttonTextColor: $font-light;
+$buttonBackgroundColor: $accent;
+.Button {
+  background-color: $buttonBackgroundColor;
+  color: $buttonTextColor;
+  border: none;
+  font-size: 1.4rem;
+  transition: background-color .15s ease;
+
+  &_Small {
+    font-size: 1rem;
+  }
+
+  &_Big {
+    font-size: 1.8rem;
+  }
+
+  &_Rounded {
+    border-radius: 4px;
+  }
+
+  &:hover {
+    background-color: lighten($buttonBackgroundColor, 15%);
+  }
+
+  &[disabled] {
+    background-color: darken($buttonBackgroundColor, 15%);
+    color: darken($buttonTextColor, 15%);
+    pointer-events: none;
+  }
+}

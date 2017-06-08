@@ -24,10 +24,5 @@
 </script>
 
 <style lang="scss">
-  @import "~node.normalize.scss/normalize";
-  @import "icons";
-  @import "variables";
-  @import "typography";
-  @import "layout";
-  @import "transitions";
+  @import "main";
 </style>
