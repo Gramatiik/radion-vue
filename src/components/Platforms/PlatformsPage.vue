@@ -2,6 +2,11 @@
     <div class="PlatformsPage">
       <h1>Platforms</h1>
 
+      <modal-component :isVisible="showDetails" :onClose="closeDetails">
+        <h2 slot="title">SLIP</h2>
+        <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto eligendi magnam modi molestias officiis porro praesentium.</p>
+      </modal-component>
+
       <div v-if="!apiFailure">
         <div class="CardLayout">
           <platform-item-component
@@ -25,8 +30,8 @@
 <script>
   import { mapState, mapGetters } from 'vuex'
   import { API_FAILURE, CLEAR_PLATFORMS } from '@/store/mutation-types'
-  import Modal from 'modal-vue'
   import ListLoaderComponent from '@/components/Shared/ListLoaderComponent'
+  import ModalComponent from '@/components/Shared/ModalComponent'
   import PlatformItemComponent from '@/components/Platforms/PlatformItemComponent'
   import store from '@/store/'
 
@@ -35,7 +40,7 @@
     components: {
       PlatformItemComponent,
       ListLoaderComponent,
-      Modal
+      ModalComponent
     },
     data () {
       return {
@@ -56,7 +61,7 @@
         this.showDetails = true
       },
       closeDetails () {
-        this.showModal = false
+        this.showDetails = false
       },
       dispatchPlatformsAction () {
         this.$store.dispatch('getPlatforms', this.platformsCount)
