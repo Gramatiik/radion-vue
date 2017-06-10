@@ -6,6 +6,7 @@ import HomePage from '@/components/HomePage'
 import SettingsPage from '@/components/SettingsPage'
 import PlatformsPage from '@/components/Platforms/PlatformsPage'
 import GamesPage from '@/components/Games/GamesPage'
+import FavouriteGamesPage from '@/components/Games/FavouriteGamesPage'
 import GameDetailsPage from '@/components/Games/GameDetailsPage'
 import DiscoverPage from '@/components/Discover/DiscoverPage'
 import PulsesPage from '@/components/Pulses/PulsesPage'
@@ -62,6 +63,15 @@ export default new Router({
       name: 'Games',
       component: GamesPage,
       props: true
+    },
+
+    /*
+     * Home page
+     */
+    {
+      path: '/favourite-games',
+      name: 'FavouriteGames',
+      component: FavouriteGamesPage
     },
 
     /*

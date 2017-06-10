@@ -73,6 +73,8 @@
   .PinsPlatformsComponent {
     color: $font-light;
     margin-bottom: -5px;
+    white-space: nowrap;
+    overflow-x: auto;
 
     &_Item {
       min-width: 22px;

@@ -28,6 +28,10 @@
   import store from '@/store/'
   export default {
     name: 'games-page',
+    components: {
+      GameItemComponent,
+      ListLoaderComponent
+    },
     props: {
       ordering: {
         type: String,
@@ -60,10 +64,6 @@
           }
         ]
       }
-    },
-    components: {
-      GameItemComponent,
-      ListLoaderComponent
     },
     computed: {
       ...mapState({

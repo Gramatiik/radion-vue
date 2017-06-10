@@ -57,6 +57,13 @@
             }
           },
           {
+            title: 'My Games',
+            icon: 'Favourite',
+            route: {
+              name: 'FavouriteGames'
+            }
+          },
+          {
             title: 'Discover',
             icon: 'Discover',
             route: {
