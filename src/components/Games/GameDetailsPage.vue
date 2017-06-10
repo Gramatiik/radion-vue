@@ -19,6 +19,14 @@
 
     <pin-platforms-component class="game-platforms" :platform-ids="platformIds" :pin-size="1.2"></pin-platforms-component>
 
+    <social-sharing :url="currentURL" inline-template>
+      <div>
+        <network network="facebook">Facebook</network>
+        <network network="googleplus">Google +</network>
+        <network network="twitter">Twitter</network>
+      </div>
+    </social-sharing>
+
     <div class="game-info-section" v-if="gameDetails.summary">
       <h2>Summary</h2>
       <p v-html="gameDetails.summary"></p>
@@ -61,6 +69,9 @@
       ...mapState({
         gameDetails: state => state.igdb.gameDetails
       }),
+      currentURL () {
+        return window.location.href
+      },
       platformIds () {
         let platformIds = []
         for (let release of this.gameDetails['release_dates'] || {}) {
