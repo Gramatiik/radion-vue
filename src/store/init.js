@@ -1,11 +1,21 @@
 import igdbApi from '../api/igdb'
 import {
+  ADD_FAVOURITE_GAME_ALL,
   RECIEVE_PLATFORMS_LIST,
   RECIEVE_PULSE_SOURCES_LIST,
   RECIEVE_GENRES_LIST
 } from '../store/mutation-types'
 
+/**
+ * Initializes application state
+ * @param store
+ * @returns {Promise.<TResult>}
+ */
 export default function (store) {
+  // load favourite games
+  initFavouriteGames(store)
+
+  // then load lists from API
   return Promise.all([
     initPlatformList(store),
     initPulseSourcesList(store),
@@ -14,6 +24,28 @@ export default function (store) {
     .then(() => console.log('state inited'))
 }
 
+/**
+ * Load FavouriteGames from local storage
+ * @param store
+ */
+function initFavouriteGames (store) {
+  try {
+    let favouriteGames = localStorage.getItem('favouriteGames')
+    favouriteGames = JSON.parse(favouriteGames)
+    if (!favouriteGames) {
+      favouriteGames = {}
+    }
+    store.commit(ADD_FAVOURITE_GAME_ALL, favouriteGames)
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+/**
+ * Load platforms list from local storage or from API
+ * @param store
+ * @returns {Promise}
+ */
 function initPlatformList (store) {
   return new Promise((resolve, reject) => {
     // we load platforms from local storage

@@ -8,6 +8,14 @@
   height: 36px;
   display: inline-block;
 
+  &-Favourite {
+    @include icon-url('favourite');
+
+    &-empty {
+      @include icon-url('favourite-empty');
+    }
+  }
+
   &-Home {
     @include icon-url('home');
   }

@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import igdbApi from '../../api/igdb'
 import {
   LIST_LOADING,
@@ -7,6 +8,10 @@ import {
   RECIEVE_GAMES,
   RECIEVE_GAME_DETAILS,
   CLEAR_GAMES,
+
+  ADD_FAVOURITE_GAME,
+  ADD_FAVOURITE_GAME_ALL,
+  REMOVE_FAVOURITE_GAME,
 
   RECIEVE_PULSE_SOURCES_LIST,
   RECIEVE_PULSES,
@@ -21,6 +26,7 @@ import {
 
 const state = {
   games: [],
+  favouriteGames: {},
   gameDetails: {},
 
   pulses: [],
@@ -33,19 +39,19 @@ const state = {
 }
 
 const getters = {
-  gamesCount: function (state) {
+  gamesCount (state) {
     return state.games.length
   },
 
-  pulsesCount: function (state) {
+  pulsesCount (state) {
     return state.pulses.length
   },
 
-  platformsCount: function (state) {
+  platformsCount (state) {
     return state.platforms.length
   },
 
-  platformsTotalCount: function (state) {
+  platformsTotalCount (state) {
     return state.platformsList.filter(val => { if (val) return val }).length
   }
 }
@@ -186,6 +192,58 @@ const mutations = {
   [RECIEVE_GAMES] (state, games) {
     state.apiFailure = false
     state.games = state.games.concat(games)
+  },
+
+  /**
+   * Add new game to favourites
+   * @param state
+   * @param game
+   */
+  [ADD_FAVOURITE_GAME] (state, game) {
+    Vue.set(state.favouriteGames, game.name, game)
+
+    try {
+      localStorage.setItem('favouriteGames', JSON.stringify(state.favouriteGames))
+    } catch (e) {
+      console.log(e)
+    }
+  },
+
+  /**
+   * Add multiple games to favourites
+   * @param state
+   * @param games
+   */
+  [ADD_FAVOURITE_GAME_ALL] (state, games) {
+    for (let gameName in games) {
+      if (games.hasOwnProperty(gameName)) {
+        state.favouriteGames[gameName] = games[gameName]
+        Vue.set(state.favouriteGames, gameName, games[gameName])
+      }
+    }
+
+    try {
+      localStorage.setItem('favouriteGames', JSON.stringify(state.favouriteGames))
+    } catch (e) {
+      console.log(e)
+    }
+  },
+
+  /**
+   * Remove game from favourites
+   * @param state
+   * @param game
+   */
+  [REMOVE_FAVOURITE_GAME] (state, game) {
+    if (state.favouriteGames[game.name]) {
+      Vue.delete(state.favouriteGames, game.name)
+    }
+
+    try {
+      localStorage.setItem('favouriteGames', JSON.stringify(state.favouriteGames))
+    } catch (e) {
+      console.log(e)
+    }
   },
 
   /**
