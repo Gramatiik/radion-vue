@@ -1,10 +1,9 @@
 <template>
     <div class="FavouriteGamesPage">
       <h1>My Games</h1>
-      <button @click="addFav">Add favourite</button>
-      <button @click="removeFav">Remove Favourite</button>
-      <div v-if="favouriteGames">
-        <pre>{{ favouriteGames }}</pre>
+      <p>Click a favourite to see game details</p>
+      <div v-if="favouriteGames" class="CardLayout">
+        <game-item-component class="CardLayout_Item" v-for="item in favouriteGames" :key="item.id" :game-data="item"></game-item-component>
       </div>
       <div v-else>
         No favourite games
@@ -15,8 +14,12 @@
 <script>
   import { mapState, mapMutations } from 'vuex'
   import { ADD_FAVOURITE_GAME, REMOVE_FAVOURITE_GAME } from '@/store/mutation-types'
+  import GameItemComponent from '@/components/Games/GameItemComponent'
   export default {
     name: 'favourite-games-page',
+    components: {
+      GameItemComponent
+    },
     computed: {
       ...mapState({ favouriteGames: state => state.igdb.favouriteGames })
     },
@@ -35,7 +38,20 @@
 </script>
 
 <style scoped lang="scss">
+  @import "variables";
     .FavouriteGamesPage {
-
+      &_Item {
+        position: relative;
+        &_Remove {
+          position: absolute;
+          bottom: 5px;
+          left: 5px;
+          background-color: $primary;
+          padding: 2px 4px;
+          font-size: .8rem;
+          text-align: center;
+          border-radius: 5px;
+        }
+      }
     }
 </style>

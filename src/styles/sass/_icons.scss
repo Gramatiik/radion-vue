@@ -8,12 +8,21 @@
   height: 36px;
   display: inline-block;
 
+  &-small {
+    width: 28px;
+    height: 28px;
+  }
+
   &-Favourite {
     @include icon-url('favourite');
 
     &-empty {
       @include icon-url('favourite-empty');
     }
+  }
+
+  &-Details {
+    @include icon-url('details')
   }
 
   &-Home {
