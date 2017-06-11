@@ -7,7 +7,10 @@
           <slot name="title"></slot>
         </div>
         <div class="ModalComponent_Content_Body">
-          <slot name="content"></slot>
+          <slot name="body"></slot>
+        </div>
+        <div class="ModalComponent_Content_Actions">
+          <slot name="actions"></slot>
         </div>
       </div>
     </div>
@@ -47,6 +50,7 @@
 
 <style scoped lang="scss">
   @import "variables";
+  @import "mixins";
 
     .ModalComponent {
       position: relative;
@@ -66,20 +70,38 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 300px;
-        height: 300px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: scroll;
         z-index: 26;
         background-color: $bg-light;
-        padding: 8px;
+        border-radius: 5px;
+
+        @include responsiveMinWidth($bp-mobile) {
+          width: 80%;
+        }
+
+        @include responsiveMinWidth($bp-tablet) {
+          width: 60%;
+        }
 
         &_Title {
-          font-size: 1.2em;
-          padding-bottom: 2px;
+          background-color: $primary;
+          color: $font-light;
+          font-size: 1.4rem;
+          font-weight: bold;
+          padding: 8px;
           border-bottom: 1px solid $bg-dark;
         }
 
         &_Body {
+          font-size: 1.2rem;
+          padding: 8px 16px;
+        }
 
+        &_Actions {
+          padding: 8px;
+          text-align: right;
         }
       }
 
