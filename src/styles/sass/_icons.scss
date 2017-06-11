@@ -21,6 +21,14 @@
     }
   }
 
+  &-Heart {
+    @include icon-url('heart');
+
+    &-empty {
+      @include icon-url('heart-empty');
+    }
+  }
+
   &-Details {
     @include icon-url('details')
   }
