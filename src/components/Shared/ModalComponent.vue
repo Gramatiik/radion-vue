@@ -27,13 +27,20 @@
         required: true
       }
     },
-    mounted: function () {
-      // close modal on ESC key press
-      document.addEventListener('keydown', (e) => {
+    methods: {
+      closeWithEsc (e) {
         if (this.isVisible && e.keyCode === 27) {
           this.onClose()
         }
-      })
+      }
+    },
+    mounted () {
+      // close modal on ESC key press
+      document.addEventListener('keydown', this.closeWithEsc)
+    },
+    beforeDestroy () {
+      // close modal on ESC key press
+      document.removeEventListener('keydown', this.closeWithEsc)
     }
   }
 </script>
