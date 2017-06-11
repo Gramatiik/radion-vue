@@ -1,7 +1,6 @@
 <template>
     <div class="FavouriteGamesPage">
       <h1>My Games</h1>
-      <p>Click a favourite to see game details</p>
       <div v-if="favouriteGames" class="CardLayout">
         <game-item-component class="CardLayout_Item" v-for="item in favouriteGames" :key="item.id" :game-data="item"></game-item-component>
       </div>
