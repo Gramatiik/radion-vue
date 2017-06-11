@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import VueMoment from 'vue-moment'
 import VueYoutubeEmbed from 'vue-youtube-embed'
+import VueSocialSharing from 'vue-social-sharing'
 import VueLazyBackgroundImage from 'vue-lazy-background-images/VueLazyBackgroundImage.vue'
 import {} from './resource'
 import {} from './filters'
@@ -13,6 +14,7 @@ import initState from './store/init'
 
 Vue.use(VueMoment)
 Vue.use(VueYoutubeEmbed)
+Vue.use(VueSocialSharing)
 Vue.component('lazy-background', VueLazyBackgroundImage)
 
 Vue.config.productionTip = false

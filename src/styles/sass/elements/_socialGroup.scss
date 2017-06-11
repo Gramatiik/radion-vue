@@ -1,0 +1,46 @@
+/*
+ * Share Group Element
+ */
+$bg-facebook: #3b5998;
+$font-facebook: #fff;
+
+$bg-googleplus: #d34836;
+$font-googleplus: #f1f1f1;
+
+$bg-twitter: #1DA1F2;
+$font-twitter: #fff;
+
+.ShareGroup {
+  &_Link {
+    cursor: pointer;
+    padding: 2px 6px;
+    transition: background-color .1s ease;
+
+    &-facebook {
+      background-color: $bg-facebook;
+      color: $font-facebook;
+
+      &:hover {
+        background-color: lighten($bg-facebook, 10%);
+      }
+    }
+
+    &-googleplus {
+      background-color: $bg-googleplus;
+      color: $font-googleplus;
+
+      &:hover {
+        background-color: lighten($bg-googleplus, 10%);
+      }
+    }
+
+    &-twitter {
+      background-color: $bg-twitter;
+      color: $font-twitter;
+
+      &:hover {
+        background-color: lighten($bg-twitter, 10%);
+      }
+    }
+  }
+}

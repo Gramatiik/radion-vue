@@ -1,42 +1,55 @@
 <template>
-  <div>
-    <div class="game-header">
+  <div class="GameDetailsPage">
+    <div class="GameDetailsPage_Header">
 
-      <img class="game-cover" :src="gameCoverImage" alt="Cover">
+      <img class="GameDetailsPage_Header_Cover" :src="gameCoverImage" alt="Cover">
 
-      <h1 class="game-name">{{ gameDetails.name }}</h1>
+      <h1 class="GameDetailsPage_Header_Name">{{ gameDetails.name }}</h1>
 
-      <span class="game-release-date">Released on {{ new Date(gameDetails.first_release_date) | moment("MMMM D, YYYY") }}</span>
+      <span class="GameDetailsPage_Header_ReleaseDate">Released on {{ new Date(gameDetails.first_release_date) | moment("MMMM D, YYYY") }}</span>
 
       <lazy-background
-        class="game-header-background"
+        class="GameDetailsPage_Header_Background"
         :image-source="gameCoverBackgroundImage"
         :loading-image="require('@/assets/images/pulse-no-image.png')"
         :error-image="require('@/assets/images/pulse-no-image.png')">
       </lazy-background>
     </div>
+
     <rating-meter-component v-if="gameDetails.aggregated_rating" :value="gameDetails.aggregated_rating"></rating-meter-component>
 
-    <pin-platforms-component class="game-platforms" :platform-ids="platformIds" :pin-size="1.2"></pin-platforms-component>
+    <pin-platforms-component class="GameDetailsPage_Platforms" :platform-ids="platformIds" :pin-size="1.2"></pin-platforms-component>
 
-    <div class="game-info-section" v-if="gameDetails.summary">
-      <h2>Summary</h2>
-      <p v-html="gameDetails.summary"></p>
+    <div class="GameDetailsPage_Share">
+      <h3 class="GameDetailsPage_Share_Title">Share</h3>
+      <social-sharing inline-template class="GameDetailsPage_Share_Links ShareGroup">
+        <div>
+          <network class="ShareGroup_Link ShareGroup_Link-facebook" network="facebook">Facebook</network>
+          <network class="ShareGroup_Link ShareGroup_Link-googleplus" network="googleplus">Google +</network>
+          <network class="ShareGroup_Link ShareGroup_Link-twitter" network="twitter">Twitter</network>
+        </div>
+      </social-sharing>
     </div>
 
-    <div class="game-info-section" v-if="gameDetails.storyline">
-      <h2>Storyline</h2>
-      <p v-html="gameDetails.storyline"></p>
+
+    <div class="GameDetailsPage_Section" v-if="gameDetails.summary">
+      <h2 class="GameDetailsPage_Section_Title">Summary</h2>
+      <p class="GameDetailsPage_Section_Content" v-html="gameDetails.summary"></p>
     </div>
 
-    <div class="game-info-section" v-if="gameDetails.screenshots">
-      <h2>Screenshots ({{ gameDetails.screenshots.length }})</h2>
-      <simple-gallery-component :images="screenshotImages"></simple-gallery-component>
+    <div class="GameDetailsPage_Section" v-if="gameDetails.storyline">
+      <h2 class="GameDetailsPage_Section_Title">Storyline</h2>
+      <p class="GameDetailsPage_Section_Content" v-html="gameDetails.storyline"></p>
     </div>
 
-    <div class="game-info-section" v-if="gameDetails.videos">
-      <h2>Videos ({{ gameDetails.videos.length }})</h2>
-      <youtube-player-component :video_ids="videoIds"></youtube-player-component>
+    <div class="GameDetailsPage_Section" v-if="gameDetails.screenshots">
+      <h2 class="GameDetailsPage_Section_Title">Screenshots ({{ gameDetails.screenshots.length }})</h2>
+      <simple-gallery-component class="GameDetailsPage_Section_Content" :images="screenshotImages"></simple-gallery-component>
+    </div>
+
+    <div class="GameDetailsPage_Section" v-if="gameDetails.videos">
+      <h2 class="GameDetailsPage_Section_Title">Videos ({{ gameDetails.videos.length }})</h2>
+      <youtube-player-component class="GameDetailsPage_Section_Content" :video_ids="videoIds"></youtube-player-component>
     </div>
   </div>
 </template>
@@ -113,63 +126,76 @@
   @import "variables";
   @import "mixins";
 
-  .game-header {
-    position: relative;
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    min-height: 350px;
-    background-size: cover;
-    overflow: hidden;
-    padding: 10px 5px 1.8rem;
+  .GameDetailsPage {
+    margin-bottom: 20px;
 
-    .game-cover, .game-header-background {
-      background: $font-light center;
+    &_Header {
+      position: relative;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      min-height: 350px;
+      background-size: cover;
+      overflow: hidden;
+      padding: 10px 5px 1.8rem;
+
+      &_Cover, &_Background {
+        background: $font-light center;
+      }
+
+      &_Cover {
+        box-shadow: 2px 2px 12px rgba(#000, .9);
+        object-fit: contain;
+        min-width: 90px;
+        min-height: 90px;
+        max-width: 200px;
+        max-height: 200px;
+        margin: 0 auto;
+      }
+
+      &_Background {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        filter: blur(15px);
+        transform: scale(1.2);
+        z-index: -1;
+      }
+
+      &_Name {
+        text-align: center;
+        line-height: 3.3rem;
+        font-size: 3.5rem;
+        color: $font-light;
+        text-shadow: 2px 2px 5px #000;
+        margin: 25px 20px 40px;
+        word-wrap: break-word;
+      }
+
+      &_ReleaseDate {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 5px;
+        background-color: rgba(#000, .4);
+        font-size: 1.4rem;
+        color: $accent;
+      }
+
     }
 
-    .game-cover {
-      box-shadow: 2px 2px 12px rgba(#000, .9);
-      object-fit: contain;
-      min-width: 90px;
-      min-height: 90px;
-      max-width: 200px;
-      max-height: 200px;
-      margin: 0 auto;
+    &_Share {
+      margin-bottom: 12px;
+
+      &_Links {
+        display: inline-block;
+      }
     }
 
-
-    .game-header-background {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      filter: blur(15px);
-      transform: scale(1.2);
-      z-index: -1;
+    &_Platforms {
+      margin-top: 5px;
     }
-
-    .game-name {
-      text-align: center;
-      line-height: 3.3rem;
-      font-size: 3.5rem;
-      color: $font-light;
-      text-shadow: 2px 2px 5px #000;
-      margin: 25px 20px 40px;
-    }
-
-    .game-release-date {
-      position: absolute;
-      bottom: 0px;
-      left: 0px;
-      padding: 5px;
-      background-color: rgba(#000, .4);
-      font-size: 1.4rem;
-      color: $accent;
-    }
-  }
-
-  .game-platforms {
-    margin-top: 5px;
   }
 </style>

@@ -1,6 +1,8 @@
 import igdbApi from '../api/igdb'
 import {
   ADD_FAVOURITE_GAME_ALL,
+  ADD_EXCLUDED_DISCOVER_GAMES,
+  RECIEVE_GAMES_COUNT,
   RECIEVE_PLATFORMS_LIST,
   RECIEVE_PULSE_SOURCES_LIST,
   RECIEVE_GENRES_LIST
@@ -14,14 +16,25 @@ import {
 export default function (store) {
   // load favourite games
   initFavouriteGames(store)
+  initExcludedDiscoverGames(store)
 
   // then load lists from API
   return Promise.all([
+    initTotalGames(store),
     initPlatformList(store),
     initPulseSourcesList(store),
     initGenresList(store)
   ])
     .then(() => console.log('state inited'))
+}
+
+/**
+ * Loads the total number of games from the API
+ * @param store
+ */
+function initTotalGames (store) {
+  igdbApi.getTotalGames()
+    .then(count => store.commit(RECIEVE_GAMES_COUNT, count))
 }
 
 /**
@@ -36,6 +49,23 @@ function initFavouriteGames (store) {
       favouriteGames = {}
     }
     store.commit(ADD_FAVOURITE_GAME_ALL, favouriteGames)
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+/**
+ * Load FavouriteGames from local storage
+ * @param store
+ */
+function initExcludedDiscoverGames (store) {
+  try {
+    let excludedGames = localStorage.getItem('excludedDiscoverGames')
+    excludedGames = JSON.parse(excludedGames)
+    if (!excludedGames) {
+      excludedGames = []
+    }
+    store.commit(ADD_EXCLUDED_DISCOVER_GAMES, excludedGames)
   } catch (e) {
     console.log(e)
   }
