@@ -52,58 +52,57 @@
   @import "variables";
   @import "mixins";
 
-    .ModalComponent {
-      position: relative;
+  .ModalComponent {
+    position: relative;
 
-      &_Backdrop {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 25;
-        background-color: rgba($bg-dark, .7);
-      }
-
-      &_Content {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90%;
-        max-height: 80vh;
-        overflow-y: scroll;
-        z-index: 26;
-        background-color: $bg-light;
-        border-radius: 5px;
-
-        @include responsiveMinWidth($bp-mobile) {
-          width: 80%;
-        }
-
-        @include responsiveMinWidth($bp-tablet) {
-          width: 60%;
-        }
-
-        &_Title {
-          background-color: $primary;
-          color: $font-light;
-          font-size: 1.4rem;
-          font-weight: bold;
-          padding: 8px;
-          border-bottom: 1px solid $bg-dark;
-        }
-
-        &_Body {
-          font-size: 1.2rem;
-          padding: 8px 16px;
-        }
-
-        &_Actions {
-          padding: 8px;
-          text-align: right;
-        }
-      }
-
+    &_Backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 25;
+      background-color: rgba($bg-dark, .7);
     }
+
+    &_Content {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: scroll;
+      z-index: 26;
+      background-color: $bg-light;
+      border-radius: 5px;
+
+      @include responsiveMinWidth($bp-mobile) {
+        width: 80%;
+      }
+
+      @include responsiveMinWidth($bp-tablet) {
+        width: 60%;
+      }
+
+      &_Title {
+        background-color: $primary;
+        color: $font-light;
+        font-size: 1.4rem;
+        font-weight: bold;
+        padding: 8px;
+        border-bottom: 1px solid $bg-dark;
+      }
+
+      &_Body {
+        font-size: 1.2rem;
+        padding: 8px 16px;
+      }
+
+      &_Actions {
+        padding: 8px;
+        text-align: right;
+      }
+    }
+  }
 </style>

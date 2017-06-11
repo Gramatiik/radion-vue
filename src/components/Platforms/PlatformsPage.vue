@@ -2,10 +2,7 @@
     <div class="PlatformsPage">
       <h1>Platforms</h1>
 
-      <modal-component :isVisible="showDetails" :onClose="closeDetails">
-        <h2 slot="title">SLIP</h2>
-        <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto eligendi magnam modi molestias officiis porro praesentium.</p>
-      </modal-component>
+      <platform-details-component :is-visible="showDetails" :on-close="closeDetails" :platform-details="currentPlatform"></platform-details-component>
 
       <div v-if="!apiFailure">
         <div class="CardLayout">
@@ -31,16 +28,16 @@
   import { mapState, mapGetters } from 'vuex'
   import { API_FAILURE, CLEAR_PLATFORMS } from '@/store/mutation-types'
   import ListLoaderComponent from '@/components/Shared/ListLoaderComponent'
-  import ModalComponent from '@/components/Shared/ModalComponent'
   import PlatformItemComponent from '@/components/Platforms/PlatformItemComponent'
+  import PlatformDetailsComponent from '@/components/Platforms/PlatformDetailsComponent'
   import store from '@/store/'
 
   export default {
     name: 'platforms-page',
     components: {
       PlatformItemComponent,
-      ListLoaderComponent,
-      ModalComponent
+      PlatformDetailsComponent,
+      ListLoaderComponent
     },
     data () {
       return {
@@ -54,10 +51,14 @@
         listLoading: state => state.listLoading,
         apiFailure: state => state.apiFailure
       }),
-      ...mapGetters(['platformsCount', 'platformsTotalCount'])
+      ...mapGetters(['platformsCount', 'platformsTotalCount']),
+      currentPlatform () {
+        return this.platforms[this.currentPlatformIndex]
+      }
     },
     methods: {
       presentDetails (index) {
+        this.currentPlatformIndex = index
         this.showDetails = true
       },
       closeDetails () {
