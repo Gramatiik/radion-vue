@@ -3,6 +3,16 @@ import IgdbQueryBuilder from './IgdbQueryBuilder'
 
 export default {
   /**
+   * Get the total number of games
+   */
+  getTotalGames (orderingField, offset) {
+    let builder = new IgdbQueryBuilder()
+
+    return Vue.http.get(builder.setEndpoint('games/count').finalize())
+      .then(response => response.body.count || 0)
+  },
+
+  /**
    * Get a game list and order it by 'orderingField'
    * @param orderingField
    * @param offset
@@ -36,6 +46,13 @@ export default {
       .finalize())
       .then(response => response.body[0] || {})
   },
+
+  /**
+   * Get a Random game, for discover page
+   * @param total Number total games
+   * @param excludes Array excluded ids
+   */
+  getRandomGame: getRandomGameReal,
 
   /**
    * Search for games matching query
@@ -234,4 +251,31 @@ export default {
         })
     })
   }
+}
+
+function getRandomGameReal (total, excludes) {
+  let builder = new IgdbQueryBuilder()
+
+  // generate random game id that is not in excluded list
+  let randomId
+  do {
+    console.log(total)
+    randomId = Math.floor(Math.random() * (total - 1))
+  } while (excludes.indexOf(randomId) !== -1)
+
+  // fetch this game
+  return Vue.http.get(builder
+    .setEndpoint('games')
+    .setId(randomId)
+    .setFields(['id', 'name', 'cover', 'first_release_date', 'release_dates'])
+    .setLimit(1)
+    .finalize())
+    .then(response => {
+      // if thre result is an empty array, perform random search again
+      if (response.body.length === 0) {
+        getRandomGameReal(total, excludes)
+      } else {
+        return response.body[0] || {}
+      }
+    })
 }

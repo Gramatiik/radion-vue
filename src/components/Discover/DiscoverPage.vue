@@ -1,20 +1,174 @@
 <template>
     <div class="DiscoverPage">
-      <h1>Discover</h1>
+      <transition mode="out-in" name="slide-fade">
+        <div class="DiscoverPage_Content" v-if="currentGame">
+
+          <div class="DiscoverPage_GameCard">
+            <div class="DiscoverPage_GameCard_Background" :style="{ backgroundImage: currentGame.cover ? 'url(\'' + currentGame.cover.url + '\')' : ''}">
+            </div>
+            <img class="DiscoverPage_GameCard_Cover" :src="gameCoverImage" alt="Cover">
+            <h2 class="DiscoverPage_GameCard_Title">{{ currentGame.name }}</h2>
+            <span class="DiscoverPage_GameCard_ReleaseDate">Released on {{ new Date(currentGame.first_release_date) | moment("MMMM D, YYYY") }}</span>
+            <pin-platforms-component class="DiscoverPage_GameCard_Platforms" :platform-ids="platformIds" :pin-size="1.2"></pin-platforms-component>
+          </div>
+
+          <div class="DiscoverPage_Thumbs">
+            <div class="DiscoverPage_Thumbs_Dislike" @click="dislike">
+              <span class="Icon Icon-ThumbDown"></span>
+            </div>
+
+            <div class="DiscoverPage_Thumbs_Like" @click="like">
+              <span class="Icon Icon-ThumbUp"></span>
+            </div>
+          </div>
+
+          <life-counter-component class="DiscoverPage_LifeCount" :max="10" :count="lifeCount"></life-counter-component>
+        </div>
+      </transition>
     </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+  import LifeCounterComponent from '@/components/Discover/LifeCounterComponent'
+  import PinPlatformsComponent from '@/components/PinPlatforms/PinPlatformsComponent'
   export default {
     name: 'discover-page',
+    components: {
+      LifeCounterComponent,
+      PinPlatformsComponent
+    },
     data () {
-      return {}
+      return {
+        lifeCount: 10
+      }
+    },
+    computed: {
+      ...mapState({
+        currentGame: state => state.igdb.currentDiscoverGame,
+        loading: state => state.loading
+      }),
+      platformIds () {
+        let platformIds = []
+        for (let release of this.currentGame['release_dates'] || []) {
+          platformIds.push(release.platform)
+        }
+        return platformIds
+      },
+      gameCoverImage () {
+        return this.$options.filters.cloudinary(this.currentGame.cover, 'cover_small')
+      }
+    },
+    methods: {
+      getNextGame () {
+        this.$store.dispatch('getRandomGame', { total: this.$store.state.igdb.gamesCount, excluded: this.$store.state.igdb.excludedDiscoverGames })
+      },
+      like () {
+        if (this.lifeCount > 0) {
+          this.lifeCount--
+        }
+        this.getNextGame()
+      },
+      dislike () {
+        if (this.lifeCount > 0) {
+          this.lifeCount--
+        }
+        this.getNextGame()
+      }
+    },
+    mounted () {
+      // wait a little for vuex state being available
+      // FIXME : any better way to achieve this ?
+      setTimeout(() => {
+        this.getNextGame()
+      }, 500)
     }
   }
 </script>
 
 <style scoped lang="scss">
-    .DiscoverPage {
+  @import "variables";
 
+  .DiscoverPage {
+    padding-top: 12px;
+    &_GameCard {
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 10px;
+      padding: 8px 8px 50px;
+      min-height: 400px;
+
+      &_Cover {
+        display: block;
+        background: $font-light center;
+        box-shadow: 2px 2px 12px rgba(#000, .9);
+        object-fit: contain;
+        min-width: 90px;
+        min-height: 90px;
+        max-width: 200px;
+        max-height: 200px;
+        margin: 0 auto;
+      }
+
+      &_Title {
+        text-align: center;
+        line-height: 3.3rem;
+        font-size: 3.5rem;
+        color: $font-light;
+        text-shadow: 2px 2px 5px #000;
+        margin-top: 20px;
+      }
+
+      &_ReleaseDate {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        padding: 5px;
+        background-color: rgba(#000, .4);
+        font-size: 1.4rem;
+        color: $accent;
+      }
+
+      &_Background {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+        transform: scale(1.1);
+        filter: blur(5px);
+        z-index: -1;
+      }
     }
+
+    &_LifeCount {
+      margin-bottom: 12px;
+    }
+
+    &_Thumbs {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+
+      &_Like, &_Dislike {
+        cursor: pointer;
+        position: relative;
+        height: 60px;
+        width: 60px;
+        display: inline-block;
+        box-sizing: inherit;
+        border-radius: 50%;
+        background-color: $primary;
+
+        .Icon {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+  }
 </style>

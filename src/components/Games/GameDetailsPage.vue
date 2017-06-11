@@ -176,8 +176,8 @@
 
       &_ReleaseDate {
         position: absolute;
-        bottom: 0px;
-        left: 0px;
+        bottom: 0;
+        left: 0;
         padding: 5px;
         background-color: rgba(#000, .4);
         font-size: 1.4rem;

@@ -6,11 +6,14 @@ import {
   API_FAILURE,
 
   RECIEVE_GAMES,
+  RECIEVE_GAMES_COUNT,
+  RECIEVE_DISCOVER_GAME,
   RECIEVE_GAME_DETAILS,
   CLEAR_GAMES,
 
   ADD_FAVOURITE_GAME,
   ADD_FAVOURITE_GAME_ALL,
+  ADD_EXCLUDED_DISCOVER_GAMES,
   REMOVE_FAVOURITE_GAME,
 
   RECIEVE_PULSE_SOURCES_LIST,
@@ -26,8 +29,11 @@ import {
 
 const state = {
   games: [],
+  gamesCount: 0,
   favouriteGames: {},
   gameDetails: {},
+  currentDiscoverGame: false,
+  excludedDiscoverGames: [],
 
   pulses: [],
   pulseSourcesList: [],
@@ -62,7 +68,7 @@ const actions = {
    * Loads a list of games ordered by release dates or popularity
    * and appends results it to the current loaded games
    * @param commit
-   * @param data orderingField (can be 'recent', 'popular' or 'best-rated' and offset
+   * @param data orderingField (can be 'recent', 'popular' or 'best-rated') and offset
    */
   getGamesList ({ commit }, data) {
     let orderingField
@@ -116,6 +122,28 @@ const actions = {
       })
       .then(function () {
         commit(LIST_LOADING, false)
+      })
+  },
+
+  /**
+   * Get a random game from the API
+   * @param commit
+   * @param data
+   */
+  getRandomGame ({ commit }, data) {
+    commit(APP_LOADING, true)
+    commit(RECIEVE_DISCOVER_GAME, false)
+
+    return igdbApi.getRandomGame(data.total, data.excluded)
+      .then(function (data) {
+        commit(RECIEVE_DISCOVER_GAME, data)
+      })
+      .catch(function () {
+        console.log('Error fetching random game from API...')
+        commit(API_FAILURE, true)
+      })
+      .then(function () {
+        commit(APP_LOADING, false)
       })
   },
 
@@ -192,6 +220,40 @@ const mutations = {
   [RECIEVE_GAMES] (state, games) {
     state.apiFailure = false
     state.games = state.games.concat(games)
+  },
+
+  /**
+   * Save games count
+   * @param state
+   * @param count
+   */
+  [RECIEVE_GAMES_COUNT] (state, count) {
+    state.gamesCount = count
+  },
+
+  /**
+   * Save games count
+   * @param state
+   * @param game
+   */
+  [RECIEVE_DISCOVER_GAME] (state, game) {
+    state.excludedDiscoverGames.push(game.id)
+    state.currentDiscoverGame = game
+
+    try {
+      localStorage.setItem('excludedDiscoverGames', JSON.stringify(state.excludedDiscoverGames))
+    } catch (e) {
+      console.log(e)
+    }
+  },
+
+  /**
+   * Initializes the list of excluded games from local storage
+   * @param state
+   * @param games
+   */
+  [ADD_EXCLUDED_DISCOVER_GAMES] (state, games) {
+    state.excludedDiscoverGames = games
   },
 
   /**

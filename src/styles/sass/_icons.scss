@@ -21,6 +21,14 @@
     }
   }
 
+  &-ThumbUp {
+    @include icon-url('thumb_up');
+  }
+
+  &-ThumbDown {
+    @include icon-url('thumb_down');
+  }
+
   &-Heart {
     @include icon-url('heart');
 
