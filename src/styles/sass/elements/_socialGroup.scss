@@ -1,0 +1,33 @@
+/*
+ * Share Group Element
+ */
+$bg-facebook: #3b5998;
+$font-facebook: #fff;
+
+$bg-googleplus: #d34836;
+$font-googleplus: #f1f1f1;
+
+$bg-twitter: #1DA1F2;
+$font-twitter: #fff;
+
+.ShareGroup {
+  &_Link {
+    cursor: pointer;
+    padding: 2px 6px;
+
+    &-facebook {
+      background-color: $bg-facebook;
+      color: $font-facebook;
+    }
+
+    &-googleplus {
+      background-color: $bg-googleplus;
+      color: $font-googleplus;
+    }
+
+    &-twitter {
+      background-color: $bg-twitter;
+      color: $font-twitter;
+    }
+  }
+}

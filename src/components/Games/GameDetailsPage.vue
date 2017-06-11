@@ -19,13 +19,17 @@
 
     <pin-platforms-component class="game-platforms" :platform-ids="platformIds" :pin-size="1.2"></pin-platforms-component>
 
-    <social-sharing :url="currentURL" inline-template>
-      <div>
-        <network network="facebook">Facebook</network>
-        <network network="googleplus">Google +</network>
-        <network network="twitter">Twitter</network>
-      </div>
-    </social-sharing>
+    <div class="GameDetailsPage_Share">
+      <h3 class="GameDetailsPage_Share_Title">Share</h3>
+      <social-sharing inline-template class="GameDetailsPage_Share_Links ShareGroup">
+        <div>
+          <network class="ShareGroup_Link ShareGroup_Link-facebook" network="facebook">Facebook</network>
+          <network class="ShareGroup_Link ShareGroup_Link-googleplus" network="googleplus">Google +</network>
+          <network class="ShareGroup_Link ShareGroup_Link-twitter" network="twitter">Twitter</network>
+        </div>
+      </social-sharing>
+    </div>
+
 
     <div class="game-info-section" v-if="gameDetails.summary">
       <h2>Summary</h2>
@@ -69,9 +73,6 @@
       ...mapState({
         gameDetails: state => state.igdb.gameDetails
       }),
-      currentURL () {
-        return window.location.href
-      },
       platformIds () {
         let platformIds = []
         for (let release of this.gameDetails['release_dates'] || {}) {
@@ -123,6 +124,16 @@
 <style scoped lang="scss">
   @import "variables";
   @import "mixins";
+
+  .GameDetailsPage_Share {
+    &_Title {
+      display: inline-block;
+    }
+
+    &_Links {
+      display: inline-block;
+    }
+  }
 
   .game-header {
     position: relative;
