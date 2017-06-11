@@ -13,3 +13,7 @@ Vue.filter('cloudinary', function (value, type) {
     return `${CLOUDINARY_URL}/t_${type}/${value.cloudinary_id}.jpg`
   }
 })
+
+Vue.filter('capitalize', function (string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+})
