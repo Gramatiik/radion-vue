@@ -267,7 +267,7 @@ function getRandomGameReal (total, excludes) {
   return Vue.http.get(builder
     .setEndpoint('games')
     .setId(randomId)
-    .setFields(['id', 'name', 'cover', 'first_release_date', 'release_dates'])
+    .setFields(['id', 'name', 'slug', 'cover', 'popularity', 'created_at', 'first_release_date', 'release_dates', 'rating'])
     .setLimit(1)
     .finalize())
     .then(response => {
