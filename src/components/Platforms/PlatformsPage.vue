@@ -5,9 +5,8 @@
       <platform-details-component :is-visible="showDetails" :on-close="closeDetails" :platform-details="currentPlatform"></platform-details-component>
 
       <div v-if="!apiFailure">
-        <div class="CardLayout">
+        <div class="grid-3-small-2 has-gutter">
           <platform-item-component
-            class="CardLayout_Item"
             v-for="(platform, index) in platforms"
             :key="platform.id"
             :platform="platform"

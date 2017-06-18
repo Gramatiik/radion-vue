@@ -21,6 +21,10 @@
     }
   }
 
+  &-Info {
+    @include icon-url('info');
+  }
+
   &-ThumbUp {
     @include icon-url('thumb_up');
   }

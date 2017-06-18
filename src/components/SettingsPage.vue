@@ -2,54 +2,56 @@
     <div class="SettingsPage">
       <h1>Settings</h1>
 
-      <div class="SettingsPage_SettingCategory">
-
+      <div class="SettingsPage_SettingCategory" v-if="isPushNotificationsSupported">
         <h3 class="SettingsPage_SettingCategory_Title">Notifications</h3>
 
         <div class="SettingsPage_SettingCategory_Content">
           <div class="SettingsPage_SettingItem">
-            <label for="notifications">Enable notifications</label>
-            <input type="checkbox" id="notifications" v-model="enableNotifications">
+            <button v-if="!isPushNotificationsEnabled" class="Button" @click="togglePush(true)">Register</button>
+            <button v-else class="Button" @click="togglePush(false)">Unregister</button>
           </div>
         </div>
 
       </div>
 
       <div class="SettingsPage_SettingCategory">
-
         <h3 class="SettingsPage_SettingCategory_Title">Cache</h3>
 
-        <div class="SettingsPage_SettingCategory_Content-row">
+        <div class="SettingsPage_SettingCategory_Content grid-2 has-gutter">
           <div class="SettingsPage_SettingItem">
-            <button class="Button" @click="clearCache()">Clear all cache</button>
+            <button class="Button Button-full" @click="clearCache()">Clear all cache</button>
           </div>
 
           <div class="SettingsPage_SettingItem">
-            <button class="Button" @click="clearCache('platforms')">Clear platforms cache</button>
+            <button class="Button Button-full" @click="clearCache('platforms')">Clear platforms cache</button>
           </div>
 
           <div class="SettingsPage_SettingItem">
-            <button class="Button" @click="clearCache('pulseSources')">Clear pulse sources cache</button>
+            <button class="Button Button-full" @click="clearCache('pulseSources')">Clear pulse sources cache</button>
           </div>
 
           <div class="SettingsPage_SettingItem">
-            <button class="Button" @click="clearCache('genres')">Clear genres cache</button>
+            <button class="Button Button-full" @click="clearCache('genres')">Clear genres cache</button>
           </div>
         </div>
 
       </div>
-
-      <button class="Button" @click="saveSettings">Save</button>
     </div>
 </template>
 
 <script>
+  /* global OneSignal:false */
   export default {
     name: 'settings-page',
     data () {
       return {
         cacheTypes: [ 'platforms', 'pulseSources', 'genres' ],
-        enableNotifications: false
+        isPushNotificationsEnabled: false
+      }
+    },
+    computed: {
+      isPushNotificationsSupported () {
+        return OneSignal.isPushNotificationsSupported()
       }
     },
     methods: {
@@ -71,9 +73,29 @@
         // then reload the page to re-init state
         location.reload()
       },
-      saveSettings () {
-        // settings should reflect user selected values
+      togglePush (status) {
+        OneSignal.push(() => {
+          if (status) OneSignal.registerForPushNotifications()
+          OneSignal.setSubscription(status)
+        })
+
+        // if the user is unsubscribing, present a notification
+        if (!status) {
+          new window.Notification('Radion.mx', { // eslint-disable-line no-new
+            body: 'Notifications are now turned off.',
+            icon: 'https://radion.mx/images/radion_onesignal.png'
+          })
+        }
       }
+    },
+    created () {
+      OneSignal.isPushNotificationsEnabled().then((isSubscribed) => {
+        this.isPushNotificationsEnabled = isSubscribed
+      })
+
+      OneSignal.on('subscriptionChange', (isSubscribed) => {
+        this.isPushNotificationsEnabled = isSubscribed
+      })
     }
   }
 </script>
@@ -103,6 +125,7 @@
 
     &_SettingItem {
       font-size: 1.4rem;
+      margin-bottom: 10px;
     }
   }
 </style>
