@@ -66,7 +66,6 @@ export default {
       .setSearch(query)
       .setFields(['id', 'name', 'slug', 'cover', 'popularity', 'created_at', 'first_release_date', 'release_dates', 'rating'])
       .setLimit(50)
-      .setFilters([{field: 'first_release_date', type: 'lte', value: Date.now()}])
       .finalize())
       .then(response => response.body || {})
   },
