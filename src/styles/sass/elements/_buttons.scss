@@ -11,15 +11,15 @@ $buttonBackgroundColor: $accent;
   font-size: 1.4rem;
   transition: background-color .15s ease;
 
-  &_Small {
+  &-small {
     font-size: 1rem;
   }
 
-  &_Big {
+  &-big {
     font-size: 1.8rem;
   }
 
-  &_Rounded {
+  &-rounded {
     border-radius: 4px;
   }
 
