@@ -23,6 +23,7 @@
         :icon="menuEntry.icon"
         :route="menuEntry.route">
       </navigation-item-component>
+      <div class="TopBarComponent_SideNav_Item-MadeBy">Made with ♥ by <a href="https://stanyslasbres.fr">Stanyslas Bres</a></div>
     </nav>
 
   </div>
@@ -230,7 +231,7 @@
         width: 100%;
 
         @media screen and (min-width: $bp-mobile){
-          width: 280px;
+          width: 300px;
         }
         @media screen and (min-width: $bp-tablet){
           width: 560px;
@@ -239,6 +240,16 @@
 
       &_Item {
         margin-bottom: 15px;
+
+        &-MadeBy {
+          white-space: nowrap;
+          position: absolute;
+          font-size: 1.2rem;
+          bottom: 55px;
+          text-align: center;
+          width: 100%;
+          color: white;
+        }
       }
     }
   }

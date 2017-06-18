@@ -7,6 +7,7 @@
       <div v-if="!apiFailure">
         <div class="grid-3-small-2 has-gutter">
           <platform-item-component
+            class="PlatformsPage_PlatformItem"
             v-for="(platform, index) in platforms"
             :key="platform.id"
             :platform="platform"
@@ -89,3 +90,10 @@
       .then(() => next())
   }
 </script>
+<style scoped lang="scss">
+  .PlatformsPage {
+    &_PlatformItem {
+      cursor: pointer;
+    }
+  }
+</style>
