@@ -22,7 +22,12 @@
 
     <div class="GameDetailsPage_Share">
       <h3 class="GameDetailsPage_Share_Title">Share</h3>
-      <social-sharing inline-template class="GameDetailsPage_Share_Links ShareGroup">
+      <social-sharing
+        inline-template
+        :url="sharingURL"
+        :title="gameDetails.name + ' - on Radion.mx'"
+        :description="'Check out ' + gameDetails.name + ' game on Radion.mx, the video game informer !'"
+        class="GameDetailsPage_Share_Links ShareGroup">
         <div>
           <network class="ShareGroup_Link ShareGroup_Link-facebook" network="facebook">Facebook</network>
           <network class="ShareGroup_Link ShareGroup_Link-googleplus" network="googleplus">Google +</network>
@@ -74,6 +79,9 @@
       ...mapState({
         gameDetails: state => state.igdb.gameDetails
       }),
+      sharingURL () {
+        return window.location.href
+      },
       platformIds () {
         let platformIds = []
         for (let release of this.gameDetails['release_dates'] || {}) {

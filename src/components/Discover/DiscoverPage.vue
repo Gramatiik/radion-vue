@@ -18,7 +18,7 @@
       </modal-component>
 
       <transition mode="out-in" name="slide-fade">
-        <div class="DiscoverPage_Content" v-if="currentGame">
+        <div v-if="currentGame && isDiscoverAvailable" key="Content" class="DiscoverPage_Content">
 
           <div class="GameCard">
             <div class="GameCard_Background" :style="{ backgroundImage: currentGame.cover ? 'url(\'' + currentGame.cover.url + '\')' : ''}">
@@ -41,6 +41,11 @@
 
           <life-counter-component class="DiscoverPage_LifeCount" :max="10" :count="lifeCount"></life-counter-component>
         </div>
+        <div v-else key="OutLife" class="DiscoverPage_NoMoreLives">
+          <h2>No more lives :(</h2>
+          <p>Come back tomorrow !</p>
+          <p>Discover available {{ livesManager.livesAvailability | moment('from', 'now') }}</p>
+        </div>
       </transition>
     </div>
 </template>
@@ -51,6 +56,7 @@
   import LifeCounterComponent from '@/components/Discover/LifeCounterComponent'
   import PinPlatformsComponent from '@/components/PinPlatforms/PinPlatformsComponent'
   import ModalComponent from '@/components/Shared/ModalComponent'
+  import DiscoverLivesManager from '@/components/Discover/DiscoverLivesManager'
   export default {
     name: 'discover-page',
     components: {
@@ -60,8 +66,8 @@
     },
     data () {
       return {
-        lifeCount: 10,
-        infosVisible: false
+        infosVisible: false,
+        livesManager: new DiscoverLivesManager()
       }
     },
     computed: {
@@ -69,6 +75,12 @@
         currentGame: state => state.igdb.currentDiscoverGame,
         loading: state => state.loading
       }),
+      lifeCount () {
+        return this.livesManager.livesCount
+      },
+      isDiscoverAvailable () {
+        return this.livesManager.isDiscoverAvailable
+      },
       platformIds () {
         let platformIds = []
         for (let release of this.currentGame['release_dates'] || []) {
@@ -89,20 +101,16 @@
         this.$store.dispatch('getRandomGame', { total: this.$store.state.igdb.gamesCount, excluded: this.$store.state.igdb.excludedDiscoverGames })
       },
       like () {
-        if (this.lifeCount > 0) {
-          this.lifeCount--
-        }
+        this.livesManager.decrementLivesCount()
         // add this game to favourites
         this.ADD_FAVOURITE_GAME(this.currentGame)
 
-        // get the next game
-        this.getNextGame()
+        if (this.lifeCount >= 0) this.getNextGame()
       },
       dislike () {
-        if (this.lifeCount > 0) {
-          this.lifeCount--
-        }
-        this.getNextGame()
+        this.livesManager.decrementLivesCount()
+
+        if (this.lifeCount >= 0) this.getNextGame()
       }
     },
     mounted () {
@@ -110,7 +118,7 @@
       // FIXME : any better way to achieve this ?
       setTimeout(() => {
         this.getNextGame()
-      }, 500)
+      }, 750)
     }
   }
 </script>
@@ -156,6 +164,10 @@
           transform: translate(-50%, -50%);
         }
       }
+    }
+
+    &_NoMoreLives {
+      text-align: center;
     }
   }
 
