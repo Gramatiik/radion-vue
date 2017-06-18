@@ -8,7 +8,7 @@
           <p>Discover page present you games you might like.</p>
           <p>
             <strong>Thumbs up</strong> a game to add it to your favourites, or <strong>thumbs down</strong> to ignore it.<br>
-            You have <strong>10 discovers</strong> per days, represented by <strong>your life count</strong>.
+            You have <strong>10 discovers</strong> each day, represented by your <strong>life count</strong>.
           </p>
           <p>Go ahead and discover awesome games !</p>
         </div>
