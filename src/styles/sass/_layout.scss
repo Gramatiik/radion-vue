@@ -23,28 +23,3 @@ body {
     width: $bp-desktop;
   }
 }
-
-// Card layout - 3 items
-.CardLayout {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-
-  &_Item {
-    width: 100%;
-  }
-
-  // 2 items in tablet mode
-  @include responsiveMinWidth($bp-tablet - 1) {
-    &_Item {
-      width: calc(50% - #{$card-layout-gutter / 2});
-    }
-  }
-
-  // 3 items grid in desktop mode
-  @include responsiveMinWidth($bp-desktop - 1) {
-    &_Item {
-      width: calc( ( 100% / 3 ) - #{(2 / 3 ) * $card-layout-gutter});
-    }
-  }
-}
