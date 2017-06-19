@@ -1,39 +1,37 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
-import router from '../../../src/router'
-import TopBarComponent from '@/components/Shared/TopBarComponent.vue'
+import VueYoutube from 'vue-youtube-embed'
+import YoutubePlayerComponent from '@/components/Shared/YoutubePlayerComponent.vue'
 let vm
 
-/**
- * Create a mock store with only what this component needs
- * @returns {Store}
- */
-function createMockStore () {
-  return new Vuex.Store({
-    state: {
-      menuOpened: false
-    },
-    mutations: {
-      'MENU_TOGGLE': sinon.stub()
-    }
-  })
-}
-
-describe('TopBarComponent.vue', () => {
+describe('YoutubePlayerComponent.vue', () => {
   /**
    * Generate a fresh vm before each tests
    */
   beforeEach(() => {
-    const Ctor = Vue.extend(TopBarComponent)
-    const store = createMockStore()
-    vm = new Ctor({ store, router }).$mount()
+    Vue.use(VueYoutube)
+    const Ctor = Vue.extend(YoutubePlayerComponent)
+    const propsData = {
+      video_ids: [ '88XU5Oi2mgE', '22WZtbPn0Fc', '8KaEZ0by6rM' ]
+    }
+    vm = new Ctor({ propsData }).$mount()
   })
 
-  /**
-   * Test the compoment initialization
-   */
-  it('should have 7 menu items after initialization', () => {
-    expect(vm.menuItems).to.be.an('array')
-    expect(vm.menuItems.length).to.equal(7)
+  it('should have 3 videos after initialization', () => {
+    expect(vm.video_ids.length).to.equal(3)
+    expect(vm.videoCount).to.equal(3)
+  })
+
+  it('should have first video as current video index', () => {
+    expect(vm.currentVideoIndex).to.equal(0)
+  })
+
+  it('should still have first video as currentVideoIndex after calling previousVideo()', () => {
+    vm.previousVideo()
+    expect(vm.currentVideoIndex).to.equal(0)
+  })
+
+  it('should have second video as currentVideoIndex after calling nextVideo()', () => {
+    vm.nextVideo()
+    expect(vm.currentVideoIndex).to.equal(1)
   })
 })
