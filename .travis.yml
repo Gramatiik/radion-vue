@@ -16,6 +16,8 @@ before_script:
   - npm install
 
 script:
+  - npm run unit
+  - npm run coverall
   - npm run build
 
 after_success:
