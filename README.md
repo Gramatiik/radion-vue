@@ -3,6 +3,7 @@
 A web client for the [Internet Game Database](https://igdb.js)
 
 [![Build Status](https://travis-ci.org/Gramatiik/radion-vue.svg?branch=master)](https://travis-ci.org/Gramatiik/radion-vue)
+[![Coverage Status](https://coveralls.io/repos/github/Gramatiik/radion-vue/badge.svg?branch=master)](https://coveralls.io/github/Gramatiik/radion-vue?branch=master)
 
 ## Features
 - Browse and search **Games**
