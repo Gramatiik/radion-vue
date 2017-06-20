@@ -52,10 +52,9 @@ export default class IgdbQueryBuilder {
   }
 
   finalize () {
-    if (this.options) {
+    if (this.options.length > 0) {
       this.query += `?${this.options.join('&')}`
     }
-    console.log(this.query)
     return this.query
   }
 }

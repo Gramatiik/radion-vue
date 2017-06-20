@@ -11,7 +11,7 @@ module.exports = function (config) {
     // 1. install corresponding karma launcher
     //    http://karma-runner.github.io/0.13/config/browsers.html
     // 2. add it to the `browsers` array below.
-    browsers: ['Chrome'],
+    browsers: [ process.env.TRAVIS ? 'Chrome_travis' : 'Chrome' ],
     frameworks: ['mocha', 'sinon-chai', 'phantomjs-shim'],
     reporters: ['spec', 'coverage'],
     files: ['./index.js'],
@@ -21,6 +21,12 @@ module.exports = function (config) {
     webpack: webpackConfig,
     webpackMiddleware: {
       noInfo: true
+    },
+    customLaunchers: {
+      Chrome_travis: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      }
     },
     coverageReporter: {
       dir: './coverage',
