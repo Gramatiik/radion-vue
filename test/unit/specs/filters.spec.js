@@ -15,6 +15,7 @@ describe('filters/index.js', () => {
   describe('Cloudinary Filter', () => {
     it('should generate the right link to image', () => {
       expect(vm.$options.filters.cloudinary('XXXXXXXXXX', 'cover_small')).to.equal('https://images.igdb.com/igdb/image/upload/t_cover_small/XXXXXXXXXX.jpg')
+      expect(vm.$options.filters.cloudinary('', 'cover_small')).to.contain('data:image/png;base64')
       expect(vm.$options.filters.cloudinary('XXXXXXXXXX', 'original')).to.equal('https://images.igdb.com/igdb/image/upload/XXXXXXXXXX.jpg')
     })
   })
