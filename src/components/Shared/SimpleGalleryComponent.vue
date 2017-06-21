@@ -1,11 +1,11 @@
 <template>
   <div class="SimpleGalleryComponent">
-    <img class="SimpleGalleryComponent_CurrentImage" :src="currentImage.big">
+    <img class="SimpleGalleryComponent_CurrentImage" :src="currentImage | cloudinary('screenshot_big')">
     <div class="SimpleGalleryComponent_Thumbs">
       <img v-for="(image, index) in images"
            class="SimpleGalleryComponent_Thumbs_Item"
            :class="{ current : isCurrent(index) }"
-           :src="image.thumb"
+           :src="image | cloudinary('cover_small')"
            @click="setCurrent(index)">
     </div>
   </div>
@@ -20,8 +20,7 @@
         required: true,
         validator: function (images) {
           for (let val of images) {
-            if (!val.hasOwnProperty('thumb') ||
-              !val.hasOwnProperty('big')) {
+            if (typeof val !== 'string') {
               return false
             }
           }

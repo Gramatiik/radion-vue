@@ -9,23 +9,14 @@ describe('SimpleGalleryComponent.vue', () => {
   beforeEach(() => {
     const Ctor = Vue.extend(SimpleGalleryComponent)
     const propsData = {
-      images: [
-        {
-          big: 'image1-big',
-          thumb: 'image1-thumb'
-        },
-        {
-          big: 'image2-big',
-          thumb: 'image2-thumb'
-        }
-      ]
+      images: ['CLOUDINARY_ID_1', 'CLOUDINARY_ID_2']
     }
     vm = new Ctor({ propsData }).$mount()
   })
 
   it('should validate the props correctly', () => {
-    expect(vm.$options.props.images.validator([{ big: 'BIG', thumb: 'THUMB' }])).to.equal(true)
-    expect(vm.$options.props.images.validator([{ thumb: 'THUMB' }])).to.equal(false)
+    expect(vm.$options.props.images.validator(['XX', 'XXZZ'])).to.equal(true)
+    expect(vm.$options.props.images.validator([12, 'XX'])).to.equal(false)
   })
 
   it('should have the correct number of images in computed property', () => {
