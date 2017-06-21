@@ -1,9 +1,9 @@
 import Vue from 'vue'
-import router from '../../../src/router'
+import router from '@/router'
 import HomePage from '@/components/HomePage.vue'
 let vm
 
-describe('HomePage.vue', () => {
+describe('filters/index.js', () => {
   /**
    * Generate a fresh vm before each tests
    */
@@ -12,22 +12,19 @@ describe('HomePage.vue', () => {
     vm = new Ctor({ router }).$mount()
   })
 
-  it('should render a correct link', done => {
-    vm.links = [{ name: 'Test', classes: [ 'test-class-1', 'test-class-2' ], route: { name: 'GamesDefault' } }]
-    Vue.nextTick(() => {
-      let elements = vm.$el.querySelectorAll('.HomePage_Links_Item')
-      expect(elements.length).to.equal(1)
-      expect(elements[0].getAttribute('class')).to.equal('HomePage_Links_Item test-class-1 test-class-2')
-      expect(elements[0].textContent.trim()).to.equal('Test')
-      done()
+  describe('Cloudinary Filter', () => {
+    it('should generate the right link to image', () => {
+      expect(vm.$options.filters.cloudinary('XXXXXXXXXX', 'cover_small')).to.equal('https://images.igdb.com/igdb/image/upload/t_cover_small/XXXXXXXXXX.jpg')
+      expect(vm.$options.filters.cloudinary('XXXXXXXXXX', 'original')).to.equal('https://images.igdb.com/igdb/image/upload/XXXXXXXXXX.jpg')
     })
   })
 
-  it('should have a valid object for each link', () => {
-    let hasValidStructure = true
-    for (let link of vm.links) {
-      if (!(link.name && link.classes && link.route)) hasValidStructure = false
-    }
-    expect(hasValidStructure).to.equal(true)
+  describe('Capitalize Filter', () => {
+    it('should Capitalize the word correctly', () => {
+      expect(vm.$options.filters.capitalize('capitalize')).to.equal('Capitalize')
+      expect(vm.$options.filters.capitalize('00TEST')).to.equal('00TEST')
+      expect(vm.$options.filters.capitalize('AlreadyCapitalized')).to.equal('AlreadyCapitalized')
+      expect(vm.$options.filters.capitalize('~TOSTESTAS')).to.equal('~TOSTESTAS')
+    })
   })
 })

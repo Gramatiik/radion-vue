@@ -83,34 +83,19 @@
         return window.location.href
       },
       platformIds () {
-        let platformIds = []
-        for (let release of this.gameDetails['release_dates'] || {}) {
-          platformIds.push(release.platform)
-        }
-        return platformIds
+        return (this.gameDetails['release_dates'] || []).map(value => value.platform)
       },
       gameCoverBackgroundImage () {
         return this.gameDetails.cover ? this.gameDetails.cover.url : require('@/assets/images/pulse-no-image.png')
       },
       gameCoverImage () {
-        return this.$options.filters.cloudinary(this.gameDetails.cover, 'cover_small')
+        return this.$options.filters.cloudinary(this.gameDetails.cover.cloudinary_id, 'cover_small')
       },
       screenshotImages () {
-        let images = []
-        for (let screenshot of this.gameDetails.screenshots || []) {
-          images.push({
-            thumb: this.$options.filters.cloudinary(screenshot, 'cover_small'),
-            big: this.$options.filters.cloudinary(screenshot, 'screenshot_big')
-          })
-        }
-        return images
+        return (this.gameDetails.screenshots || []).map(item => item.cloudinary_id)
       },
       videoIds: function () {
-        let ids = []
-        for (let video of this.gameDetails.videos || []) {
-          ids.push(video.video_id)
-        }
-        return ids
+        return (this.gameDetails.videos || []).map(item => item.video_id)
       }
     },
     beforeRouteEnter (to, from, next) {
