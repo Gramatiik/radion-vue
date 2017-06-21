@@ -21,17 +21,25 @@ describe('YoutubePlayerComponent.vue', () => {
     expect(vm.videoCount).to.equal(3)
   })
 
-  it('should have first video as current video index', () => {
+  it('should have first video as current video index after initialization', () => {
     expect(vm.currentVideoIndex).to.equal(0)
   })
 
-  it('should still have first video as currentVideoIndex after calling previousVideo()', () => {
-    vm.previousVideo()
-    expect(vm.currentVideoIndex).to.equal(0)
-  })
-
-  it('should have second video as currentVideoIndex after calling nextVideo()', () => {
+  it('should navigate correctly in videos list', () => {
     vm.nextVideo()
     expect(vm.currentVideoIndex).to.equal(1)
+
+    vm.previousVideo()
+    expect(vm.currentVideoIndex).to.equal(0)
+
+    vm.previousVideo()
+    expect(vm.currentVideoIndex).to.equal(0)
+
+    vm.nextVideo()
+    vm.nextVideo()
+    expect(vm.currentVideoIndex).to.equal(2)
+
+    vm.nextVideo()
+    expect(vm.currentVideoIndex).to.equal(2)
   })
 })

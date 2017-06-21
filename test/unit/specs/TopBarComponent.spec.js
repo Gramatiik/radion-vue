@@ -29,11 +29,12 @@ describe('TopBarComponent.vue', () => {
     vm = new Ctor({ store, router }).$mount()
   })
 
-  /**
-   * Test the compoment initialization
-   */
-  it('should have 7 menu items after initialization', () => {
+  it('should have valid menu items after initialization', () => {
     expect(vm.menuItems).to.be.an('array')
-    expect(vm.menuItems.length).to.equal(7)
+    let hasValidStructure = true
+    for (let menuItem of vm.menuItems) {
+      if (!(menuItem.title && menuItem.icon && menuItem.route)) hasValidStructure = false
+    }
+    expect(hasValidStructure).to.equal(true)
   })
 })
