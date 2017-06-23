@@ -8,7 +8,7 @@ describe('RatingMeterComponent.vue', () => {
    */
   beforeEach(() => {
     const Ctor = Vue.extend(RatingMeterComponent)
-    vm = new Ctor().$mount()
+    vm = new Ctor({ value: 50 }).$mount()
   })
 
   it('should validate the value prop correctly', () => {
