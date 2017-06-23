@@ -24,10 +24,10 @@ describe('HomePage.vue', () => {
   })
 
   it('should have a valid object for each link', () => {
-    let hasValidRoute = true
+    let hasValidStructure = true
     for (let link of vm.links) {
-      if (!(link.name && link.classes && link.route)) hasValidRoute = false
+      if (!(link.name && link.classes && link.route)) hasValidStructure = false
     }
-    expect(hasValidRoute).to.equal(true)
+    expect(hasValidStructure).to.equal(true)
   })
 })

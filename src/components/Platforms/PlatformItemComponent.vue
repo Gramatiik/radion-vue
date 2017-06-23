@@ -15,7 +15,7 @@
     props: [ 'platform' ],
     computed: {
       cardThumb () {
-        return `url("${this.$options.filters.cloudinary(this.platform.logo, 'thumb')}")`
+        return `url("${this.$options.filters.cloudinary(this.platform.logo.cloudinary_id, 'thumb')}")`
       }
     }
   }

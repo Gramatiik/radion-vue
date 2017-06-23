@@ -89,7 +89,7 @@
         return platformIds
       },
       gameCoverImage () {
-        return this.$options.filters.cloudinary(this.currentGame.cover, 'cover_small')
+        return this.$options.filters.cloudinary(this.currentGame.cover.cloudinary_id, 'cover_small')
       }
     },
     methods: {

@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import store from '../../../src/store'
 import PinPlatformsComponent from '@/components/PinPlatforms/PinPlatformsComponent.vue'
-
 let vm
 
 import platformList from '../data/platformList.json'
